@@ -1,0 +1,68 @@
+key: ir-01
+title: "BraidRank: Query-Adaptive Fusion of Sparse Term Weights and Dense Embeddings for Scientific Passage Retrieval"
+authors: ["Oriana Velloso-Thiel", "Kasimir Andrade-Holm", "Teodora Nwachukwu-Berg"]
+affiliation: "School of Information Engineering, Calderwyn University"
+year: 2022
+venue: "Proceedings of the Synthetic Conference on Retrieval Systems"
+doi: "10.5555/rrsyn.2022.ir01"
+arxiv_id: "2299.31807"
+keywords: ["hybrid retrieval", "dense retrieval", "sparse retrieval", "scientific question answering"]
+abstract: >-
+  Scientific question answering systems depend on a first-stage retriever that must find
+  relevant passages among millions of candidates. Sparse lexical scorers handle rare technical
+  terms well, while dense encoders capture paraphrase, yet neither dominates across query types.
+  We present BraidRank, a hybrid retriever that combines a sparse scorer called TermLattice with
+  a 768-dimensional dense encoder called Wren through a query-adaptive fusion weight. We also
+  release QuarryQA, a benchmark of 41,200 questions paired with 1.9 million passages drawn from
+  63,000 open-access scientific articles. On the QuarryQA test split, BraidRank reaches a
+  Recall@100 of 0.874, compared with 0.781 for TermLattice alone and 0.812 for Wren alone, and an
+  nDCG@10 of 0.512. The adaptive fusion adds 6 ms of latency per query on average. We close with
+  an analysis of failure cases involving tabular values, chemical formulas and references to
+  figures, and we release the benchmark splits to support work on reranking.
+sections:
+  - title: "Introduction"
+    paragraphs:
+      - "Retrieval-augmented question answering over scientific literature places unusual demands on the first-stage retriever. Queries often hinge on a single rare token, such as a gene identifier, an alloy designation or an acronym coined in one laboratory, and a lexical scorer finds such tokens reliably. Other queries paraphrase a finding in words that never appear in the source passage, which favours dense encoders trained on question and passage pairs. In our pilot audit of 600 queries written by graduate students, 37 percent were answered only by a lexical system, 29 percent only by a dense system, and the remainder by both or by neither."
+      - "Hybrid retrieval is not new, but most published hybrids combine the two score lists with a single global weight tuned on a development set. We argue that the right balance depends on the query. A query dominated by rare technical tokens should lean on lexical evidence, while a conversational query should lean on the dense encoder. This paper introduces BraidRank, a hybrid that predicts a per-query fusion weight from cheap query features, and QuarryQA, a benchmark built to stress both kinds of query. Our contributions are the BraidRank fusion model, the QuarryQA benchmark with its construction protocol, and an analysis of where hybrid retrieval still fails."
+      - "Earlier work on sparse retrieval refined term weighting with learned document expansion, and the TermLattice scorer used here descends from that line: it assigns each vocabulary term a learned weight and stores postings in an inverted index. Dense retrieval systems encode queries and passages separately and compare them with an inner product, which permits approximate nearest neighbour search over large collections. Prior hybrid systems, such as the fixed-weight interpolation of Marrowby and Teague, reported gains of two to four points of recall over the stronger single component, but they were evaluated on general web questions rather than on scientific text with dense terminology."
+  - title: "Methods"
+    paragraphs:
+      - "BraidRank has three components. The sparse component, TermLattice, produces a score for each passage from learned term weights over a vocabulary of 52,000 word pieces. The dense component, Wren, is a 12-layer transformer encoder that maps queries and passages to 768-dimensional vectors; it was fine-tuned for four epochs on the QuarryQA training split with in-batch negatives and a batch size of 256. Each component returns its top 1,000 candidates, and the union of the two lists is rescored by the fusion module."
+      - "The fusion module computes the final score as a weighted sum of min-max normalised sparse and dense scores. Instead of a fixed weight, a small gradient-boosted regressor predicts the dense weight alpha for each query from nine features, including query length, the fraction of tokens outside the dense vocabulary, the presence of digits, and the maximum inverse document frequency of any query term. Predicted values of alpha are clipped to the range 0.15 to 0.85. On the development split the median predicted alpha was 0.35, and queries containing chemical formulas received a median alpha of 0.21, meaning they leaned heavily on lexical evidence."
+      - "QuarryQA was built from 63,000 open-access scientific articles in materials science, ecology and computational biology, segmented into 1.9 million passages of roughly 180 words each. Forty-four annotators with graduate degrees wrote 41,200 questions, each linked to between one and three gold passages. To discourage lexical overlap, annotators saw a passage for 45 seconds and then wrote the question from memory. The collection is split into 33,000 training, 3,600 development and 4,600 test questions, with source articles kept disjoint across splits."
+  - title: "Experimental Setup"
+    paragraphs:
+      - "We compare BraidRank against four baselines: TermLattice alone, Wren alone, a classical BM25 scorer with default parameters, and a fixed-weight hybrid that uses alpha equal to 0.35 for every query. All systems retrieve from the same 1.9 million passage index. We report Recall@100, which measures whether any gold passage appears in the top 100 results, and nDCG@10, which rewards placing gold passages near the top. Statistical significance is assessed with a paired bootstrap test over 10,000 resamples at the 0.01 level."
+      - "Latency is measured end to end, from receiving the query string to returning a ranked list, on a server with one accelerator card and 32 processor cores. The dense index uses a graph-based approximate nearest neighbour structure that occupies 14.6 GB in memory, while the TermLattice inverted index occupies 3.1 GB. Each latency figure is the mean over the full test split after a warm-up period of 500 queries that are excluded from the measurement."
+  - title: "Results"
+    paragraphs:
+      - "Table 1 summarises the main results on the QuarryQA test split. BraidRank achieves a Recall@100 of 0.874 and an nDCG@10 of 0.512, outperforming every baseline. The fixed-weight hybrid reaches 0.851 Recall@100, so roughly half of the improvement over the best single component comes from fusion itself and the rest from making the weight adaptive. All differences between BraidRank and the baselines are significant under the bootstrap test, and the ordering of systems is identical on the development split."
+      - "The adaptive weight helps most on queries with rare tokens. On the 1,140 test queries that contain at least one digit, BraidRank improves Recall@100 over the fixed hybrid by 4.6 points, whereas on queries without digits the gain is only 1.2 points. The regressor that predicts alpha adds 6 ms per query on average, which accounts for most of the latency gap between the fixed hybrid at 32 ms and BraidRank at 38 ms."
+      - "We manually inspected 200 test queries for which BraidRank failed to retrieve any gold passage in the top 100. The largest group, 71 queries, asked about values reported only in tables, which our passage segmentation flattened into hard-to-match text. A further 48 failures involved chemical formulas split apart by the word-piece tokenizer, and 33 involved questions whose gold passage referred to a figure rather than restating its content. The remaining 48 failures had no single dominant cause."
+    tables:
+      - caption: "Table 1: Retrieval quality and mean latency on the QuarryQA test split (4,600 questions)."
+        after_paragraph: 0
+        header: ["System", "Recall@100", "nDCG@10", "Mean latency (ms)"]
+        rows:
+          - ["BM25", "0.744", "0.368", "11"]
+          - ["TermLattice", "0.781", "0.402", "14"]
+          - ["Wren (dense)", "0.812", "0.447", "27"]
+          - ["Fixed hybrid (alpha 0.35)", "0.851", "0.489", "32"]
+          - ["BraidRank", "0.874", "0.512", "38"]
+  - title: "Discussion"
+    paragraphs:
+      - "The results suggest that the weight given to lexical evidence should be a property of the query rather than of the collection. A practical consequence is that BraidRank can be placed in front of a reranker without retuning, since its candidate lists are already balanced across query types. The failure analysis also points to segmentation as a hidden variable: passages of a fixed 180 words sometimes separate a claim from its supporting number, and we expect chunking choices to interact with hybrid retrieval in ways this paper does not explore."
+  - title: "Limitations"
+    paragraphs:
+      - "QuarryQA covers only three scientific fields and only English text, so the reported gains may not transfer to clinical, legal or multilingual collections. The question-writing protocol reduces lexical overlap but cannot remove it, and annotators may still have favoured distinctive terms when writing from memory. Finally, all latency numbers come from a single hardware configuration and do not include network overhead in a distributed deployment."
+  - title: "Conclusion"
+    paragraphs:
+      - "BraidRank shows that a lightweight, query-adaptive fusion weight lets a hybrid retriever outperform both its sparse and dense components on scientific passage retrieval, raising Recall@100 to 0.874 on QuarryQA at a mean cost of 38 ms per query. We release the QuarryQA splits and the fusion regressor to support further work on second-stage reranking and on passage segmentation for long scientific documents."
+references:
+  - "Marrowby, E. and Teague, R. (2019). Interpolating lexical and neural scores for open-domain question answering. Journal of Invented Retrieval 8(2):101-118."
+  - "Quillon, S., Abara, N. and Fenwright, J. (2020). Learned term weights for inverted indexes. Proceedings of the Imaginary Symposium on Search 14:33-47."
+  - "Dovrenko, A. (2021). Graph-based approximate neighbour search at billion scale. Fictional Transactions on Data Systems 5(4):210-229."
+  - "Ilvesmaa, K. and Perrot-Bangura, T. (2020). In-batch negatives for dense passage encoders. Journal of Invented Retrieval 9(1):12-30."
+  - "Sorell, H., Okoro-Lund, C. and Vatanen, O. (2018). Bootstrap significance testing for ranking metrics. Synthetic Statistics Letters 3:77-89."
+  - "Castellane, B. (2021). Question writing protocols that limit lexical overlap. Proceedings of the Workshop on Imagined Benchmarks 2:5-14."
+  - "Tarrowgate, M. and Ueda-Vance, L. (2020). Word-piece vocabularies for scientific text. Journal of Pretend Linguistics 11(1):40-58."

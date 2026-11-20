@@ -1,0 +1,67 @@
+key: clim-03
+title: "A Decade of Wild Pollinator Decline Along Brennick Lowlands Farmland Transects"
+authors: ["Odalys Fenwright", "Benedek Saramago-Lund", "Priya Halloway-Chen"]
+affiliation: "Agroecology Unit, Tarnside Agricultural College"
+year: 2024
+venue: "Annals of Synthetic Agroecology"
+doi: "10.5555/rrsyn.2024.clim03"
+keywords: ["pollinators", "wild bees", "farmland biodiversity", "hedgerows", "transect monitoring"]
+abstract: >-
+  Wild pollinators support crop yields and wild plant reproduction, yet long-term standardised
+  monitoring on farmland remains scarce. We analysed ten years (2014-2023) of the Brennick
+  Pollinator Transect Scheme (BPTS), comprising 2,160 walks along 36 fixed 1 km transects in the
+  farmland of the Tarn valley. Mean wild bee counts fell by 37 percent between 2014-2015 and
+  2022-2023, hoverflies by 21 percent and butterflies by 29 percent, and mean species richness per
+  transect dropped from 24.6 to 17.9. Declines were far steeper on open-field transects (48 percent
+  for wild bees) than on transects bordered by hedgerows (14 percent). Sensors built to the Calder
+  Microclimate Network design, deployed at 18 transects, showed the number of days above 30 degrees
+  C rising from 4 to 11 per season. A mixed model associated each 1 degree C rise in mean July
+  temperature with 8.4 percent lower wild bee abundance.
+sections:
+  - title: "Introduction"
+    paragraphs:
+      - "Insect pollinators visit the flowers of most crops grown in the Tarn valley, including field beans, oilseed rape and orchard fruit, and they sustain the wildflowers of field margins. Declines in pollinators have been reported from many farmed landscapes, but much of the evidence comes from short studies or from presence records rather than standardised counts. The Brennick Lowlands, a 640 km^2 alluvial plain about 40 km upstream of Port Calderan, provide an unusual opportunity because staff and volunteer recorders have walked the same fixed transects every summer since 2014."
+      - "Two drivers are frequently proposed for farmland pollinator decline: loss of semi-natural habitat such as hedgerows and flower-rich margins, and rising summer temperatures that push species beyond their thermal tolerance. These drivers are hard to separate, because habitat loss and warming have often proceeded together. Here we combine ten years of transect counts with on-site microclimate measurements to estimate the trend in wild pollinator abundance and richness, to compare transects with and without hedgerows, and to estimate the association between summer temperature and wild bee abundance."
+  - title: "Methods"
+    paragraphs:
+      - "The Brennick Pollinator Transect Scheme (BPTS) comprises 36 fixed transects, each 1 km long and 4 m wide, placed by stratified random selection across the arable and mixed farms of the plain. Twelve transects run along hedgerows and 24 run along open field edges without woody vegetation. Each transect was walked once per month from April to September in every year from 2014 to 2023, giving 2,160 walks in total. Walks took place between 10:00 and 16:00 on days with less than 50 percent cloud cover, light wind and air temperature above 13 degrees C."
+      - "Recorders counted all wild bees, hoverflies and butterflies seen within 2 m on either side of the transect line. Wild bees and hoverflies were identified to species where possible and otherwise to one of 11 morphogroups, while butterflies were identified to species. Managed honeybees were excluded from the counts. Over the ten years recorders logged 48,915 individual wild pollinators belonging to 112 species. Farm management was summarised each year with the Lowland Spray Intensity Index (LSII), a score from 0 to 10 derived from farmer-reported insecticide application frequency within 500 m of each transect."
+      - "In 2018 we installed microclimate sensors at 18 of the transects, using the same ventilated sensor housing and 2 m mounting height as the Calder Microclimate Network operated in Port Calderan (Oyelaran-Dahl et al., 2023), so that rural and urban temperatures could be compared directly. For years before 2018, transect temperatures were reconstructed from a regional weather station using a calibration regression with an r^2 of 0.91. Abundance was modelled with a negative binomial generalised linear mixed model including year, habitat type, mean July temperature and LSII as fixed effects and transect and recorder as random effects."
+  - title: "Results"
+    paragraphs:
+      - "Counts of all three groups declined between the first two and the last two years of the record (Table 1). Mean wild bee counts per walk fell from 61.2 to 38.6, a 37 percent decline, while hoverflies declined by 21 percent and butterflies by 29 percent. The year-on-year trend in wild bees was negative in seven of the nine intervals, with the sharpest single drop, 15 percent, between 2018 and 2019 following the hottest summer in the record. Mean species richness per transect per year fell from 24.6 to 17.9 species."
+      - "Habitat strongly modified the trend (Table 2). Transects bordered by hedgerows lost 14 percent of their wild bees over the decade, while open-field transects lost 48 percent. Open-field transects were also sprayed more intensively, with a mean LSII of 5.7 in 2023 compared with 3.1 along hedgerows. The difference between habitats was consistent across years, with hedgerow transects recording higher wild bee counts than open-field transects in every season, and the gap widened from 1.3-fold in 2014 to 2.2-fold in 2023. Butterflies showed a similar but weaker contrast, declining by 18 percent along hedgerows and by 35 percent along open edges."
+      - "The microclimate record showed marked warming. Across the 18 instrumented transects, the mean number of days per season with afternoon air temperature above 30 degrees C rose from 4 in 2014-2015 to 11 in 2022-2023, and mean July temperature increased at a rate equivalent to 0.39 degrees C per decade, compared with 0.47 degrees C per decade reported for Port Calderan. In the mixed model, each 1 degree C increase in mean July temperature was associated with 8.4 percent lower wild bee abundance (95 percent confidence interval 4.9 to 11.7 percent), and each one-point increase in LSII with 6.1 percent lower abundance."
+    tables:
+      - caption: "Table 1: Mean wild pollinator counts per transect walk at the start and end of the BPTS record."
+        after_paragraph: 0
+        header: ["Group", "2014-2015 mean", "2022-2023 mean", "Change (percent)"]
+        rows:
+          - ["Wild bees", "61.2", "38.6", "-37"]
+          - ["Hoverflies", "44.0", "34.8", "-21"]
+          - ["Butterflies", "27.5", "19.5", "-29"]
+      - caption: "Table 2: Wild bee decline and spray intensity by transect habitat, 2014-2015 to 2022-2023."
+        after_paragraph: 1
+        header: ["Habitat", "Transects", "Change in wild bees (percent)", "LSII in 2023"]
+        rows:
+          - ["Hedgerow", "12", "-14", "3.1"]
+          - ["Open field", "24", "-48", "5.7"]
+  - title: "Discussion"
+    paragraphs:
+      - "The decline of 37 percent in wild bees over ten years is large, and the contrast between hedgerow and open-field transects suggests that woody field boundaries buffer pollinators against both pesticides and heat. Hedgerows provide nesting sites, early-season flowers and shade, and our sensors recorded afternoon temperatures that were on average 1.4 degrees C lower along hedgerows than along open edges on days above 30 degrees C. The temperature association in the mixed model persisted after accounting for spray intensity, indicating that warming acts in addition to farm management rather than merely tracking it."
+      - "Using the Calder Microclimate Network sensor design allowed the first like-for-like comparison of rural and urban warming in the Tarn valley. The plain warmed somewhat more slowly than Port Calderan, but farmland lacks the shade and engineered cooling options available to cities, such as the reflective roofs evaluated by Oyelaran-Dahl et al. (2023). The Brennick Lowlands also lie beside the middle Tarn River, whose summer water temperature is moderated by glacial meltwater, and whether cooler riparian strips offer pollinators a thermal refuge is an open question for the scheme."
+      - "The scale of decline has practical implications for crop pollination in the valley. Field beans and orchard fruit in the Brennick Lowlands depend heavily on wild bees, because few farms keep managed hives and those insects were excluded from our counts. If the open-field trend continued at the same rate, wild bee counts there would halve again within about a decade. We did not measure crop yield or fruit set, so the consequences for production remain to be quantified, but the scheme now provides a baseline against which pollination deficits could be tested."
+  - title: "Limitations"
+    paragraphs:
+      - "Several limitations should be noted. A change of lead recorder in 2018 coincided with the largest annual drop, and although recorder was included as a random effect, some of the decline in that year may reflect differences in detection. Transect walks record only active, visible insects, and we did not use pan traps or nest surveys, so small or cryptic species are under-represented. Identification to morphogroup rather than species for some bees and hoverflies limits species-level conclusions, and temperatures before 2018 were reconstructed rather than measured on site."
+  - title: "Conclusion"
+    paragraphs:
+      - "Ten years of standardised BPTS counts show a 37 percent decline in wild bees on Brennick Lowlands farmland, with smaller but substantial declines in hoverflies and butterflies. Declines were concentrated on open-field transects and were associated with both warmer Julys and higher spray intensity. Retaining and restoring hedgerows emerges as the most promising local measure suggested by the data, and continued paired monitoring of counts and microclimate will be needed to track whether it is sufficient."
+references:
+  - "Oyelaran-Dahl, K., Mbeki-Torvald, J., Vasquez-Ellery, H. and Rautaleht, S. (2023). Reflective roof retrofits and afternoon cooling in Port Calderan. Urban Thermal Environments Review 10(2):77-98."
+  - "Gessner-Okoro, A. and Linfield, R. (2015). Standardised transect walks for wild pollinators on invented farmland. Journal of Fictional Entomology 19(3):210-226."
+  - "Abernathy-Silva, M. (2017). Hedgerow structure and bee nesting in alluvial plains. Agroecology Imagined 6:33-49."
+  - "Truong-Halvorsen, B., Peake, D. and Mwangi-Fell, C. (2019). Thermal tolerance of farmland hoverflies. Annals of Synthetic Agroecology 8(1):12-28."
+  - "Saramago-Lund, B. (2016). The Lowland Spray Intensity Index: construction and validation. Tarnside Agricultural Reports 4:1-22."
+  - "Kinsella-Obi, J. and Marr, V. (2020). Negative binomial mixed models for count-based biodiversity monitoring. Methods in Invented Ecology 12(2):144-159."
+  - "Fenwright, O. and Halloway-Chen, P. (2018). Recorder effects in long-running butterfly transects. Journal of Fictional Entomology 22(1):5-17."

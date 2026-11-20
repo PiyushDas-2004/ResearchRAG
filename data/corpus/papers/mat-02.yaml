@@ -1,0 +1,65 @@
+key: mat-02
+title: "A Fluorinated Alumina-Siloxane Trilayer Extends the Damp-Heat Lifetime of Perovskite Solar Cells"
+authors: ["Ferelith Duncombe-Saar", "Ivo Marchetti-Ngata", "Lianne Qorvath", "Oriane Vashkell"]
+affiliation: "Photovoltaic Durability Laboratory, Westmarch Polytechnic University"
+year: 2022
+venue: "Synthetic Photovoltaics Letters"
+doi: "10.5555/rrsyn.2022.mat02"
+arxiv_id: "2299.31508"
+keywords: ["perovskite solar cell", "thin-film encapsulation", "damp heat", "humidity stability", "moisture barrier"]
+abstract: >-
+  Halide perovskite solar cells degrade rapidly in humid heat, and glass-glass packaging with butyl
+  edge seals only delays moisture ingress. We introduce FAST, a fluorinated alumina-siloxane trilayer
+  encapsulation deposited at no more than 85 degrees C directly on the finished device stack. FAST
+  consists of a 22 nm atomic-layer alumina film, a 1.8 micrometre fluorinated siloxane interlayer and
+  a 40 nm alumina cap, and its water vapour transmission rate measured by a calcium test was 3.2 x
+  10^-5 g m^-2 day^-1. Across 48 cells of 1.0 cm^2, FAST cells kept a mean initial power conversion
+  efficiency of 22.6 percent and reached 80 percent of it (T80) after 1,740 hours of damp heat at 85
+  degrees C and 85 percent relative humidity, compared with 960 hours for glass-butyl packaging and 41
+  hours for bare cells. We also adapt the Dew-Point Step Exposure protocol, originally designed for
+  sulfide battery electrolytes, to perovskite devices.
+sections:
+  - title: "Introduction"
+    paragraphs:
+      - "Perovskite solar cells now rival crystalline silicon in laboratory efficiency, but their operating lifetime remains the main obstacle to deployment. The organic cations and lead halide framework react with water, and decomposition to lead iodide accelerates with temperature. The widely used damp-heat test, 1,000 hours at 85 degrees C and 85 percent relative humidity, is passed by few perovskite devices without heavy glass packaging, and even then failure often starts at the polymer edge seal."
+      - "Thin-film barriers deposited directly on the device could remove the edge-seal pathway altogether, but inorganic films alone contain pinholes, and polymer films alone are too permeable. Multilayer stacks that alternate the two are well known for organic light-emitting displays, yet the deposition temperatures and plasma steps they require can damage a perovskite absorber. Here we design a three-layer barrier, the fluorinated alumina-siloxane trilayer or FAST, that is processed below 85 degrees C without plasma, and we test it against both conventional packaging and unencapsulated controls."
+  - title: "Related Work"
+    paragraphs:
+      - "Previous direct encapsulation work has used parylene, sputtered silicon nitride, or solution-processed polymer coatings. Talvenor and coworkers reported a parylene-alumina bilayer that extended damp-heat T80 to roughly 600 hours, while Sanderby and Kwame-Holt showed that sputtering damage cost about 1.5 percentage points of efficiency. Moisture testing of perovskites is also poorly standardised. Vashkell et al. (2021) proposed the Dew-Point Step Exposure (DPSE) protocol for sulfide battery electrolytes, in which a sample is exposed to air at controlled dew points in fixed steps. We judged that the same stepwise approach would let us compare barriers at humidities milder than damp heat, closer to those experienced during module manufacturing and storage."
+  - title: "Methods"
+    paragraphs:
+      - "Devices used an n-i-p architecture with a formamidinium-cesium lead iodide absorber of about 650 nm thickness, a tin oxide electron transport layer, a doped spiro-type hole transport layer and a gold back contact. The active area was 1.0 cm^2. A total of 48 cells from four fabrication batches were randomly assigned to three groups of 16: FAST encapsulation, glass-glass lamination with a butyl edge seal (GG-butyl), and no encapsulation."
+      - "FAST was deposited in three steps. First, a 22 nm alumina layer was grown by thermal atomic layer deposition at 85 degrees C using trimethylaluminium and water. Second, a 1.8 micrometre fluorinated siloxane layer was spin coated from a solvent-free oligomer and cured under ultraviolet light at room temperature. Third, a 40 nm alumina cap was deposited under the same conditions as the first layer. The total process time was 3.5 hours per batch of 24 substrates. Water vapour transmission rate was measured on companion polymer films with a calcium corrosion test at 38 degrees C and 90 percent relative humidity."
+      - "Stability tests comprised damp heat at 85 degrees C and 85 percent relative humidity with periodic current-voltage scans, continuous one-sun maximum power point tracking at 65 degrees C for 1,000 hours, 200 thermal cycles between minus 40 and 85 degrees C, and an adapted DPSE sequence. For perovskites we extended the DPSE dew point steps from minus 60, minus 40 and minus 20 degrees C to also include 0 and plus 10 degrees C, lengthened each step from 30 minutes to 6 hours, and replaced hydrogen sulfide monitoring with efficiency measurement and X-ray diffraction of the lead iodide peak."
+  - title: "Results"
+    paragraphs:
+      - "Encapsulation with FAST lowered the mean efficiency from 22.9 to 22.6 percent, a loss of 0.3 percentage points that came mainly from a small drop in fill factor. GG-butyl cells averaged 22.4 percent, and unencapsulated cells 22.9 percent. The calcium test gave a water vapour transmission rate of 3.2 x 10^-5 g m^-2 day^-1 for FAST, about 40 times lower than for the siloxane layer alone."
+      - "Under damp heat, FAST cells reached T80 after a median of 1,740 hours, against 960 hours for GG-butyl cells and 41 hours for unencapsulated cells. Failure in GG-butyl cells started at the edges, where lead iodide formation was visible after 700 hours, whereas FAST cells degraded uniformly. No FAST cell reached T80 before 1,400 hours, while the earliest GG-butyl failure occurred at 810 hours. Table 1 summarises the main stability metrics for all three groups."
+      - "In the adapted DPSE sequence, FAST cells retained 98.1 percent of their initial efficiency after the plus 10 degrees C step, compared with 95.7 percent for GG-butyl and 63.5 percent for unencapsulated cells. Lead iodide was detected in unencapsulated films from the 0 degrees C step onward. Under one-sun tracking at 65 degrees C, FAST cells retained 91.4 percent of initial efficiency after 1,000 hours. Thermal cycling was the weakest test: 2 of the 16 FAST cells showed partial delamination of the siloxane layer after 200 cycles, although their efficiency loss remained below 5 percent."
+    tables:
+      - caption: "Table 1: Initial efficiency and humidity stability by encapsulation type (16 cells per group)."
+        after_paragraph: 1
+        header: ["Encapsulation", "Cells", "Initial PCE (%)", "T80 at 85 C/85% RH (h)", "Retention after adapted DPSE (%)"]
+        rows:
+          - ["FAST", "16", "22.6", "1740", "98.1"]
+          - ["GG-butyl", "16", "22.4", "960", "95.7"]
+          - ["None", "16", "22.9", "41", "63.5"]
+  - title: "Discussion"
+    paragraphs:
+      - "The uniform degradation of FAST cells suggests that moisture enters through the bulk of the barrier rather than through a single weak path, which is the expected failure mode for a well-formed multilayer. The fluorinated siloxane appears to play two roles: it decouples pinholes in the two alumina layers, lengthening the diffusion path, and its low surface energy limits the condensation of water at the interface. Replacing it with a non-fluorinated siloxane in a small control set of 6 cells reduced T80 to 1,120 hours."
+      - "The adapted DPSE protocol proved a useful complement to damp heat. Its milder steps separated GG-butyl from FAST only weakly, yet they revealed that unencapsulated cells begin to decompose at dew points that are common in uncontrolled factory air. Because DPSE was first defined for sulfide electrolytes, a shared protocol now exists across two very different moisture-sensitive materials, which should make cross-material comparisons of handling requirements easier."
+      - "From a manufacturing perspective, the 3.5-hour process time per batch is the main drawback of FAST. Most of that time is spent on the two atomic layer deposition steps, which together account for about 2.8 hours. Spatial atomic layer deposition could shorten these steps considerably, and the siloxane layer is compatible with slot-die coating. Materials cost is modest, because the alumina layers are thin and the siloxane interlayer uses about 2.1 g of oligomer per square metre. We therefore see throughput, not materials, as the main obstacle to scale-up."
+  - title: "Limitations"
+    paragraphs:
+      - "Our results come from 1.0 cm^2 cells, and barrier defects scale with area, so module-sized devices may perform worse. We did not perform outdoor exposure, ultraviolet preconditioning or mechanical load tests, and the delamination seen after thermal cycling indicates that adhesion between the siloxane and alumina layers needs further work. All devices used one absorber composition, and other perovskites with different volatile components might respond differently to the 85 degrees C deposition step."
+  - title: "Conclusion"
+    paragraphs:
+      - "A thin-film trilayer of alumina and fluorinated siloxane, FAST, extended the damp-heat T80 of perovskite cells to 1,740 hours, nearly double that of glass-butyl packaging, at a cost of 0.3 percentage points of initial efficiency. Combined with an adapted Dew-Point Step Exposure protocol, these results show that direct thin-film encapsulation is a credible route to humidity-stable perovskite devices."
+references:
+  - "Vashkell, O., Renquist-Amaro, T. and Okafra, S. (2021). A Bromide-Substituted Argyrodite Electrolyte Sustains 1,200 Cycles in Pressure-Graded Solid-State Cells. Journal of Synthetic Electrochemical Materials 8(2):140-156."
+  - "Talvenor, J., Ruiz-Abernathy, K. and Pell, D. (2020). Parylene-alumina bilayers for perovskite encapsulation. Synthetic Photovoltaics Letters 5(1):22-30."
+  - "Sanderby, L. and Kwame-Holt, E. (2021). Sputter damage in perovskite top contacts. Journal of Invented Thin Films 17(4):410-421."
+  - "Marchetti-Ngata, I. (2019). Calcium corrosion tests for ultra-barrier films. Fictional Measurement Science 7(2):88-97."
+  - "Qorvath, L. and Ostrander, B. (2020). Fluorinated siloxanes as low surface energy coatings. Invented Polymer Chemistry 12(6):601-615."
+  - "Duncombe-Saar, F., Hiller, A. and Ndovu, C. (2019). Edge-seal failure in glass-glass solar laminates. Synthetic Module Reliability 3(3):144-158."
+  - "Ebrahimsen, K. (2018). Thermal atomic layer deposition at low temperature. Journal of Imaginary Surface Science 21(1):5-19."

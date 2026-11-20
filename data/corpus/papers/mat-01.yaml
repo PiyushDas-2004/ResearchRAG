@@ -1,0 +1,71 @@
+key: mat-01
+title: "A Bromide-Substituted Argyrodite Electrolyte Sustains 1,200 Cycles in Pressure-Graded Solid-State Cells"
+authors: ["Oriane Vashkell", "Tobiah Renquist-Amaro", "Seluna Okafra"]
+affiliation: "Center for Solid Ionics, Halbrook Institute of Technology"
+year: 2021
+venue: "Journal of Synthetic Electrochemical Materials"
+doi: "10.5555/rrsyn.2021.mat01"
+arxiv_id: "2199.40316"
+keywords: ["solid-state battery", "argyrodite electrolyte", "ionic conductivity", "stack pressure", "cycle life"]
+abstract: >-
+  Sulfide argyrodite electrolytes conduct lithium ions quickly but often lose capacity when the
+  stack pressure on a solid-state cell is relaxed. We report BrAG-6, a bromide-substituted
+  argyrodite with nominal composition Li5.6PS4.6Cl0.9Br0.5, prepared by a two-step milling and
+  annealing route. Cold-pressed BrAG-6 pellets reached an ionic conductivity of 7.4 mS/cm at 25
+  degrees C, compared with 3.9 mS/cm for our chloride-only reference CLAG-0. To test pressure
+  sensitivity we introduce the Graded Stack Pressure Cycling (GSPC) protocol, which lowers stack
+  pressure from 10 to 5 to 2.5 MPa in 400-cycle stages. Cells with a nickel-rich NR-88 cathode and
+  a BrAG-6 separator retained 82.4 percent of their initial capacity after 1,200 cycles at 1C,
+  whereas CLAG-0 cells fell below 80 percent after 610 cycles. A companion Dew-Point Step Exposure
+  (DPSE) test showed roughly three times lower hydrogen sulfide release for BrAG-6 than for CLAG-0.
+sections:
+  - title: "Introduction"
+    paragraphs:
+      - "Solid-state lithium batteries replace the flammable liquid electrolyte with an inorganic ion conductor, and sulfide argyrodites are among the most conductive candidates. Their softness lets them be densified by cold pressing, which avoids high-temperature sintering. However, the same softness means that interfaces between electrolyte particles and cathode particles open up as the cathode breathes during cycling. Most laboratory cells hide this problem by applying stack pressures of 10 MPa or more for the whole test, a pressure that is difficult to maintain in a commercial module. Reported cycle lives therefore tend to overstate how the material would behave in a lightly clamped pack."
+      - "A second weakness of sulfide electrolytes is moisture. Even brief handling in air with a modest dew point releases hydrogen sulfide and leaves a resistive surface layer. In this work we address both issues with a single compositional change. We substitute part of the chloride in a lithium argyrodite with bromide, which we expected to soften the anion lattice and lower the migration barrier, and we evaluate the resulting material, BrAG-6, with two test protocols designed to expose weaknesses rather than hide them. The Graded Stack Pressure Cycling protocol steps the clamping pressure down during a long cycling run, and the Dew-Point Step Exposure protocol quantifies degradation under controlled humid air."
+  - title: "Related Work"
+    paragraphs:
+      - "Earlier efforts to raise argyrodite conductivity focused on increasing the halide content beyond one per formula unit, which creates site disorder on the sulfur and halide sublattices. Ferrandel and Ouko reported a chloride-rich phase with 5.1 mS/cm but noted rapid fade at low pressure. Mixed-halide variants were explored computationally by Lindqvar and coworkers, who predicted that bromide on the 4d site lowers the migration barrier by about 0.05 eV. Few studies, however, report cycling under deliberately reduced stack pressure, and moisture tests are usually qualitative, describing colour change or odour rather than measured gas release."
+  - title: "Methods"
+    paragraphs:
+      - "BrAG-6 was synthesised from lithium sulfide, phosphorus pentasulfide, lithium chloride and lithium bromide weighed to the nominal composition Li5.6PS4.6Cl0.9Br0.5. Precursors were planetary milled for 14 hours at 450 rpm in zirconia jars under argon and then annealed at 510 degrees C for 5 hours. The reference electrolyte CLAG-0 was prepared by the same route without bromide. Six independent batches of each material were made, and batch-to-batch variation in conductivity was below 6 percent. Pellets of 12 mm diameter were cold pressed at 375 MPa, and ionic conductivity was measured by impedance spectroscopy between minus 20 and 80 degrees C to extract activation energies."
+      - "Cells used a nickel-rich layered oxide cathode, designated NR-88, mixed with electrolyte in a 70 to 30 mass ratio at an areal capacity of 3.1 mAh/cm^2, a 520 micrometre electrolyte separator, and a lithium-indium alloy anode. Twelve cells were assembled with each electrolyte, giving 24 cells in total. All cells were cycled at 1C and 25 degrees C between 2.5 and 4.25 V versus the lithium-indium reference after two formation cycles at C/10."
+      - "Under the Graded Stack Pressure Cycling (GSPC) protocol, each cell is held at 10 MPa for cycles 1 to 400, at 5 MPa for cycles 401 to 800, and at 2.5 MPa for cycles 801 to 1,200. Pressure is changed only at the end of a discharge, and the capacity fade within each stage is reported separately so that pressure-induced losses can be distinguished from ordinary ageing. For the Dew-Point Step Exposure (DPSE) protocol, 0.5 g of powder is placed in a sealed chamber and exposed to air at dew points of minus 60, minus 40 and minus 20 degrees C for 30 minutes per step, while a gas sensor records the cumulative hydrogen sulfide released."
+  - title: "Results"
+    paragraphs:
+      - "BrAG-6 pellets reached an ionic conductivity of 7.4 mS/cm at 25 degrees C, nearly double the 3.9 mS/cm of CLAG-0. The activation energy fell from 0.29 eV for CLAG-0 to 0.23 eV for BrAG-6, consistent with a softer anion framework. Electronic conductivity of BrAG-6 was 2.1 x 10^-9 S/cm, low enough that self-discharge was not detectable over a 30-day rest. X-ray diffraction showed a single argyrodite phase with no residual lithium bromide."
+      - "In GSPC cycling, BrAG-6 cells delivered an initial discharge capacity of 188 mAh/g and retained 82.4 percent of it after 1,200 cycles, with an average coulombic efficiency of 99.86 percent. CLAG-0 cells started at 181 mAh/g but crossed the 80 percent threshold after 610 cycles and ended at 61.7 percent. Table 2 shows that the gap opened mainly when pressure was relaxed: CLAG-0 lost 15.1 percent of its capacity in the 5 MPa stage, compared with 5.3 percent for BrAG-6."
+      - "Three of the 24 cells failed by internal short circuit before completing the protocol, two with CLAG-0 and one with BrAG-6, and they are excluded from the averages. In the DPSE test, BrAG-6 released 0.11 cm^3/g of hydrogen sulfide by the end of the minus 20 degrees C step, against 0.34 cm^3/g for CLAG-0. After the full DPSE sequence BrAG-6 retained 71 percent of its pristine conductivity, while CLAG-0 retained 48 percent."
+    tables:
+      - caption: "Table 1: Transport and cycling summary for the two electrolytes under the GSPC protocol at 25 degrees C."
+        after_paragraph: 0
+        header: ["Electrolyte", "Conductivity (mS/cm)", "Ea (eV)", "Cycles to 80%", "Retention at 1200 cycles (%)"]
+        rows:
+          - ["BrAG-6", "7.4", "0.23", "not reached", "82.4"]
+          - ["CLAG-0", "3.9", "0.29", "610", "61.7"]
+      - caption: "Table 2: Capacity fade within each GSPC stage (percent of initial capacity)."
+        after_paragraph: 1
+        header: ["Stage", "Cycles", "Stack pressure (MPa)", "BrAG-6 fade (%)", "CLAG-0 fade (%)"]
+        rows:
+          - ["1", "1-400", "10", "6.1", "12.4"]
+          - ["2", "401-800", "5", "5.3", "15.1"]
+          - ["3", "801-1200", "2.5", "6.2", "10.8"]
+  - title: "Discussion"
+    paragraphs:
+      - "The stage-wise reporting of GSPC turned out to be more informative than the headline cycle count. Both electrolytes faded at a moderate rate in the first stage, which suggests that bulk cathode ageing dominates while pressure is high. The materials separated most clearly once pressure was halved. We attribute the better behaviour of BrAG-6 to its lower elastic modulus, measured by nanoindentation at 18.2 GPa versus 23.5 GPa for CLAG-0, which allows the electrolyte to follow the volume changes of the cathode particles and keep contact."
+      - "Rate tests outside the GSPC run gave a consistent picture. At 3C and 10 MPa, BrAG-6 cells delivered 151 mAh/g, or about 80 percent of their 1C capacity, while CLAG-0 cells delivered 126 mAh/g. At 2.5 MPa the 3C capacity of BrAG-6 dropped to 139 mAh/g, showing that interfacial resistance still rises when pressure is low even for the softer electrolyte."
+      - "The DPSE results show that bromide substitution also slows hydrolysis, although it does not prevent it. A release of 0.11 cm^3/g is still too high for open-air processing, so dry rooms remain necessary. We see the main value of DPSE as a common yardstick: because it reports gas release and conductivity retention at fixed dew points, it can be applied to other moisture-sensitive energy materials, and we encourage groups working on halide perovskites or hygroscopic salts to adapt it."
+  - title: "Limitations"
+    paragraphs:
+      - "This study has several limitations. All cells used a lithium-indium alloy anode rather than lithium metal, so dendrite formation was not tested. Cycling was carried out only at 25 degrees C, and the lowest GSPC pressure of 2.5 MPa is still higher than the clamping available in many module designs. Cells were small pellet cells of 1.13 cm^2 area, and we did not assess how BrAG-6 behaves in thin, sheet-cast separators with polymer binders."
+  - title: "Conclusion"
+    paragraphs:
+      - "Partial bromide substitution produced an argyrodite electrolyte, BrAG-6, with an ionic conductivity of 7.4 mS/cm and markedly better tolerance of reduced stack pressure. Under the GSPC protocol its cells retained 82.4 percent of capacity after 1,200 cycles. We propose GSPC and DPSE as simple, stress-revealing protocols for comparing solid electrolytes and other sensitive energy materials."
+references:
+  - "Ferrandel, A. and Ouko, M. (2018). Chloride-rich argyrodites with enhanced lithium mobility. Journal of Invented Solid Ionics 9(2):112-124."
+  - "Lindqvar, S., Teodor, H. and Mbaye, R. (2019). Mixed halide ordering in thiophosphate conductors: a computational survey. Synthetic Materials Theory 4(1):33-47."
+  - "Quennell, B. (2017). Stack pressure and contact loss in cold-pressed solid-state cells. Fictional Battery Letters 2(4):201-209."
+  - "Arbogast-Lee, T. and Vashkell, O. (2019). Nanoindentation of soft sulfide electrolytes. Journal of Synthetic Electrochemical Materials 6(3):77-89."
+  - "Moravek, D., Sunniva, P. and Halloran-Ito, J. (2020). Hydrogen sulfide release from sulfide electrolytes in humid air. Invented Journal of Chemical Safety 11(1):15-26."
+  - "Okafra, S. and Delacorte, N. (2020). Nickel-rich cathodes for solid-state cells: a practical review. Annual Review of Fictional Energy Storage 3:301-330."
+  - "Renquist-Amaro, T. (2018). Impedance analysis of grain boundaries in pressed ceramic electrolytes. Journal of Imaginary Ionics 14(2):55-68."

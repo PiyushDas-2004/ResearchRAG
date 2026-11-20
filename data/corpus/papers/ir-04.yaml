@@ -1,0 +1,69 @@
+key: ir-04
+title: "Phantom Citations: A Human Annotation Study of Citation Hallucination in LLM-Generated Literature Summaries"
+authors: ["Sunniva Achterberg-Lowe", "Desmond Ifeanyi-Castell", "Paulina Rautio-Mendes", "Gideon Wexmoor"]
+affiliation: "Institute for Trustworthy Text Systems, Ostmere University"
+year: 2025
+venue: "Journal of Synthetic Evaluation Methods"
+doi: "10.5555/rrsyn.2025.ir04"
+arxiv_id: "2599.02248"
+keywords: ["citation hallucination", "literature summaries", "human annotation", "retrieval-augmented generation"]
+abstract: >-
+  Large language models are increasingly used to draft literature summaries, but the citations
+  they produce may point to works that do not exist or that do not support the cited claim. We
+  introduce VeriCite, a three-step human annotation protocol that checks each citation for
+  existence, attribution and numeric fidelity. Using VeriCite, 14 trained annotators labelled
+  9,612 citations from 1,480 summaries written by four anonymised models on 185 research topics,
+  both closed-book and with retrieval grounding. Retrieval used BraidRank with Kestrel-CE-base
+  reranking over 256-token chunks with 25 percent overlap. Retrieval grounding cut the pooled
+  rate of fabricated citations from 21.3 percent to 3.9 percent, but misattributed citations fell
+  only from 11.3 percent to 8.7 percent. Inter-annotator agreement reached a Cohen's kappa of 0.91
+  for existence and 0.74 for attribution. An automatic checker, CiteProbe, reached only 0.69
+  macro-F1 against the adjudicated labels, missing most misattributions.
+sections:
+  - title: "Introduction"
+    paragraphs:
+      - "Researchers now routinely ask language models to summarise the literature on a topic, and the resulting summaries usually arrive decorated with citations. A citation implicitly promises two things: that the cited work exists, and that it supports the sentence it is attached to. Either promise can be broken. A fabricated citation points to a work that cannot be found anywhere, while a misattributed citation points to a real work that says something different. Both mislead readers, but the second kind is harder to detect because a quick lookup succeeds."
+      - "Previous evaluations of citation quality have mostly relied on automatic checks of title existence, which catch fabrication but miss misattribution entirely. This paper reports a human annotation study designed to measure both. Our contributions are VeriCite, an annotation protocol with explicit decision rules; a corpus of 9,612 adjudicated citation labels; a comparison of closed-book and retrieval-grounded generation; and an assessment of how well an automatic checker reproduces the human labels."
+  - title: "Methods"
+    paragraphs:
+      - "We selected 185 research topics from the ecology and materials science portions of QuarryQA, choosing topics for which at least 20 relevant articles existed in the collection. Four instruction-tuned language models, anonymised as M1 to M4, each wrote one summary per topic under two conditions, giving 1,480 summaries in total. In the closed-book condition the model received only the topic description and an instruction to cite supporting work. In the retrieval condition it also received the ten highest-ranked chunks returned by our retrieval pipeline, each with its bibliographic record."
+      - "The retrieval pipeline followed the best configuration reported for LongLedger: full articles were split into 256-token chunks with 25 percent overlap, retrieved with BraidRank, and the top 50 chunks were reranked with Kestrel-CE-base. We chose this configuration because it was the strongest published setting for long technical documents at the time of the study, and because its components were openly released. The pipeline itself was held fixed across models so that differences in citation quality reflect the generators."
+      - "VeriCite asks annotators to resolve each citation in three steps. In the existence step, the annotator searches a reference database built from the 63,000 QuarryQA articles plus an external bibliographic index, and records whether a matching work exists. In the attribution step, the annotator reads the cited work and decides whether it supports the sentence carrying the citation. In the numeric fidelity step, applied only to sentences with numbers, the annotator checks whether every number in the sentence matches the cited work."
+      - "These steps yield four labels. A citation is fabricated if no matching work exists, misattributed if the work exists but does not support the sentence or contradicts a number in it, accurate if it passes all applicable steps, and unverifiable if the reference is too vague to resolve. Of 9,755 citations extracted from the summaries, 143 were labelled unverifiable and excluded, leaving 9,612 citations for analysis."
+      - "Fourteen annotators with graduate training in ecology or materials science took part after completing a four-hour calibration session on 120 practice citations. Every citation was labelled independently by two annotators, and disagreements were resolved by a third, senior annotator who saw both labels and their written justifications. The median annotation time was 2.6 minutes per citation, and the study consumed 612 annotator-hours in total, including adjudication."
+  - title: "Results"
+    paragraphs:
+      - "Table 1 breaks down the adjudicated labels by condition and model. Pooled across models, 21.3 percent of closed-book citations were fabricated, compared with 3.9 percent in the retrieval condition. Misattribution behaved differently: it fell from 11.3 percent to only 8.7 percent. In other words, retrieval nearly eliminated invented references but left a substantial share of real references attached to claims they did not support. Model M4 had the highest closed-book fabrication rate at 26.2 percent, and model M3 had the lowest retrieval-condition fabrication rate at 2.7 percent."
+      - "We traced the 416 misattributed citations in the retrieval condition back to the chunks the model had received. In 58 percent of these cases, the cited work had been supplied in the retrieved context, but the chunk shown to the model was topically related to the claim without actually stating it. In a further 19 percent, the supporting statement existed in the cited work but lay outside the retrieved chunk, often just beyond a chunk boundary. Numeric fidelity errors made up 27 percent of all misattributions across both conditions."
+      - "Inter-annotator agreement before adjudication reached a Cohen's kappa of 0.91 for the existence step and 0.74 for the attribution step. Disagreements on attribution concentrated on hedged claims, where one annotator judged a cautious statement in the source as support and the other did not. We also compared the adjudicated labels with CiteProbe, an automatic checker that combines a title lookup with an entailment classifier. CiteProbe reached 0.69 macro-F1 overall; it detected 94 percent of fabricated citations but only 38 percent of misattributed ones."
+    tables:
+      - caption: "Table 1: Adjudicated VeriCite labels by condition and model (percent of analysed citations)."
+        after_paragraph: 0
+        header: ["Condition", "Model", "Citations", "Fabricated (%)", "Misattributed (%)", "Accurate (%)"]
+        rows:
+          - ["Closed-book", "M1", "1302", "18.7", "13.4", "67.9"]
+          - ["Closed-book", "M2", "1177", "24.9", "12.1", "63.0"]
+          - ["Closed-book", "M3", "1240", "16.3", "9.8", "73.9"]
+          - ["Closed-book", "M4", "1091", "26.2", "9.5", "64.3"]
+          - ["Retrieval", "M1", "1236", "3.1", "9.2", "87.7"]
+          - ["Retrieval", "M2", "1198", "5.4", "8.8", "85.8"]
+          - ["Retrieval", "M3", "1214", "2.7", "7.6", "89.7"]
+          - ["Retrieval", "M4", "1154", "4.4", "9.1", "86.5"]
+  - title: "Discussion"
+    paragraphs:
+      - "The asymmetry between fabrication and misattribution is the central finding. Retrieval gives the model real references to cite, so it no longer needs to invent them, but it does not guarantee that the model attaches each reference to a claim the reference supports. Because misattributed citations survive a simple existence check, evaluations that report only fabrication rates will overstate the reliability of retrieval-grounded summaries. The poor recall of CiteProbe on misattribution shows that automatic checking is not yet a substitute for reading the cited work."
+      - "Our trace analysis links part of the remaining error to retrieval and segmentation. When the retrieved chunk is topically close to a claim without containing it, the generator appears to treat proximity as support. Earlier work on chunking found that answers split across chunk boundaries cause a measurable share of retrieval misses even at moderate overlap, and the 19 percent of misattributions whose support lay just outside the retrieved chunk is consistent with that observation. Better chunking may therefore reduce misattribution, not only improve recall."
+  - title: "Limitations"
+    paragraphs:
+      - "The study covers two scientific fields, English-language summaries and four anonymised models, and the rates we report should not be read as properties of any particular commercial system. The retrieval pipeline was fixed, so we cannot separate the contributions of the retriever, the reranker and the chunking configuration. Annotators were domain experts, and the cost of 612 annotator-hours limits how often such a study can be repeated. Finally, the existence step depends on the coverage of our reference database, so a small number of real but obscure works may have been labelled fabricated."
+  - title: "Conclusion"
+    paragraphs:
+      - "Retrieval grounding reduced fabricated citations in LLM-generated literature summaries from 21.3 percent to 3.9 percent, but misattributed citations remained at 8.7 percent and largely escaped automatic detection. We release the VeriCite guidelines, the 9,612 adjudicated labels and the annotator justifications, and we encourage evaluations of citation quality to report misattribution alongside fabrication. Future work should test whether larger retrieval contexts or claim-level verification before generation can close the remaining gap."
+references:
+  - "Velloso-Thiel, O., Andrade-Holm, K. and Nwachukwu-Berg, T. (2022). BraidRank: Query-adaptive fusion of sparse term weights and dense embeddings for scientific passage retrieval. Proceedings of the Synthetic Conference on Retrieval Systems 4:88-103."
+  - "Saarinen-Ocampo, B., Fenwhistle, L., Korhonen-Pratt, A. and Ellisande, R. (2023). How deep should a cross-encoder rerank? Latency and accuracy trade-offs over hybrid retrieval candidates. Journal of Synthetic Information Access 6(2):114-139."
+  - "Strandqvist-Obi, M., Delacroix-Mensah, H. and Barrandeau, Y. (2024). Chunk size and overlap as hidden hyperparameters of long-document retrieval. Transactions on Fictional Language Technology 9(1):1-22."
+  - "Quennell, A. and Haddad-Sorensen, V. (2023). Existence checks for machine-generated references. Journal of Synthetic Evaluation Methods 2(3):55-70."
+  - "Osterberg-Nkem, R. (2024). CiteProbe: Combining title lookup with entailment for citation checking. Proceedings of the Imaginary Symposium on Search 18:112-127."
+  - "Dalvanne, F., Ito-Brannagh, C. and Mweru-Holt, J. (2022). Adjudication procedures for expert annotation. Synthetic Statistics Letters 7:33-49."
+  - "Treloar-Achebe, N. (2023). Hedged claims and the limits of textual entailment. Journal of Pretend Linguistics 14(2):77-96."

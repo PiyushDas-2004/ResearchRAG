@@ -1,0 +1,71 @@
+key: mat-03
+title: "Molybdate-Intercalated Nickel-Iron Hydroxide on Nickel Felt for Durable Alkaline Water Electrolysis Under Intermittent Load"
+authors: ["Haldis Brennecke", "Arjun Vellacott", "Mirela Szandor"]
+affiliation: "Electrocatalysis Group, Lake Orvane Institute for Hydrogen Research"
+year: 2023
+venue: "Journal of Invented Electrocatalysis"
+doi: "10.5555/rrsyn.2023.mat03"
+arxiv_id: "2399.08812"
+keywords: ["alkaline water electrolysis", "oxygen evolution", "nickel-iron catalyst", "overpotential", "durability"]
+abstract: >-
+  Alkaline electrolysers powered by wind and solar must survive frequent ramps and shutdowns, which
+  degrade nickel-iron oxygen evolution catalysts faster than steady operation. We report NFM-felt, a
+  molybdate-intercalated nickel-iron layered hydroxide with a Ni to Fe ratio of 3 to 1 grown directly
+  on porous nickel felt at a loading of 2.6 mg/cm^2. In 1 M potassium hydroxide at 25 degrees C,
+  NFM-felt required an overpotential of 214 mV to reach 10 mA/cm^2, with a Tafel slope of 37 mV/dec.
+  In a 25 cm^2 zero-gap cell at 80 degrees C, the cell voltage at 1 A/cm^2 was 1.79 V, a voltage
+  efficiency of 82.7 percent on a higher heating value basis. We also define the Intermittent
+  Renewable Load Profile (IRLP-24) protocol, under which NFM-felt degraded by 38 microvolts per hour
+  over 1,200 hours, compared with 96 microvolts per hour for a molybdate-free reference.
+sections:
+  - title: "Introduction"
+    paragraphs:
+      - "Alkaline water electrolysis is the most mature route to low-carbon hydrogen, and earth-abundant catalysts are already standard practice on the anode, where nickel-iron hydroxides are the leading oxygen evolution catalysts. Their initial activity is excellent, but their durability under the variable power of renewable sources is less well understood. During shutdowns, the anode potential falls and reverse currents flow through the shared manifolds of a stack, partially reducing the catalyst and promoting iron dissolution."
+      - "Most durability studies, however, hold the electrolyser at a constant current density for a few hundred hours, which does not reproduce these events. In this paper we make two contributions. First, we present NFM-felt, a nickel-iron hydroxide stabilised by molybdate anions in its interlayer and grown directly on a three-dimensional nickel felt. Second, we propose a staged intermittent test, IRLP-24, that increases the frequency of shutdowns over time so that the sensitivity of a catalyst to cycling can be measured rather than averaged away."
+  - title: "Related Work"
+    paragraphs:
+      - "Nickel-iron hydroxides with iron fractions between 15 and 30 percent typically show overpotentials of 230 to 280 mV at 10 mA/cm^2 in 1 M hydroxide. Intercalation of oxoanions such as carbonate, borate or molybdate has been reported to modify the interlayer spacing and the local electronic structure of nickel sites. Durability protocols for alkaline cells remain heterogeneous. Our staged design borrows directly from the Graded Stack Pressure Cycling protocol of Vashkell et al. (2021), which was developed for solid-state batteries and reports degradation separately for each stress stage, so that the effect of an increasing stress can be read off one long test."
+  - title: "Methods"
+    paragraphs:
+      - "NFM-felt was prepared by a one-step hydrothermal reaction at 120 degrees C for 10 hours. Nickel felt with 86 percent porosity and 1.7 mm thickness was immersed in an aqueous solution of nickel nitrate, iron nitrate, sodium molybdate and urea, with the metal salts in a 3 to 1 Ni to Fe ratio. The resulting catalyst loading was 2.6 mg/cm^2. The reference catalyst NF-ref was made by the same route without molybdate, and bare nickel felt served as a third comparison. Iron content and leaching were quantified by inductively coupled plasma analysis."
+      - "Half-cell measurements were made in purified 1 M potassium hydroxide at 25 degrees C in a three-electrode cell, with 90 percent ohmic correction. Full-cell tests used a 25 cm^2 zero-gap cell with a Raney-nickel cathode, a 220 micrometre porous separator and 30 weight percent potassium hydroxide at 80 degrees C. Three cells were tested for each anode, and reported values are means."
+      - "The IRLP-24 protocol applies a repeating 24-hour current profile derived from a synthetic hybrid wind and solar output, ranging between 0 and 1 A/cm^2, with ramp rates up to 0.2 A/cm^2 per minute. The 1,200-hour test is divided into three 400-hour stages with 2, 4 and 6 full shutdowns per day respectively, each shutdown lasting 20 minutes at open circuit. Degradation is reported as the rate of increase in cell voltage at 500 mA/cm^2, measured in a reference hold at the same time each day. A separate constant-current test held cells at 500 mA/cm^2 for 2,000 hours."
+  - title: "Results"
+    paragraphs:
+      - "In half-cell tests, NFM-felt reached 10 mA/cm^2 at an overpotential of 214 mV and 100 mA/cm^2 at 251 mV, with a Tafel slope of 37 mV/dec. NF-ref needed 247 mV at 10 mA/cm^2 and showed a Tafel slope of 49 mV/dec, while bare nickel felt needed 342 mV. In the zero-gap cell at 80 degrees C, NFM-felt gave 1.79 V at 1 A/cm^2, corresponding to a voltage efficiency of 82.7 percent based on the higher heating value of hydrogen, compared with 1.86 V for NF-ref."
+      - "Under constant current at 500 mA/cm^2, NFM-felt cells degraded by only 11 microvolts per hour over 2,000 hours, a total voltage rise of 22 mV, and inductively coupled plasma analysis showed an iron loss of 0.8 percent of the initial inventory. Intermittent operation was markedly harsher. Over the full IRLP-24 test NFM-felt degraded at a mean rate of 38 microvolts per hour, more than three times its constant-current rate, while NF-ref degraded at 96 microvolts per hour and lost 4.6 percent of its iron."
+      - "Table 2 shows that degradation accelerated with shutdown frequency for both catalysts, but the rise was steeper without molybdate. Between the first and third stages, the rate for NFM-felt increased from 21 to 59 microvolts per hour, while NF-ref increased from 58 to 138 microvolts per hour. Post-test Raman spectra of NF-ref showed a growing nickel oxyhydroxide band and a loss of the iron-related signal, consistent with iron dissolution during reverse-current events."
+    tables:
+      - caption: "Table 1: Activity and intermittent durability of the three anodes (half-cell at 25 degrees C, full cell at 80 degrees C)."
+        after_paragraph: 0
+        header: ["Catalyst", "Eta at 10 mA/cm^2 (mV)", "Tafel slope (mV/dec)", "Cell voltage at 1 A/cm^2 (V)", "IRLP-24 decay (microvolts/h)"]
+        rows:
+          - ["NFM-felt", "214", "37", "1.79", "38"]
+          - ["NF-ref", "247", "49", "1.86", "96"]
+          - ["Bare nickel felt", "342", "71", "2.04", "143"]
+      - caption: "Table 2: Voltage degradation rate in each IRLP-24 stage (microvolts per hour at 500 mA/cm^2)."
+        after_paragraph: 2
+        header: ["Stage", "Hours", "Shutdowns per day", "NFM-felt decay", "NF-ref decay"]
+        rows:
+          - ["1", "0-400", "2", "21", "58"]
+          - ["2", "400-800", "4", "34", "92"]
+          - ["3", "800-1200", "6", "59", "138"]
+  - title: "Discussion"
+    paragraphs:
+      - "We interpret the improved stability of NFM-felt as a result of molybdate anchoring the iron sites. Molybdate is partly released in the first hours of operation, as reported for other oxoanion-modified catalysts, but the fraction retained, about 44 percent after 2,000 hours, appears sufficient to slow iron loss during potential excursions. Growing the catalyst directly on felt also removed the binder, eliminating a delamination pathway that is common with sprayed catalyst inks."
+      - "The staged structure of IRLP-24 was essential to this conclusion. Averaged over 1,200 hours, both catalysts would simply look worse under intermittent load, but the stage-wise rates show that the penalty grows with each additional shutdown and that NFM-felt degrades less steeply. As with the GSPC protocol for solid-state cells, separating the stages makes it possible to say which stress is responsible for which share of the loss, and we suggest IRLP-24 as a shared profile for other technologies coupled to variable renewable supply, including thermal storage."
+      - "For system designers, the most practical number is the stage 3 rate, because sites with high renewable shares can see six or more shutdowns on windy days. At 59 microvolts per hour, an NFM-felt cell operated under such conditions for 8,000 hours a year would accumulate a voltage rise of roughly 0.47 V, far beyond typical end-of-life criteria. Mitigation at system level, such as protective polarisation currents during shutdown or a small heated buffer that keeps the stack warm, is therefore likely to remain necessary even with improved catalysts."
+  - title: "Limitations"
+    paragraphs:
+      - "The study was limited to single 25 cm^2 cells, and reverse currents in multi-cell stacks are larger than in a single cell because of shunt paths through the shared electrolyte, so the IRLP-24 rates may underestimate stack degradation. The IRLP-24 profile is synthetic and does not include the seasonal variability of a real site. We also used high-purity electrolyte, and the effect of iron or carbonate impurities typical of industrial potassium hydroxide was not examined. Finally, we did not measure gas purity, so the effect of the catalyst on oxygen crossover into the hydrogen stream remains unknown."
+  - title: "Conclusion"
+    paragraphs:
+      - "Molybdate intercalation and binder-free growth on nickel felt produced an oxygen evolution catalyst, NFM-felt, with an overpotential of 214 mV at 10 mA/cm^2 and a degradation rate of 38 microvolts per hour under the IRLP-24 intermittent protocol, less than half that of the molybdate-free reference. Staged intermittent testing should become routine for catalysts intended for renewable-powered electrolysis."
+references:
+  - "Vashkell, O., Renquist-Amaro, T. and Okafra, S. (2021). A Bromide-Substituted Argyrodite Electrolyte Sustains 1,200 Cycles in Pressure-Graded Solid-State Cells. Journal of Synthetic Electrochemical Materials 8(2):140-156."
+  - "Grauvel, P. and Ammundsen, T. (2020). Oxoanion intercalation in layered double hydroxides for oxygen evolution. Journal of Invented Electrocatalysis 15(3):255-270."
+  - "Szandor, M. and Kettleby, R. (2019). Reverse currents during shutdown of alkaline electrolyser stacks. Synthetic Hydrogen Engineering 6(2):98-112."
+  - "Vellacott, A., Nyborg, E. and Faraj-Linde, S. (2021). Binder-free catalyst growth on nickel foams and felts. Fictional Catalysis Reports 10(1):41-55."
+  - "Holmquist-Adeyemi, F. (2018). Iron dissolution from nickel-iron oxyhydroxides. Invented Journal of Corrosion Science 22(5):377-390."
+  - "Brennecke, H. and Oyelaran, D. (2020). Synthetic wind and solar profiles for electrolyser testing. Annual Review of Fictional Energy Systems 2:118-139."
+  - "Duvallier, C. (2017). Raman spectroscopy of nickel oxyhydroxides. Journal of Imaginary Spectroscopy 31(4):502-514."

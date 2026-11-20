@@ -1,0 +1,69 @@
+key: bio-01
+title: "Wrist-Worn Step Counters Undercount Slow Walking: A Video-Referenced Validation in the Harrowmere Activity Cohort"
+authors: ["Odalys Brenninger", "Kofi Marchetti-Laine", "Saskia Yudovin"]
+affiliation: "Department of Digital Epidemiology, Vessmoor Institute of Population Health"
+year: 2021
+venue: "Journal of Synthetic Health Measurement"
+doi: "10.5555/rrsyn.2021.bio01"
+arxiv_id: "2199.03812"
+keywords: ["step counting", "wearable validation", "video annotation", "measurement error"]
+abstract: >-
+  Wrist-worn step counters are widely used as exposure measures in population health studies, yet
+  their accuracy at slow walking speeds is rarely checked against a direct reference. We validated
+  three consumer-style wrist devices, the Pacewell Band 3, the Kinetra Loop and the Corvi Strap,
+  against two-camera video annotation in 148 adults from the fictional Harrowmere Activity and
+  Longitudinal Observation (HALO) cohort. Participants completed six walking conditions under the
+  StepTrace protocol, yielding 211,460 video-annotated steps. Pooled and weighted by annotated steps,
+  the mean absolute percentage error (MAPE) was 7.9 percent for the Pacewell Band 3, 10.6 percent for
+  the Kinetra Loop and 13.4 percent for the Corvi Strap. Errors were concentrated in slow and
+  walker-assisted walking, where all devices undercounted by more than 23 percent. A speed-dependent
+  correction, CadenceFloor, cut slow-walk MAPE for the Pacewell Band 3 from 23.7 to 11.2 percent. We
+  discuss implications for activity-based exposure variables in epidemiological models.
+sections:
+  - title: "Introduction"
+    paragraphs:
+      - "Daily step counts collected by wrist-worn devices have become a convenient exposure measure in population health research. They are cheap to deploy, they run for weeks without attention, and participants tolerate them better than hip-mounted pedometers. In the fictional city of Harrowmere, step counts from wrist devices are now a core variable in the Harrowmere Activity and Longitudinal Observation (HALO) cohort, which follows 3,920 adults and supplies activity summaries to several modelling groups. Because downstream analyses treat these counts as if they were measured without error, any systematic bias in the device propagates silently into estimates of activity, contact and risk."
+      - "Most published validations of wrist devices rely on treadmill walking at moderate speeds, where accelerometer signals are strong and regular. Slow, irregular and assisted walking is less studied, even though it is common among older adults and people recovering from illness. This paper reports a video-referenced validation of three wrist devices in a HALO subsample, with deliberate oversampling of slow walking. Our aims were to estimate device error under six walking conditions, to identify the conditions in which errors concentrate, and to test whether a simple speed-dependent correction could reduce error enough for epidemiological use."
+  - title: "Related Work"
+    paragraphs:
+      - "Earlier work within the fictional literature has compared wrist devices against manual tally counters, which are themselves error prone at high cadence. Fenwright and Ollobar reported a mean undercount of 9 percent for wrist devices during supermarket walking, but their reference was a single observer with a clicker. Video annotation offers a stronger reference because each heel strike can be reviewed frame by frame and disagreements can be adjudicated. We are not aware of a previous study in the HALO population that combined video ground truth with an explicit slow-walking stratum, which motivated the design described below."
+  - title: "Methods"
+    paragraphs:
+      - "We recruited 148 HALO participants aged 21 to 79 years (median 52), of whom 39 were aged 65 or older and 11 used a walking frame in daily life. Each participant wore the Pacewell Band 3, the Kinetra Loop and the Corvi Strap simultaneously on the non-dominant wrist, stacked in an order randomised per participant. All devices ran manufacturer firmware with default step-detection settings, and counts were read from the minute-level exports of each device."
+      - "The StepTrace protocol consisted of six conditions completed in one 95-minute visit: slow walking at a paced 0.6 m/s, self-paced walking at about 1.2 m/s, brisk walking at about 1.6 m/s, stair ascent and descent over four flights, walker-assisted walking, and a 12-minute free-living kitchen task involving short shuffles between counters. The walker-assisted condition was completed by the 52 participants who were able and willing to use a frame. Walking conditions took place on a 40 m indoor loop filmed by two synchronised cameras recording at 60 frames per second."
+      - "Two trained annotators independently marked every heel strike in the video using a frame-stepping tool, and disagreements larger than two steps per bout were resolved by a third annotator. Inter-rater agreement on bout totals was high, with an intraclass correlation coefficient of 0.994. In total the reference contained 211,460 annotated steps. Our primary error metric was the mean absolute percentage error (MAPE) of device counts relative to video counts per bout, pooled across bouts with weights proportional to annotated steps. Secondary metrics were the Bland-Altman bias in steps per 1,000 true steps and the 95 percent limits of agreement."
+      - "Statistical analysis used mixed-effects models with random intercepts for participant to estimate condition effects on percentage error, with walking speed measured from video as a continuous covariate. Confidence intervals were obtained by bootstrapping participants 2,000 times, and all analyses were prespecified in a protocol lodged before data collection. The study was approved by the fictional Vessmoor Research Ethics Board under reference VREB-2020-117, and all participants gave written consent before their visit."
+  - title: "Results"
+    paragraphs:
+      - "All three devices undercounted on average. Pooled across conditions and weighted by annotated steps, MAPE was 7.9 percent for the Pacewell Band 3, 10.6 percent for the Kinetra Loop and 13.4 percent for the Corvi Strap. The Bland-Altman bias for the Pacewell Band 3 was minus 64 steps per 1,000 true steps, with limits of agreement from minus 191 to plus 63. Because self-paced and brisk walking contributed 71 percent of annotated steps, the pooled figures are dominated by conditions in which devices performed well."
+      - "Table 1 shows that error depended strongly on condition. At self-paced and brisk speeds, every device stayed below 7 percent MAPE, and the Pacewell Band 3 reached 2.4 percent during brisk walking. Slow walking at 0.6 m/s produced MAPE between 23.7 and 34.2 percent across devices, and walker-assisted walking was worst, with the Corvi Strap missing about four in ten steps. The kitchen task, which mixed shuffling with arm movements while handling objects, sat between these extremes."
+      - "Participants aged 65 or older had higher error than younger participants under every condition, but most of this difference disappeared after adjusting for measured walking speed, suggesting that speed rather than age per se drove undercounting. We then fitted CadenceFloor, a speed-dependent correction that rescales minute-level counts when device cadence falls below 70 steps per minute, using half of the participants for fitting and half for testing. In the test half, CadenceFloor reduced slow-walk MAPE for the Pacewell Band 3 from 23.7 to 11.2 percent and walker-assisted MAPE from 31.4 to 19.8 percent, while leaving brisk-walk error unchanged at 2.4 percent."
+    tables:
+      - caption: "Table 1: Mean absolute percentage error (percent) of device step counts against video, by StepTrace condition."
+        after_paragraph: 1
+        header: ["Condition", "Pacewell Band 3", "Kinetra Loop", "Corvi Strap"]
+        rows:
+          - ["Slow walk 0.6 m/s", "23.7", "29.5", "34.2"]
+          - ["Self-paced 1.2 m/s", "3.1", "4.6", "6.0"]
+          - ["Brisk 1.6 m/s", "2.4", "3.9", "5.3"]
+          - ["Stairs", "8.9", "12.6", "15.8"]
+          - ["Walker-assisted", "31.4", "38.0", "41.7"]
+          - ["Kitchen task", "17.5", "21.2", "26.9"]
+  - title: "Discussion"
+    paragraphs:
+      - "The main message is that wrist step counts are trustworthy at ordinary walking speeds and unreliable at slow speeds, with the gap large enough to matter for epidemiological work. A study that compares activity across age groups, or that uses steps as a proxy for time spent outside the home, will exaggerate differences between slow and fast walkers if raw counts are used. Ranking of participants by activity is fairly robust, because the Spearman correlation between device and video totals was 0.93 for the Pacewell Band 3, but absolute levels at the low end are biased downward."
+      - "CadenceFloor is deliberately simple. It needs only minute-level counts, which most cohort exports already contain, and it can be applied retrospectively to existing HALO data. We have released the fitted coefficients for the Pacewell Band 3 so that modelling groups using HALO activity quintiles can apply them. We expect that models which convert activity into contact rates or exposure time will be most sensitive to the correction, because the lowest activity quintile is where raw counts are most distorted."
+  - title: "Limitations"
+    paragraphs:
+      - "Several limitations apply. All conditions were performed indoors on a flat loop or a single stairwell, so outdoor terrain, cold weather and carried loads were not represented. Devices were worn only on the non-dominant wrist, and we did not test dominant-wrist placement, which may change error during tasks such as the kitchen condition. The sample was 71 percent under 60 years of age, and only 11 participants used a walking frame in daily life, so estimates for frail walkers are imprecise. Finally, CadenceFloor was fitted for one firmware version and may need refitting after updates."
+  - title: "Conclusion"
+    paragraphs:
+      - "Against a two-camera video reference, three wrist devices undercounted steps, with pooled MAPE between 7.9 and 13.4 percent and much larger errors during slow and assisted walking. A speed-dependent correction roughly halved slow-walk error for the best device. We recommend that cohorts reporting wrist step counts state the walking-speed mix of their validation and, where slow walkers are common, apply a correction such as CadenceFloor before using counts as exposure variables."
+references:
+  - "Fenwright, A. and Ollobar, N. (2018). Wrist pedometry in grocery aisles: a tally-counter comparison. Journal of Invented Activity Science 6(1):22-35."
+  - "Yudovin, S. and Pellacott, R. (2019). Design and baseline profile of the Harrowmere Activity and Longitudinal Observation cohort. Fictional Cohort Profiles 4(2):71-88."
+  - "Marchetti-Laine, K. (2017). Frame-stepping tools for gait annotation in synchronised video. Proceedings of the Imaginary Workshop on Movement Sensing, 113-121."
+  - "Drossel, H., Amankwa, T. and Linnqvist, E. (2016). Percentage error metrics for count data from wearable sensors. Synthetic Statistics in Medicine 11(4):301-317."
+  - "Quarrington, M. and Abelard, J. (2020). Cadence thresholds and missed steps in older walkers. Archives of Fabricated Gerontology 15(3):190-204."
+  - "Brenninger, O. and Thale, V. (2019). Measurement error in wearable exposures and its propagation into risk estimates. Notional Epidemiology Review 8(2):55-70."
+  - "Sorvino, P., Kettering, L. and Imbala, D. (2015). Bland-Altman analysis for repeated counts. Journal of Pretend Biostatistics 3(1):9-24."

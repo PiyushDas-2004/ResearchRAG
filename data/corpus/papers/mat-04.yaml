@@ -1,0 +1,66 @@
+key: mat-04
+title: "Eighteen Months of a Ternary Nitrate Molten-Salt Storage Pilot: Round-Trip Efficiency and Heat Loss"
+authors: ["Cormac Tellani-Ruiz", "Haldis Brennecke", "Yusra Fennimore", "Bertil Oakhaven"]
+affiliation: "Thermal Storage Pilot Facility, Corvane Ridge Energy Research Station"
+year: 2024
+venue: "Synthetic Thermal Energy Systems"
+doi: "10.5555/rrsyn.2024.mat04"
+arxiv_id: "2499.17263"
+keywords: ["thermal energy storage", "molten salt", "round-trip efficiency", "heat loss", "pilot plant"]
+abstract: >-
+  Molten nitrate salts are the established medium for large-scale thermal storage, but long-term
+  operating data from small, heater-charged tanks are scarce. We report 18 months of operation of the
+  Corvane Ridge pilot, a 3.2 MWh_th two-tank system holding 21.6 tonnes of a ternary
+  calcium-potassium-sodium nitrate salt, TN-131, with a freezing point of 131 degrees C. The hot tank
+  operated at 500 degrees C and the cold tank at 290 degrees C. Charging was driven by a 600 kW
+  electric heater following the IRLP-24 intermittent load profile, and discharged heat supplied
+  process steam and a preheating loop for an alkaline electrolyser. Over a 12-month reference year
+  comprising 326 charge cycles, the cycle-weighted round-trip thermal efficiency was 92.8 percent,
+  falling to 88.9 percent in winter. Standby heat loss from the hot tank was 3.4 kW at design
+  conditions, of which 31 percent passed through the foundation.
+sections:
+  - title: "Introduction"
+    paragraphs:
+      - "Thermal energy storage in molten salt allows electricity from variable sources to be converted into heat and released hours later for industrial processes or power generation. Commercial plants built around concentrating solar collectors use tanks holding thousands of tonnes, where surface-to-volume ratios are small and heat losses are a minor concern. Smaller tanks charged by electric heaters are now being considered for industrial sites, but at that scale heat loss and the energy needed for freeze protection weigh much more heavily on efficiency."
+      - "This paper reports the first 18 months of operation of the Corvane Ridge pilot, built to measure these penalties directly. The pilot uses a ternary nitrate salt with a lower freezing point than the common binary mixture, which reduces the trace heating needed in winter. We present the round-trip thermal efficiency across seasons, a breakdown of standby heat loss by tank component, the stability of the salt chemistry, and operating experience from coupling the pilot to an intermittent charging profile and to a hydrogen production test loop."
+  - title: "Background"
+    paragraphs:
+      - "Round-trip thermal efficiency is defined here as the heat recovered from the salt during discharge divided by the electrical heat delivered to the salt during charging over the same set of complete cycles, with trace heating counted as an additional input. It is a heat-to-heat measure and is not directly comparable with electricity-to-electricity efficiencies of batteries. Earlier pilot reports used the binary sodium-potassium nitrate mixture, which freezes near 220 degrees C, and reported round-trip efficiencies between 85 and 90 percent for tanks below 5 MWh_th."
+  - title: "Experimental Setup"
+    paragraphs:
+      - "The pilot consists of two vertical carbon steel tanks of 3.3 m internal diameter, each insulated with 420 mm of mineral wool and an outer aluminium cladding. The hot tank stands on a foundation of insulating firebrick with an aerogel blanket ring, designated ARC-40, around its perimeter. The salt inventory is 21.6 tonnes of TN-131, a calcium-potassium-sodium nitrate with a freezing point of 131 degrees C. The usable capacity between 290 and 500 degrees C is 3.2 MWh_th. Salt is moved by a long-shaft cantilever pump with a nominal flow of 9.5 kg/s."
+      - "Charging is by a 600 kW immersion heater. Rather than charging at constant power, the heater followed the IRLP-24 profile defined by Brennecke et al. (2023) for intermittent electrolyser testing, rescaled so that 1 A/cm^2 corresponds to full heater power. We used the stage 2 variant with four interruptions per day, which approximates the output of a mid-sized hybrid wind and solar plant. Discharge passed salt through a shell-and-tube heat exchanger raising saturated steam at 14 bar, and a side stream heated a closed water-glycol loop to 80 degrees C to preheat electrolyte for a 30 kW alkaline electrolyser test stand with NFM-felt anodes."
+      - "Heat flows were measured with calibrated flow meters and 46 thermocouples, logged every 10 seconds. Standby losses were determined by isolating each tank for 72-hour cool-down tests at full and at minimum inventory, and the share of loss through the roof, walls and foundation was estimated by combining surface heat flux sensors with a finite-element model. The salt was sampled monthly and analysed for nitrite, carbonate and chloride content."
+  - title: "Results"
+    paragraphs:
+      - "Over the 12-month reference year, from month 4 to month 15 of operation, the pilot completed 326 full charge-discharge cycles with a cycle-weighted round-trip thermal efficiency of 92.8 percent. Efficiency varied strongly with season, as shown in Table 1. The best single month was July at 95.4 percent and the worst was January at 87.6 percent, when trace heating of pipes and the cold-tank drain line added up to 210 kWh per day."
+      - "Isolation tests gave a hot-tank standby loss of 3.4 kW at 500 degrees C and full inventory, equal to about 2.55 percent of capacity per day, and a cold-tank loss of 1.6 kW at 290 degrees C. The foundation accounted for 31 percent of hot-tank loss, the walls for 52 percent and the roof for 17 percent. Installing the ARC-40 ring in month 9 reduced foundation loss by 0.4 kW. Plant availability over 18 months was 96.7 percent, with downtime caused by one pump seal failure and two freeze-protection trips."
+      - "The salt chemistry remained stable. Nitrite content rose from 0.4 to 1.9 weight percent over 18 months, and carbonate stayed below 0.25 weight percent. The electrolyte preheating loop supplied a mean of 61 kWh of heat per day to the electrolyser test stand, which allowed it to start at its 80 degrees C operating temperature after overnight shutdowns without using electric preheaters."
+    tables:
+      - caption: "Table 1: Seasonal performance of the Corvane Ridge pilot over the 12-month reference year."
+        after_paragraph: 0
+        header: ["Season", "Charge cycles", "Round-trip efficiency (%)", "Mean hot-tank loss (kW)", "Mean ambient (degrees C)"]
+        rows:
+          - ["Winter", "71", "88.9", "3.9", "-2.1"]
+          - ["Spring", "84", "93.4", "3.4", "9.8"]
+          - ["Summer", "92", "95.0", "3.1", "21.6"]
+          - ["Autumn", "79", "93.2", "3.3", "11.4"]
+  - title: "Discussion"
+    paragraphs:
+      - "The seasonal swing in efficiency, about 6 percentage points between summer and winter, is larger than the variation in tank standby loss alone would explain. Most of the winter penalty came from trace heating, which is counted as an input. The low freezing point of TN-131 helps here: we estimate that a binary nitrate salt at the same site would have required roughly 2.3 times as much trace heating energy in January. Conversely, the seasonal swing means that annual efficiency figures from summer-only campaigns can overstate long-term performance."
+      - "Using the IRLP-24 profile for charging made the pilot directly comparable to electrolyser and battery tests run under similar intermittency. During two test weeks in month 12 the heater instead followed the stage 3 variant with six interruptions per day, and round-trip efficiency changed by less than 0.2 percentage points, suggesting that the tank is largely insensitive to the frequency of interruptions, unlike electrochemical devices. On a heat-to-heat basis the 92.8 percent efficiency also exceeds the 82.7 percent voltage efficiency reported for NFM-felt electrolysis cells, though the two quantities measure different conversions and should not be ranked against each other without care."
+      - "The coupling to the electrolyser test stand illustrates a use of small storage tanks that is easy to overlook. Alkaline electrolysers lose efficiency when they restart cold, and keeping a stack at its operating temperature during overnight shutdowns otherwise requires electric heating. The 61 kWh per day supplied by the preheating loop is small compared with the tank capacity, about 2 percent of it, but it removed one of the shutdown penalties identified in intermittent electrolyser testing. A combined test of electrolyser degradation and heat supply under the same profile would be a natural next step."
+  - title: "Limitations"
+    paragraphs:
+      - "The pilot is a single installation at one inland site with cold winters, and its losses would differ in a milder climate. Its 3.2 MWh_th capacity is far below commercial scale, so the surface-to-volume ratio and thus the relative heat loss are much higher than in large tanks. We did not convert stored heat back to electricity, so no electricity-to-electricity efficiency is reported, and 18 months is too short to observe long-term corrosion of the tank steel."
+  - title: "Conclusion"
+    paragraphs:
+      - "The Corvane Ridge pilot operated with 96.7 percent availability and a cycle-weighted round-trip thermal efficiency of 92.8 percent over its reference year. Standby losses of 3.4 kW from the hot tank and trace heating in winter were the dominant penalties. A low-freezing ternary salt and careful foundation insulation make small electrically charged molten-salt tanks a practical source of process heat, including for hydrogen production."
+references:
+  - "Brennecke, H., Vellacott, A. and Szandor, M. (2023). Molybdate-Intercalated Nickel-Iron Hydroxide on Nickel Felt for Durable Alkaline Water Electrolysis Under Intermittent Load. Journal of Invented Electrocatalysis 18(4):301-318."
+  - "Ostergaard-Vale, N. (2019). Performance of small two-tank nitrate storage pilots. Synthetic Thermal Energy Systems 7(2):60-74."
+  - "Fennimore, Y. and Rask, J. (2021). Ternary nitrate salts with low freezing points. Invented Journal of Molten Salt Chemistry 5(1):12-27."
+  - "Tellani-Ruiz, C. (2020). Foundation heat loss in hot storage tanks. Fictional Heat Transfer Letters 13(3):180-191."
+  - "Oakhaven, B., Sorel, P. and Imani-Dahl, L. (2018). Nitrite formation in nitrate storage salts. Journal of Imaginary High-Temperature Chemistry 9(4):233-247."
+  - "Lindgaard, M. and Achterberg-Nwosu, C. (2022). Trace heating strategies for molten-salt plants. Synthetic Plant Engineering 11(2):95-109."
+  - "Peverell, G. (2017). Calibration of thermocouple arrays for storage tanks. Fictional Instrumentation Review 4(1):9-18."

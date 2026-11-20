@@ -1,0 +1,74 @@
+key: ir-03
+title: "Chunk Size and Overlap as Hidden Hyperparameters of Long-Document Retrieval"
+authors: ["Mireille Strandqvist-Obi", "Hakon Delacroix-Mensah", "Yuki Barrandeau"]
+affiliation: "Centre for Document Intelligence, Varnholt College of Computing"
+year: 2024
+venue: "Transactions on Fictional Language Technology"
+doi: "10.5555/rrsyn.2024.ir03"
+arxiv_id: "2499.11573"
+keywords: ["chunking", "long documents", "retrieval-augmented generation", "passage segmentation"]
+abstract: >-
+  Retrieval-augmented systems for long documents must first cut each document into chunks, yet
+  chunk size and overlap are rarely tuned or reported. We measure their effect on retrieval recall
+  using LongLedger, a new collection of 2,350 long technical documents averaging 14,900 tokens,
+  with 6,120 questions whose answers were marked as exact spans. We sweep four chunk sizes (128,
+  256, 512 and 1,024 tokens) and four overlap ratios (0, 10, 25 and 50 percent), retrieving with
+  the BraidRank hybrid retriever. Answer-complete Recall@10 ranges from 0.588 for 1,024-token
+  chunks without overlap to 0.748 for 256-token chunks with 50 percent overlap. A 25 percent
+  overlap captures nearly all of the benefit, reaching 0.742 while indexing a third fewer chunks
+  than 50 percent overlap. Answers split across chunk boundaries cause 17.3 percent of retrieval
+  misses without overlap. Adding Kestrel-CE-base reranking raises the best configuration to 0.801.
+sections:
+  - title: "Introduction"
+    paragraphs:
+      - "Most retrieval benchmarks ship with passages that have already been segmented, so the retriever never faces the question of where one passage should end and the next begin. Real deployments over manuals, standards and technical reports do not have this luxury. Engineers choose a chunk size and an overlap, often by copying a default from a software library, and then tune everything else. If an answer is split across two chunks, or diluted inside a very long chunk, no amount of retriever tuning can fully repair the damage."
+      - "Earlier work hints at the problem without measuring it. The authors of BraidRank traced part of their failures to fixed 180-word passages that separated a claim from its supporting number, and the Kestrel reranking study found that dozens of demoted gold passages had been cut mid-sentence. This paper isolates segmentation as an experimental variable. We hold the retriever fixed, vary only chunk size and overlap, and measure how often a retrieved chunk contains the entire answer. Our contributions are the LongLedger collection, a 16-configuration sweep, and an error analysis of boundary failures."
+  - title: "Methods"
+    paragraphs:
+      - "LongLedger contains 2,350 English documents drawn from fictionalised engineering reports, equipment standards and doctoral theses, with an average length of 14,900 tokens, or roughly 38 printed pages. Twenty-six annotators wrote 6,120 questions and marked the exact answer span for each one in the source document. The median answer span is 41 tokens long, and 22 percent of answer spans cross a paragraph break in the original layout. Tokens are counted with the word-piece tokenizer of the Wren encoder throughout."
+      - "Each document is split into fixed-length windows of 128, 256, 512 or 1,024 tokens, with consecutive windows overlapping by 0, 10, 25 or 50 percent of the window length. Windows never cross document boundaries, and the final window of a document is allowed to be shorter. For the 256-token setting, this produces 137,000 chunks with no overlap, 182,000 chunks with 25 percent overlap and 274,000 chunks with 50 percent overlap, so the largest overlap doubles the index size relative to no overlap."
+      - "We also test a structure-aware baseline, SectionCut, which splits documents at headings detected from layout cues and then subdivides any section longer than 1,024 tokens. SectionCut produces chunks with a mean length of 410 tokens and a long tail of short chunks under 60 tokens, typically captions or isolated list items. It represents the common practice of chunking by document structure rather than by token count."
+  - title: "Experimental Setup"
+    paragraphs:
+      - "All configurations are retrieved with BraidRank using the checkpoints released by its authors, without retraining the fusion regressor. Because BraidRank was trained on QuarryQA passages of about 180 words, its encoder sees chunks that are both shorter and much longer than its training distribution. We consider this realistic, since practitioners seldom retrain retrievers for each chunking choice, but we note it as a possible confound."
+      - "The primary metric is answer-complete Recall@10: a question counts as a hit only if at least one of the top ten retrieved chunks contains the entire annotated answer span. This is stricter than the usual passage-level recall, which would credit a chunk that contains only part of the answer. For selected configurations we also rerank the top 50 chunks with Kestrel-CE-base, whose maximum input of 320 tokens means that 512-token and 1,024-token chunks are truncated before scoring."
+  - title: "Results"
+    paragraphs:
+      - "Table 1 reports answer-complete Recall@10 for all 16 configurations. Chunks of 256 tokens perform best at every overlap level. Very small chunks of 128 tokens often cut answers apart, while very large chunks of 1,024 tokens dilute the relevant text and lower retrieval scores. The worst configuration, 1,024 tokens with no overlap, reaches only 0.588, which is 16 points below the best configuration."
+      - "Overlap helps most at small chunk sizes. Moving from no overlap to 25 percent overlap adds 6.2 points at 128 tokens and 5.9 points at 256 tokens, but only 1.5 points at 1,024 tokens. Going further, from 25 to 50 percent overlap, adds just 0.006 at 256 tokens while increasing the number of indexed chunks from 182,000 to 274,000. We therefore recommend 25 percent overlap as a default. SectionCut reaches 0.709, better than any 1,024-token setting but below the 256-token configurations with 10 percent or more overlap."
+      - "To understand the misses, we sampled 400 failed questions from the 256-token configuration without overlap. Boundary failures, where the answer span was split across two adjacent chunks, accounted for 17.3 percent of misses. With 25 percent overlap, boundary failures fell to 6.9 percent of misses. Questions whose answers lay in tables suffered most at 128 tokens, where answer-complete Recall@10 for the 540 table questions was only 0.522, because tables were frequently split between rows."
+      - "Reranking amplifies the benefit of good chunking rather than replacing it. As Table 2 shows, Kestrel-CE-base raises the 256-token, 25 percent overlap configuration from 0.742 to 0.801, but improves the 1,024-token configuration by only 3.3 points, partly because long chunks are truncated to fit the reranker input and the answer may lie in the discarded portion. Reranking 50 chunks of 256 tokens added a mean of 96 ms per query on our hardware, a modest cost compared with the 5.9-point gain it delivered."
+    tables:
+      - caption: "Table 1: Answer-complete Recall@10 on LongLedger by chunk size (tokens) and overlap ratio, BraidRank retrieval."
+        after_paragraph: 0
+        header: ["Chunk size", "Overlap 0%", "Overlap 10%", "Overlap 25%", "Overlap 50%"]
+        rows:
+          - ["128", "0.611", "0.648", "0.673", "0.679"]
+          - ["256", "0.683", "0.721", "0.742", "0.748"]
+          - ["512", "0.664", "0.689", "0.702", "0.705"]
+          - ["1024", "0.588", "0.597", "0.603", "0.606"]
+      - caption: "Table 2: Answer-complete Recall@10 before and after reranking the top 50 chunks with Kestrel-CE-base."
+        after_paragraph: 3
+        header: ["Configuration", "Without reranking", "With reranking", "Absolute gain"]
+        rows:
+          - ["256 tokens, 25% overlap", "0.742", "0.801", "0.059"]
+          - ["512 tokens, 25% overlap", "0.702", "0.749", "0.047"]
+          - ["1024 tokens, 0% overlap", "0.588", "0.621", "0.033"]
+  - title: "Discussion"
+    paragraphs:
+      - "The preference for 256-token chunks is consistent with the passage length on which BraidRank was trained, and it is possible that a retriever trained on longer passages would shift the optimum upward. Even so, the size of the effect is striking: the gap between the best and worst segmentation choices is larger than the gap between BraidRank and a classical lexical baseline on QuarryQA. Segmentation deserves the same reporting discipline as model choice, and papers that evaluate retrieval-augmented generation on long documents should state chunk size and overlap explicitly."
+      - "Structure-aware chunking did not beat a well-chosen fixed window in our experiments, but its errors were different in kind. SectionCut rarely split an answer across chunks, yet its many very short chunks, such as figure captions, were often retrieved in place of the body text they summarised. A hybrid strategy that merges short sections with their neighbours is a natural next step."
+  - title: "Limitations"
+    paragraphs:
+      - "We used a single retriever and a single reranker, both trained on short scientific passages, so the optimal settings may differ for other models. LongLedger documents are English and technical, and conversational or narrative documents may favour different chunk sizes. Answer-complete recall is deliberately strict and may undervalue chunks that contain enough of the answer for a generator to succeed. We also did not measure how chunking affects the final quality of generated answers."
+  - title: "Conclusion"
+    paragraphs:
+      - "Chunk size and overlap move answer-complete Recall@10 on long technical documents by up to 16 points, more than many retriever improvements. For BraidRank on LongLedger, 256-token chunks with 25 percent overlap gave 0.742 before reranking and 0.801 after reranking with Kestrel-CE-base. We release LongLedger, its answer-span annotations and our chunking scripts so that segmentation can be reported, tuned and compared across studies rather than silently inherited from library defaults."
+references:
+  - "Velloso-Thiel, O., Andrade-Holm, K. and Nwachukwu-Berg, T. (2022). BraidRank: Query-adaptive fusion of sparse term weights and dense embeddings for scientific passage retrieval. Proceedings of the Synthetic Conference on Retrieval Systems 4:88-103."
+  - "Saarinen-Ocampo, B., Fenwhistle, L., Korhonen-Pratt, A. and Ellisande, R. (2023). How deep should a cross-encoder rerank? Latency and accuracy trade-offs over hybrid retrieval candidates. Journal of Synthetic Information Access 6(2):114-139."
+  - "Pemberton-Asu, G. and Lindgren-Oyelaran, F. (2021). Layout cues for heading detection in technical documents. Journal of Imaginary Document Analysis 4(1):17-35."
+  - "Kowalczyk-Reyes, I. (2022). Sliding windows for long-text encoding. Proceedings of the Workshop on Imagined Benchmarks 3:22-31."
+  - "Adeyemi-Strand, O. and Faraday-Nunez, P. (2023). Answer span annotation at scale. Synthetic Statistics Letters 8:140-152."
+  - "Rensselaer-Moto, K. (2021). Default settings and their hidden costs in retrieval pipelines. Synthetic Systems Review 6:88-101."
+  - "Bjornvik, A. and Tallis-Oduya, S. (2023). Strict and lenient recall for span-based retrieval evaluation. Journal of Invented Retrieval 12(1):5-24."

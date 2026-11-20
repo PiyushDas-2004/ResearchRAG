@@ -1,0 +1,68 @@
+key: bio-02
+title: "School Closure Timing in an Agent-Based Model of Influenza-Like Illness for the Fictional City of Harrowmere"
+authors: ["Tamsin Okafor-Lindqvist", "Raoul Deverajan", "Ines Hallstrand-Abebe", "Piotr Quennell"]
+affiliation: "Centre for Computational Epidemiology, Calderbrook University"
+year: 2022
+venue: "Annals of Invented Epidemic Modelling"
+doi: "10.5555/rrsyn.2022.bio02"
+arxiv_id: "2299.11047"
+keywords: ["agent-based model", "influenza-like illness", "school closure", "approximate Bayesian computation"]
+abstract: >-
+  School closures are a recurring option for slowing seasonal influenza-like illness (ILI), but their
+  benefit depends on timing and duration. We built HARBOR-ABM, an agent-based model of the fictional
+  city of Harrowmere with 412,600 synthetic agents in 37 districts and 118 schools, and calibrated it
+  to weekly ILI incidence from 22 sentinel clinics using approximate Bayesian computation. The
+  posterior median basic reproduction number was 1.46. Out-of-sample weekly incidence forecasts had a
+  mean absolute percentage error of 14.8 percent. Adult contact rates outside the home were scaled by
+  activity quintiles from a wrist-worn step-count cohort after correction for slow-walking undercount.
+  A four-week closure triggered when weekly ILI reached 1 percent lowered the peak by 32 percent and
+  delayed it by 23 days, but reduced the cumulative attack rate only from 27.4 to 24.6 percent.
+  Closures triggered later had much smaller effects. The model is a methods illustration and does not
+  constitute policy guidance.
+sections:
+  - title: "Introduction"
+    paragraphs:
+      - "Influenza-like illness places a recurring seasonal load on clinics in temperate cities, and school closure is one of the few non-pharmaceutical measures that can be enacted quickly by local authorities. Children have high contact rates and are often early in the transmission chain, so closing schools can in principle flatten an epidemic curve. In practice the benefit depends on when closure starts, how long it lasts, and how much mixing simply moves from classrooms to other settings. Agent-based models are suited to these questions because they represent households, schools and workplaces explicitly and allow contacts to be rerouted when a setting closes."
+      - "This paper describes HARBOR-ABM, the Harrowmere Agent-Based Outbreak Replicator, built for the fictional city of Harrowmere. Our contributions are a calibrated synthetic population linked to a local sentinel surveillance series, an explicit activity-scaling step that uses corrected wrist-worn step counts to vary adult contact rates, and a comparison of five school-closure scenarios that differ in trigger threshold, duration and spatial scope. We emphasise methodological transparency over policy conclusions: the city, the data and the numbers are all fictional."
+  - title: "Background"
+    paragraphs:
+      - "Earlier fictional modelling of Harrowmere used a compartmental model with four age groups and a fixed contact matrix, which reproduced the timing of seasonal peaks but could not represent individual school calendars. Agent-based models trade this simplicity for structure. Their main weakness is the number of behavioural parameters, which motivates calibration against observed incidence and the use of independent data, such as measured physical activity, to constrain parameters that would otherwise be guessed."
+  - title: "Methods"
+    paragraphs:
+      - "The synthetic population of 412,600 agents was generated from the invented 2018 Harrowmere household census, matching household size, age structure and district of residence across 37 districts. Each school-age agent was assigned to one of 118 schools using catchment rules, and working adults were assigned to workplaces by a gravity model fitted to commuting tables. Transmission occurs in four settings: households, schools, workplaces and a community layer representing shops, transit and leisure. The model advances in half-day steps, and infection follows a susceptible, exposed, infectious, recovered structure with a mean latent period of 1.6 days and a mean infectious period of 3.8 days."
+      - "Community-layer contact rates for adults were scaled by activity quintile using daily step counts from the HALO cohort. Before assigning quintiles, we applied the CadenceFloor correction described by Brenninger and colleagues, which rescales minute-level counts recorded at low cadence and reduces undercounting among slow walkers. Agents in the highest activity quintile had 2.7 times the community contacts of agents in the lowest quintile. Children's community contacts were not scaled, because the HALO cohort enrols adults only."
+      - "We calibrated transmissibility, the relative infectiousness of children and the seeding date with approximate Bayesian computation, using weekly ILI consultation rates from the Harrowmere Sentinel Clinic Network (HSCN), which comprises 22 clinics. The 2018-2019 season was used for calibration and the 2019-2020 season was held out for testing. We accepted 1,000 of 250,000 simulated parameter sets. Forecast accuracy was summarised by the mean absolute percentage error (MAPE) of weekly incidence, computed over weeks with incidence above 50 per 100,000."
+      - "Five scenarios were compared, each run 400 times with different random seeds: no closure; a two-week closure of all schools triggered when weekly ILI reached 1 percent of the population; a four-week closure at the same 1 percent trigger; a two-week closure triggered later, at 3 percent; and reactive closure of individual schools for 10 days when absenteeism exceeded 12 percent. During closures, 35 percent of lost school contacts were reassigned to the community layer to reflect informal childcare and gatherings."
+  - title: "Results"
+    paragraphs:
+      - "The posterior median basic reproduction number was 1.46 (95 percent credible interval 1.38 to 1.55), and children aged 5 to 14 were estimated to be 1.9 times as infectious per contact as adults. In-sample MAPE for weekly incidence was 11.3 percent, rising to 14.8 percent for the held-out 2019-2020 season. The model reproduced the held-out peak week exactly but overestimated the peak height by 9 percent. Repeating the calibration with uncorrected step counts widened the contact ratio between the highest and lowest activity quintiles from 2.7 to 3.3 and moved the baseline peak 4 days earlier."
+      - "Table 2 summarises the scenarios. In the baseline, weekly incidence peaked at 1,284 per 100,000 in week 9 and the cumulative attack rate was 27.4 percent, reaching 41.2 percent among children aged 5 to 14. The four-week closure at the 1 percent trigger produced the largest change, lowering the peak to 873 per 100,000, a reduction of 32 percent, and delaying it by 23 days. However, the attack rate fell only to 24.6 percent, because transmission resumed once schools reopened."
+      - "Timing mattered more than duration. A two-week closure triggered at 3 percent delayed the peak by only 5 days and reduced it by 7 percent, because by then most districts were already near their local peaks. Reactive closure of individual schools performed nearly as well as the two-week citywide closure while closing a median of 46 of the 118 schools at least once, and its benefit came largely from earlier closure in the densely populated eastern districts."
+    tables:
+      - caption: "Table 2: School-closure scenarios in HARBOR-ABM (medians of 400 runs per scenario)."
+        after_paragraph: 1
+        header: ["Scenario", "Peak incidence per 100,000", "Peak week", "Attack rate (%)", "Peak delay (days)"]
+        rows:
+          - ["No closure", "1,284", "9", "27.4", "0"]
+          - ["2-week closure at 1%", "1,051", "11", "25.9", "12"]
+          - ["4-week closure at 1%", "873", "13", "24.6", "23"]
+          - ["2-week closure at 3%", "1,197", "10", "26.8", "5"]
+          - ["Reactive single-school", "1,002", "11", "25.1", "14"]
+  - title: "Discussion"
+    paragraphs:
+      - "Our results agree with the general expectation that early, longer closures flatten epidemic curves more than they shrink them. In HARBOR-ABM the main gain from a four-week closure is time: a 23-day delay could matter for clinic staffing even though total infections fall by under 3 percentage points. The 35 percent reassignment of school contacts to the community layer was influential; in a sensitivity run with 60 percent reassignment, the four-week closure reduced the peak by only 19 percent."
+      - "Using corrected step counts to scale adult contacts is, to our knowledge, new within the Harrowmere modelling literature, and the 4-day shift in peak timing without correction shows that measurement error in activity data is not merely a descriptive concern. We encourage environmental and clinical surveillance groups in the region to use the HARBOR-ABM synthetic population as a common denominator, so that rates computed from different data streams refer to the same population base."
+  - title: "Limitations"
+    paragraphs:
+      - "HARBOR-ABM does not include vaccination, which would lower the attack rate and probably reduce the marginal benefit of closure. The synthetic population is based on an invented 2018 census and assumes that contact structure is static within a season. Children's community contacts were not informed by any activity data. Finally, sentinel ILI consultations are an imperfect proxy for infection, and we assumed a constant consultation probability of 0.18 across the season."
+  - title: "Conclusion"
+    paragraphs:
+      - "HARBOR-ABM reproduces a held-out influenza-like illness season in fictional Harrowmere with 14.8 percent MAPE and suggests that early, four-week school closures delay and lower the epidemic peak substantially while changing cumulative infections only modestly. Late closures offer little. The model, the corrected activity scaling and the synthetic population are offered as a methods template rather than as guidance for any real setting."
+references:
+  - "Brenninger, O., Marchetti-Laine, K. and Yudovin, S. (2021). Wrist-worn step counters undercount slow walking: a video-referenced validation in the Harrowmere Activity Cohort. Journal of Synthetic Health Measurement 9(2):114-129."
+  - "Deverajan, R. and Coltrane-Aubel, M. (2019). A four-group compartmental model of seasonal respiratory illness in Harrowmere. Fictional Journal of Disease Dynamics 7(3):140-156."
+  - "Quennell, P., Sarrafian, J. and Lowe-Batiste, K. (2020). Synthetic households from small-area census tables. Imaginary Population Methods 5(1):33-49."
+  - "Hallstrand-Abebe, I. (2018). Approximate Bayesian computation for stochastic epidemic simulators. Notional Statistics and Computing 12(4):410-428."
+  - "Okafor-Lindqvist, T. and Rennick, H. (2017). Design of the Harrowmere Sentinel Clinic Network. Invented Surveillance Quarterly 2(2):61-74."
+  - "Valtonen-Mbeki, S. and Gorsuch, A. (2016). Contact displacement during school holidays: a diary study. Journal of Pretend Social Epidemiology 4(1):18-31."
+  - "Yudovin, S. and Pellacott, R. (2019). Design and baseline profile of the Harrowmere Activity and Longitudinal Observation cohort. Fictional Cohort Profiles 4(2):71-88."

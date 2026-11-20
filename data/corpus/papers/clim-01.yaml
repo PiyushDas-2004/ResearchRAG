@@ -1,0 +1,69 @@
+key: clim-01
+title: "Declining Carbon Burial in Vellmar Estuary Tidal Marsh Sediment Cores, 1960-2019"
+authors: ["Rosalind Achterberg-Nwosu", "Teodor Quillfeather", "Amara Lindqvast"]
+affiliation: "Coastal Carbon Laboratory, Halvern Polytechnic University"
+year: 2021
+venue: "Journal of Estuarine Synthesis"
+doi: "10.5555/rrsyn.2021.clim01"
+arxiv_id: "2199.03812"
+keywords: ["blue carbon", "tidal marsh", "sediment cores", "sea-level rise", "lead-210 dating"]
+abstract: >-
+  Tidal marshes store carbon by burying organic matter as sediment accretes, but it is unclear
+  whether burial keeps pace with accelerating sea-level rise. We collected 46 sediment cores from
+  the low, mid and high zones of the Vellmar Estuary marsh in 2019 and dated them with the Layered
+  Isotope Dating Protocol (LIDP), which combines lead-210 and cesium-137 profiles at 1 cm
+  resolution. The area-weighted mean carbon burial rate over 1990-2019 was 165 g C m^-2 yr^-1,
+  ranging from 231 g C m^-2 yr^-1 in the low marsh to 109 g C m^-2 yr^-1 in the high marsh.
+  High-marsh burial fell by 22 percent between the 1960-1989 and 1990-2019 intervals, and
+  high-marsh accretion of 2.3 mm yr^-1 now lags the local relative sea-level rise of 3.6 mm yr^-1.
+  Geochemical fingerprinting attributes 58 percent of the mineral sediment to the Tarn River. All
+  cores are released as the Vellmar Core Archive (VCA-19) for reuse in catchment-to-coast studies.
+sections:
+  - title: "Introduction"
+    paragraphs:
+      - "Coastal wetlands are among the most efficient long-term carbon sinks per unit area, because waterlogged sediments slow decomposition and rising tides deliver mineral particles that bury organic matter. The Vellmar Estuary, a 38 km^2 marsh complex at the mouth of the Tarn River, has been treated in regional carbon inventories as a stable sink, yet no dated cores from the estuary had been published before this study. Regional tide gauges show that relative sea-level rise at the estuary mouth has accelerated from about 1.9 mm yr^-1 in the mid twentieth century to 3.6 mm yr^-1 over 1990-2019, raising the question of whether vertical accretion, and with it carbon burial, has kept pace."
+      - "Earlier work in comparable settings has suggested that marshes with ample sediment supply can track sea-level rise, while sediment-starved marshes drown from the landward edge inward. The Vellmar marsh receives sediment from two sources, the glacier-fed Tarn River and resuspended material from the outer bay, and their relative importance had never been measured. Our objectives were to quantify carbon burial rates in each marsh zone, to test whether burial has changed over the last six decades, and to estimate how much mineral sediment the Tarn River supplies. We also release the full core dataset so that later studies of the Tarn catchment can link upstream processes to estuarine carbon storage."
+  - title: "Methods"
+    paragraphs:
+      - "Coring took place between 3 June and 19 July 2019. We stratified the marsh into low marsh (below mean high water), mid marsh, and high marsh (above mean high water spring tide) using a 0.5 m resolution elevation model, and placed cores along nine shore-normal transects. In total we recovered 46 cores, 17 in the low marsh, 15 in the mid marsh and 14 in the high marsh, using a 10 cm diameter piston corer driven to a depth of 50 cm. Core shortening during extraction averaged 6 percent and was corrected linearly with depth."
+      - "Each core was sliced at 1 cm intervals and analysed for dry bulk density, for organic carbon by elemental analysis after acid fumigation, and for radionuclide activity. Ages were assigned with the Layered Isotope Dating Protocol (LIDP), our in-house procedure that fits a constant rate of supply model to excess lead-210 and then checks it against the 1963 cesium-137 fallout peak. Cores in which the two chronologies disagreed by more than 4 years at the 1963 horizon were flagged and dated with lead-210 alone. Carbon burial was computed as the product of accretion rate, dry bulk density and organic carbon fraction for each dated interval."
+      - "To separate sediment sources we measured 14 trace elements and rare earth ratios in 120 subsamples and in end-member samples from the Tarn River bed and from the outer bay floor. A Bayesian unmixing model with uninformative priors returned the fraction of mineral sediment derived from each source. All core data, including slice depths, densities, carbon contents and radionuclide activities, are deposited as the Vellmar Core Archive (VCA-19). Comparisons between zones used a linear mixed model with transect as a random effect, and changes between the 1960-1989 and 1990-2019 intervals were tested with paired comparisons within cores. Zone areas were taken from the elevation model, which places 30 percent of the marsh in the low zone, 30 percent in the mid zone and 40 percent in the high zone."
+  - title: "Results"
+    paragraphs:
+      - "Sediments were organic-rich throughout, with a mean organic carbon content of 7.8 percent of dry mass and a mean dry bulk density of 0.71 g cm^-3. Organic carbon content increased landward, from 5.9 percent in the low marsh to 10.4 percent in the high marsh, while bulk density decreased in the same direction, from 0.95 to 0.46 g cm^-3. The cesium-137 peak was clear in 37 cores and ambiguous in 9, all of which lay in the high marsh or in the upper mid marsh where accretion is slowest."
+      - "Burial rates differed strongly between zones (Table 1). Over 1990-2019, low-marsh cores buried 231 g C m^-2 yr^-1, more than twice the 109 g C m^-2 yr^-1 of the high marsh, and the area-weighted mean for the whole marsh was 165 g C m^-2 yr^-1. Scaled to the 38 km^2 marsh, this corresponds to about 6,300 tonnes of carbon per year. Accretion in the low marsh, 4.1 mm yr^-1, exceeded relative sea-level rise, whereas the high marsh accreted only 2.3 mm yr^-1."
+      - "Temporal comparisons showed that the zones are diverging (Table 2). Low-marsh burial rose slightly between the two intervals, while high-marsh burial fell by 22 percent, from 140 to 109 g C m^-2 yr^-1. The unmixing model attributed 58 percent of the mineral sediment in the marsh to the Tarn River and 42 percent to the outer bay, with the Tarn share highest, at 71 percent, in cores closest to the main channel."
+    tables:
+      - caption: "Table 1: Accretion and carbon burial by marsh zone, 1990-2019 (burial in g C m^-2 yr^-1)."
+        after_paragraph: 1
+        header: ["Zone", "Cores", "Accretion (mm yr^-1)", "Burial rate", "Std. dev."]
+        rows:
+          - ["Low marsh", "17", "4.1", "231", "38"]
+          - ["Mid marsh", "15", "3.2", "174", "27"]
+          - ["High marsh", "14", "2.3", "109", "19"]
+      - caption: "Table 2: Mean carbon burial by zone in two dated intervals (g C m^-2 yr^-1)."
+        after_paragraph: 2
+        header: ["Zone", "1960-1989", "1990-2019", "Change (percent)"]
+        rows:
+          - ["Low marsh", "224", "231", "+3"]
+          - ["Mid marsh", "181", "174", "-4"]
+          - ["High marsh", "140", "109", "-22"]
+  - title: "Discussion"
+    paragraphs:
+      - "The divergence between zones fits a picture in which the low marsh, flooded twice daily and close to the river channel, receives enough mineral sediment to keep building upward, while the high marsh, flooded only on spring tides, is increasingly starved of sediment. Because the high marsh occupies 40 percent of the marsh area, its declining burial dominates the trend in total carbon storage. If high-marsh accretion continues to lag sea-level rise by 1.3 mm yr^-1, parts of it will convert to mid-marsh vegetation within a few decades, which could temporarily raise burial before open water eventually expands."
+      - "The large Tarn River contribution links the marsh carbon budget to processes far upstream. The Tarn drains a catchment that includes the retreating Saelvik Glacier, and changes in glacial meltwater and sediment delivery could alter the supply on which the low marsh depends. We recommend that future hydrological monitoring of the Tarn report suspended sediment loads alongside discharge, so that the VCA-19 burial record can be connected to upstream supply. The marsh also serves as a cool, open reference landscape for nearby Port Calderan, and the high-marsh weather mast installed during our coring campaign has been retained for urban climate comparisons."
+      - "Our estimates also bear on regional carbon accounting. The regional inventory had assumed a uniform burial rate of 210 g C m^-2 yr^-1 for the whole Vellmar marsh, which overstates the measured area-weighted rate by 27 percent and implies an annual sink of about 8,000 tonnes of carbon rather than 6,300 tonnes. Using zone-specific rates from VCA-19 would therefore lower the reported contribution of the estuary to regional carbon removals, and the downward trend in the high marsh suggests that the gap between assumed and actual burial will widen unless sediment supply increases."
+  - title: "Limitations"
+    paragraphs:
+      - "Several limitations apply. Cores reached only 50 cm, so the record before about 1900 in the low marsh and before about 1800 in the high marsh is incomplete, and the 1960-1989 interval relies on the deeper and more compacted part of each core. The cesium-137 check was ambiguous in 9 of the 46 cores, so those chronologies rest on lead-210 alone. We did not measure methane emissions or lateral export of dissolved carbon, so burial rates should not be read as a net greenhouse gas balance for the marsh."
+  - title: "Conclusion"
+    paragraphs:
+      - "Carbon burial in the Vellmar Estuary marsh averages 165 g C m^-2 yr^-1 but is falling in the high marsh, where accretion of 2.3 mm yr^-1 no longer keeps pace with 3.6 mm yr^-1 of relative sea-level rise. The Tarn River supplies most of the mineral sediment that sustains the low marsh, making the marsh sensitive to changes far up the catchment. The Vellmar Core Archive (VCA-19) is available for future work linking catchment change to coastal carbon storage."
+references:
+  - "Brandvold, K. and Osei-Lindgren, T. (2016). Constant rate of supply models for lead-210 in a fictional salt marsh. Journal of Invented Sediment Dating 8(2):101-118."
+  - "Marchetti-Ono, S. (2018). Cesium-137 horizons as checks on marsh chronologies. Annals of Imaginary Geochronology 14(1):22-39."
+  - "Ruiz-Halloran, D., Petrakova, V. and Amundsen, J. (2017). Sediment supply thresholds for marsh survival under sea-level rise. Coastal Process Letters 5:77-90."
+  - "Okafor-Brynn, L. and Delacroix, M. (2019). Bayesian unmixing of estuarine sediment sources using trace elements. Journal of Synthetic Sedimentology 11(4):310-327."
+  - "Weatherby, C. (2015). Blue carbon inventories for invented coastlines. Proceedings of the Imaginary Wetlands Forum 3:12-25."
+  - "Tanaka-Ferreira, R. and Holm, E. (2020). Landward drowning of high marsh platforms. Estuarine Futures 2(2):45-63."
+  - "Lindqvast, A. and Quillfeather, T. (2018). An elevation model of the Vellmar Estuary at 0.5 m resolution. Halvern Coastal Reports 22:1-34."

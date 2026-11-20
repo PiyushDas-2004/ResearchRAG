@@ -1,0 +1,64 @@
+key: bio-04
+title: "Short Sleep and Slower Reactions in Rotating Shift Workers: An Actigraphy and Psychomotor Vigilance Study at a Fictional Logistics Hub"
+authors: ["Henrike Osei-Varga", "Callum Thistlewood", "Anjali Moreau-Petrakis"]
+affiliation: "Unit for Occupational Chronobiology, Vessmoor Institute of Population Health"
+year: 2024
+venue: "Journal of Invented Occupational Health Science"
+doi: "10.5555/rrsyn.2024.bio04"
+arxiv_id: "2499.06230"
+keywords: ["shift work", "sleep duration", "psychomotor vigilance", "actigraphy validation"]
+abstract: >-
+  Shift work disrupts sleep, and short sleep is associated with slower and less reliable reactions. We
+  followed 96 workers at a fictional logistics hub in Quillan Ferry for 28 days in the NIGHTSHIFT-RT
+  study, measuring sleep with the wrist-worn Pacewell Band 3 and reaction time with a five-minute
+  tablet psychomotor vigilance task, BriefPVT-5, at the start and end of each shift. Workers were on
+  fixed day (n = 31), rotating (n = 38) or fixed night (n = 27) schedules. Of 3,840 scheduled tests,
+  3,517 were completed. Mean main-sleep duration was 7.02 hours on fixed days, 6.11 hours on rotating
+  schedules and 5.64 hours on fixed nights. In mixed-effects models, each hour less of prior sleep was
+  associated with an 11.4 ms slower median reaction time. Against polysomnography in a 22-person
+  substudy, the device's total sleep time had a mean absolute percentage error of 7.3 percent.
+sections:
+  - title: "Introduction"
+    paragraphs:
+      - "Around shift changes, workers in logistics, transport and health care must remain alert while their sleep is displaced from the biological night. Short or fragmented sleep slows simple reaction time and increases lapses of attention, effects that can be measured in a few minutes with a psychomotor vigilance task. Field studies of this relationship face two practical problems: sleep must be measured unobtrusively over weeks, and reaction-time testing must fit into real shift routines without disrupting work."
+      - "NIGHTSHIFT-RT addresses both problems in a fictional distribution centre in the town of Quillan Ferry. We used a consumer-style wrist device for sleep and a short tablet test for reactions, and we validated the device's sleep estimates against laboratory polysomnography in a subsample before relying on them. Our questions were how sleep duration differs between shift schedules, how strongly prior sleep predicts reaction time and lapses within individuals, and whether device error is small enough for this purpose. The same town hosts one of the SEWERWATCH-12 wastewater sites described by Vantongeren and colleagues, although no wastewater data were used here. The study is observational and methods-focused, and it offers no guidance for any real workplace."
+  - title: "Related Work"
+    paragraphs:
+      - "The Pacewell Band 3 was previously validated for step counting against video by Brenninger and colleagues in the HALO cohort, where it was the most accurate of three wrist devices but undercounted slow walking. Step accuracy says little about sleep scoring, which depends on detecting the absence of movement, so a separate validation was needed. Earlier fictional work on reaction time in shift workers by Lamberth and Osuji used a ten-minute vigilance test administered weekly, which is too infrequent to capture day-to-day changes in sleep."
+  - title: "Methods"
+    paragraphs:
+      - "We enrolled 96 warehouse and dispatch workers aged 19 to 61 years (median 34). Thirty-one worked fixed day shifts from 06:00 to 14:00, 38 worked a forward-rotating pattern of two days, two evenings and two nights followed by four rest days, and 27 worked fixed night shifts from 22:00 to 06:00. Participants wore the Pacewell Band 3 continuously on the non-dominant wrist for 28 days. Main sleep episodes were identified by the device's sleep mode and checked against a brief daily sleep diary."
+      - "Reaction time was measured with BriefPVT-5, a five-minute tablet test presenting a visual stimulus at random intervals of 2 to 10 seconds. Workers completed it at the start and end of each scheduled shift, giving 3,840 scheduled tests. Outcomes were the median reaction time per test in milliseconds and the number of lapses, defined as responses slower than 500 ms. Tests with more than 10 percent false starts were excluded."
+      - "For device validation, 22 participants spent one night in a fictional sleep laboratory at the Vessmoor Institute while wearing the Pacewell Band 3 alongside polysomnography. We compared 30-second epochs for sleep or wake agreement and computed the mean absolute percentage error (MAPE) of device total sleep time relative to polysomnography, using the same metric as the earlier step-count validation so that the two could be compared directly. Associations between prior sleep and reaction outcomes were estimated with linear and negative binomial mixed-effects models with random intercepts for worker, adjusting for time into shift, age and caffeine use recorded in the diary."
+  - title: "Results"
+    paragraphs:
+      - "In the laboratory substudy, epoch-by-epoch agreement between the device and polysomnography was 88.6 percent, and the device overestimated total sleep time by a mean of 19 minutes. The MAPE of device total sleep time was 7.3 percent. Sensitivity for sleep epochs was 95.2 percent, but specificity for wake epochs was lower, at 61.5 percent, meaning that quiet wakefulness in bed was often scored as sleep."
+      - "Over 28 days, 3,517 of 3,840 scheduled reaction-time tests (91.6 percent) were completed, and 2,604 main sleep episodes were recorded. Table 1 summarises sleep and reaction outcomes by schedule. Fixed night workers slept a mean of 5.64 hours per main episode, nearly 1.4 hours less than fixed day workers, and had the slowest median reaction times and the most lapses. Rotating workers fell between the two groups but showed the largest day-to-day variability in sleep, with a within-person standard deviation of 1.47 hours."
+      - "Within workers, each hour less of sleep in the preceding 24 hours was associated with an 11.4 ms slower median reaction time (95 percent CI 8.9 to 13.9). After main sleep episodes shorter than 5 hours, the expected number of lapses was 2.3 times that after episodes of 7 hours or more. Reaction times were 9 ms slower at the end of shifts than at the start on average, and this end-of-shift slowing was largest on the second consecutive night of the rotating pattern, at 17 ms."
+      - "Caffeine use was recorded on 71 percent of shift days and was associated with a 6 ms faster median reaction time at shift start, but it did not modify the association between prior sleep and reaction time. Adding device-measured wake after sleep onset as a second predictor improved model fit only slightly, and its coefficient, 0.8 ms per 10 minutes, had a confidence interval that included zero."
+    tables:
+      - caption: "Table 1: Sleep and reaction-time outcomes by shift schedule in NIGHTSHIFT-RT (28 days)."
+        after_paragraph: 1
+        header: ["Schedule", "Workers", "Mean main sleep (h)", "Median reaction time (ms)", "Lapses per test"]
+        rows:
+          - ["Fixed day", "31", "7.02", "268", "1.2"]
+          - ["Rotating", "38", "6.11", "291", "2.6"]
+          - ["Fixed night", "27", "5.64", "304", "3.4"]
+  - title: "Discussion"
+    paragraphs:
+      - "The association between prior sleep and reaction time was consistent across schedules, suggesting that schedule differences in reaction outcomes are largely carried by differences in sleep duration. Because the device overestimates total sleep time, mainly by misclassifying quiet wakefulness, true sleep in the night group was probably even shorter than reported, which would bias the per-hour slope towards zero rather than inflate it. The estimated slope of 11.4 ms per hour is therefore best read as a conservative figure for this setting."
+      - "The device validation is a useful counterpart to the step-count work in the HALO cohort. The 7.3 percent MAPE for total sleep time is similar in size to the pooled step-count MAPE reported for the same device, yet the error structures differ: steps are undercounted during slow movement, while sleep is overcounted during still wakefulness. Studies that use one wrist device for both activity and sleep should therefore not assume that a single validation covers both measures."
+  - title: "Limitations"
+    paragraphs:
+      - "The study has several limitations. Workers self-selected into schedules, so fixed night workers may differ in chronotype, family duties or second jobs that we did not measure. The polysomnography substudy took place in a laboratory, where sleep is usually more consolidated than at home after a night shift, so field device error may be larger than the 7.3 percent observed. BriefPVT-5 is shorter than standard vigilance tests and may be less sensitive to mild impairment. We did not record workplace incidents, and the results should not be read as evidence about safety outcomes."
+  - title: "Conclusion"
+    paragraphs:
+      - "In 96 fictional shift workers, fixed night and rotating schedules were associated with shorter device-measured sleep, and shorter prior sleep predicted slower reactions and more lapses within individuals. A wrist device validated for both steps and sleep made four weeks of continuous measurement feasible, but its errors were measure-specific. NIGHTSHIFT-RT is offered as a methods example for linking wearable sleep data to brief performance tests."
+references:
+  - "Brenninger, O., Marchetti-Laine, K. and Yudovin, S. (2021). Wrist-worn step counters undercount slow walking: a video-referenced validation in the Harrowmere Activity Cohort. Journal of Synthetic Health Measurement 9(2):114-129."
+  - "Lamberth, G. and Osuji, F. (2019). Weekly vigilance testing across rotating rosters. Fictional Occupational Performance Review 6(2):77-92."
+  - "Osei-Varga, H. and Brandauer, T. (2020). Brief psychomotor vigilance tasks on consumer tablets. Journal of Invented Cognitive Measurement 4(3):133-147."
+  - "Thistlewood, C., Yamane-Corr, D. and Ruusuvaara, P. (2018). Epoch-level agreement statistics for wrist actigraphy. Notional Sleep Methods 9(1):12-27."
+  - "Moreau-Petrakis, A. (2021). Mixed-effects models for repeated reaction-time outcomes. Synthetic Statistics in Medicine 16(2):201-219."
+  - "Haldane-Ferro, J. and Mbatha, Q. (2017). Forward-rotating rosters and recovery days in warehouse work. Imaginary Ergonomics 11(4):288-301."
+  - "Vantongeren, M., Aksoy-Hale, D., Tarrabell, W. and Ingersund, F. (2023). A twelve-site wastewater surveillance network for antibiotic-resistance gene prevalence in Harrowmere and surrounding towns. Journal of Fictional Environmental Surveillance 8(1):40-58."

@@ -1,0 +1,64 @@
+key: clim-04
+title: "Saelvik Glacier Meltwater Cools the Upper Tarn River but Not Its Estuary"
+authors: ["Eirik Thornquist-Abara", "Lucia Fenmore", "Dawit Halvarsen-Ruiz", "Noor Castellane"]
+affiliation: "Glacier and River Observatory, Skarnvik University"
+year: 2025
+venue: "Journal of Invented Cryosphere Hydrology"
+doi: "10.5555/rrsyn.2025.clim04"
+arxiv_id: "2599.02748"
+keywords: ["glacier meltwater", "river temperature", "hydrograph separation", "peak water", "thermistor array"]
+abstract: >-
+  Glacier retreat changes both the quantity and the temperature of water delivered to downstream
+  rivers. We combined the 27-logger Tarn River Thermistor Array (TRTA), spanning 112 km from the
+  Saelvik Glacier snout to the Vellmar Estuary, with oxygen-18 hydrograph separation of 340 water
+  samples collected between 2019 and 2024. Saelvik Glacier covered 14.2 km^2 in 2024, 19 percent
+  less than in 2003, and its terminus retreated by a mean of 31 m per year. Meltwater made up 68
+  percent of July discharge 5 km below the snout but only 9 percent at the estuary mouth. Each 10
+  m^3/s increase in meltwater discharge lowered July water temperature at the Brennick gauge by
+  0.62 degrees C, while the effect was undetectable below river km 90. July water temperature at
+  the estuary mouth warmed by 0.28 degrees C per decade over 2005-2024. The Saelvik Melt Balance
+  Model projects peak meltwater around 2035.
+sections:
+  - title: "Introduction"
+    paragraphs:
+      - "Glaciers act as cold reservoirs that release water during the warmest weeks of the year, keeping downstream rivers cooler and more stable than rain-fed rivers. As glaciers shrink, meltwater yield first rises and then falls once the ice area becomes too small, a transition often called peak water. The Saelvik Glacier, a valley glacier at the head of the Tarn River catchment, is the largest remaining ice body in the region, and the Tarn flows 112 km from its snout through the Brennick Lowlands and the city of Port Calderan before entering the Vellmar Estuary."
+      - "Downstream communities and ecosystems depend on the Tarn in different ways. Cold-water fish habitat in the upper river depends on summer meltwater, farms in the Brennick Lowlands draw irrigation water from the middle river, and the Vellmar Estuary marsh receives much of its mineral sediment from the Tarn, estimated at 58 percent by Achterberg-Nwosu et al. (2021). Yet no study had traced how far downstream the cooling influence of Saelvik meltwater extends. Our aims were to measure the meltwater fraction of summer discharge along the river, to quantify its effect on water temperature, and to assess how these patterns may change as the glacier approaches peak water."
+  - title: "Methods"
+    paragraphs:
+      - "The Tarn River Thermistor Array (TRTA) consists of 27 submerged temperature loggers installed in 2004 and 2005 at intervals of 3 to 6 km from river km 2 to km 112, recording every 15 minutes. Five of the loggers are co-located with discharge gauges, which we label T1 (snout gauge, km 5), T2 (Haldor Gorge, km 31), T3 (Brennick, km 72), T4 (Calderan Weir, km 104) and T5 (estuary mouth, km 112). We analysed July data because July combines maximum melt with the highest air temperatures of the year."
+      - "To separate meltwater from rain and groundwater we used two-component hydrograph separation based on oxygen-18. Between 2019 and 2024 we collected 340 water samples at the five gauges, together with end-member samples from the glacier portal and from tributaries draining unglaciated slopes. Glacier area and terminus position were mapped from annual aerial imagery from 2003 to 2024. We related daily mean water temperature at each gauge to meltwater discharge using regression with air temperature and day of year as covariates. Suspended sediment was sampled monthly at T5 to estimate the load delivered to the estuary."
+      - "Future meltwater yield was projected with the Saelvik Melt Balance Model (SMBM), a degree-day model with separate melt factors for snow and ice, calibrated against stake measurements on the glacier from 2010 to 2024. The model was driven by downscaled temperature scenarios that warm the catchment by 0.43 degrees C per decade, a rate between the summer warming trends reported for the Brennick Lowlands and for Port Calderan."
+  - title: "Results"
+    paragraphs:
+      - "Saelvik Glacier covered 14.2 km^2 in 2024, down 19 percent from 17.5 km^2 in 2003, and its terminus retreated by a mean of 31 m per year over the same period. July meltwater discharge at T1 rose over the record, with the highest daily peak, 47 m^3/s, recorded on 9 July 2022. Mean July discharge at T1 over 2019-2024 was 29 m^3/s, compared with 21 m^3/s over 2005-2010, an increase of 38 percent consistent with a glacier still on the rising limb of its meltwater curve. The SMBM reproduced observed July melt discharge at T1 with a mean absolute error of 2.6 m^3/s."
+      - "The meltwater fraction of July discharge declined steadily downstream as tributaries and groundwater joined the river (Table 1). Meltwater made up 68 percent of discharge at the snout gauge, 23 percent at Brennick and 9 percent at the estuary mouth. Mean July water temperature rose correspondingly, from 4.3 degrees C at T1 to 13.8 degrees C at Brennick and 19.6 degrees C at the estuary mouth."
+      - "The cooling influence of meltwater weakened with distance. At Brennick, each 10 m^3/s increase in meltwater discharge was associated with a 0.62 degrees C lower daily mean water temperature, after accounting for air temperature. At Calderan Weir the effect fell to 0.17 degrees C, and below river km 90 it was not distinguishable from zero. Over 2005-2024, July water temperature at the estuary mouth warmed by 0.28 degrees C per decade, while at T1 no trend was detectable. Suspended sediment load at T5 averaged 0.84 million tonnes per year."
+    tables:
+      - caption: "Table 1: July meltwater fraction and mean July water temperature at the five TRTA discharge gauges, 2019-2024."
+        after_paragraph: 1
+        header: ["Gauge", "River km", "Meltwater fraction (percent)", "Mean July water temperature (degrees C)"]
+        rows:
+          - ["T1 Snout", "5", "68", "4.3"]
+          - ["T2 Haldor Gorge", "31", "47", "8.9"]
+          - ["T3 Brennick", "72", "23", "13.8"]
+          - ["T4 Calderan Weir", "104", "12", "18.1"]
+          - ["T5 Estuary mouth", "112", "9", "19.6"]
+  - title: "Discussion"
+    paragraphs:
+      - "Saelvik meltwater is a strong control on water temperature in the upper and middle Tarn but has almost no thermal influence on the lower river and estuary, where warming tracks air temperature and urban runoff from Port Calderan. The upper river is therefore protected for now, but this protection is temporary. The SMBM projects that meltwater yield will peak around 2035 and then decline, by which time the cooling effect at Brennick could weaken by roughly half as the glacier contribution shrinks."
+      - "The decline of meltwater will also affect sediment. Glacial erosion is a major source of fine sediment in the Tarn, and the load of 0.84 million tonnes per year at the estuary mouth helps explain why the low marsh of the Vellmar Estuary has kept pace with sea-level rise. A post-peak decline in glacial sediment could reduce the supply on which marsh accretion depends. Coupling the TRTA with the Vellmar Core Archive (VCA-19) and with riparian temperature measurements near the Brennick pollinator transects would allow the effects of glacier loss to be traced from the ice to the coast."
+      - "The contrast between upper and lower river also shapes how warming is experienced along the valley. Near the snout, July water temperature showed no trend over two decades despite rising air temperatures, because increasing melt compensated for warmer air. Downstream, the estuary warming rate of 0.28 degrees C per decade is lower than the summer air warming of 0.47 degrees C per decade reported for Port Calderan, reflecting the thermal inertia of the deeper lower channel and tidal mixing with cooler bay water. Once melt yield declines after peak water, the upper river is likely to lose its present stability first."
+  - title: "Limitations"
+    paragraphs:
+      - "The study has limitations. Ice damage during winter floods destroyed or displaced 6 of the 27 loggers at various times, leaving gaps that were filled by interpolation from neighbouring sites. Two-component separation cannot distinguish meltwater from groundwater that was itself recharged by melt in previous years, so meltwater fractions may be underestimated in the middle river. The SMBM uses a degree-day approach that ignores debris cover, which increased on the lower glacier tongue over the study period and may slow future melt. Finally, our temperature regressions are correlative and we did not model river heat budgets explicitly, so the attribution of cooling to meltwater rather than to shading in the Haldor Gorge reach remains uncertain."
+  - title: "Conclusion"
+    paragraphs:
+      - "Saelvik Glacier meltwater supplies about two thirds of July flow below the snout and measurably cools the river as far as Brennick, but its influence fades below river km 90. The lower Tarn and its estuary are warming at 0.28 degrees C per decade regardless of meltwater. As the glacier approaches peak water around 2035, both the thermal buffering of the upper river and the sediment supply to the Vellmar Estuary are likely to decline."
+references:
+  - "Achterberg-Nwosu, R., Quillfeather, T. and Lindqvast, A. (2021). Declining carbon burial in Vellmar Estuary tidal marsh sediment cores, 1960-2019. Journal of Estuarine Synthesis 9(3):141-162."
+  - "Fenwright, O., Saramago-Lund, B. and Halloway-Chen, P. (2024). A decade of wild pollinator decline along Brennick Lowlands farmland transects. Annals of Synthetic Agroecology 13(1):1-24."
+  - "Bergstrand-Achebe, I. and Coll, R. (2014). Peak water in small valley glaciers of an invented range. Journal of Invented Cryosphere Hydrology 2(1):9-27."
+  - "Marinescu-Dorn, P. (2016). Oxygen-18 hydrograph separation in glacier-fed rivers. Isotopes in Fictional Hydrology 5(3):188-204."
+  - "Thornquist-Abara, E. and Fenmore, L. (2012). Installation of the Tarn River Thermistor Array. Skarnvik Hydrology Reports 7:1-29."
+  - "Yamashiro-Pratt, H., Delgado, S. and Ekwueme, O. (2019). Degree-day melt factors for snow and ice. Glacier Modelling Imagined 10:51-70."
+  - "Castellane, N. (2020). Debris cover expansion on retreating valley glaciers. Annals of Synthetic Glaciology 6(2):95-112."

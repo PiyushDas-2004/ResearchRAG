@@ -1,0 +1,72 @@
+key: ir-02
+title: "How Deep Should a Cross-Encoder Rerank? Latency and Accuracy Trade-offs over Hybrid Retrieval Candidates"
+authors: ["Benedikt Saarinen-Ocampo", "Lucia Fenwhistle", "Adaeze Korhonen-Pratt", "Ravindra Ellisande"]
+affiliation: "Laboratory for Language Systems, Halvercombe Polytechnic"
+year: 2023
+venue: "Journal of Synthetic Information Access"
+doi: "10.5555/rrsyn.2023.ir02"
+arxiv_id: "2399.08261"
+keywords: ["reranking", "cross-encoders", "latency", "cascades", "passage retrieval"]
+abstract: >-
+  Cross-encoder rerankers improve ranking quality by jointly encoding a query with each candidate
+  passage, but their cost grows linearly with the number of candidates reranked. We study this
+  trade-off using the Kestrel family of cross-encoders in three sizes, with 33, 110 and 340
+  million parameters, reranking BraidRank candidates on the QuarryQA test split. Reranking depth
+  is varied from 20 to 200 candidates. Kestrel-CE-large at depth 100 raises nDCG@10 from 0.512 to
+  0.603 but has a 95th-percentile latency of 412 ms per query. Doubling the depth to 200 gains
+  only 0.004 nDCG@10 while nearly doubling cost. We also propose StopGap, a two-stage cascade
+  that sends only uncertain queries to the large model; StopGap retains an nDCG@10 of 0.596 at a
+  95th-percentile latency of 158 ms. The results suggest that, for small rerankers in particular,
+  depths beyond 50 candidates are rarely worth their cost in interactive systems.
+sections:
+  - title: "Introduction"
+    paragraphs:
+      - "Two-stage retrieval pipelines pair a fast first-stage retriever with a slower but more accurate reranker. The reranker reads the query and each candidate passage together, so it can model fine-grained interactions that independent encoders miss. The price is that every candidate requires a full forward pass, and practitioners must decide how many candidates to rerank and how large a model to use. These choices are usually made by habit, with depths of 100 or 1,000 copied from earlier systems, rather than by measuring what each additional candidate actually buys."
+      - "We revisit these choices using BraidRank, the query-adaptive hybrid retriever of Velloso-Thiel and colleagues, as the first stage, and QuarryQA, its accompanying scientific question answering benchmark, as the testbed. Because BraidRank already reaches a high Recall@100 on QuarryQA, the remaining headroom lies almost entirely in ordering the top of the list, which is exactly what a cross-encoder is meant to fix. Our questions are how much nDCG@10 improves as reranking depth and model size grow, what latency each configuration costs, and whether a cascade can recover most of the gain at a fraction of the cost."
+  - title: "Methods"
+    paragraphs:
+      - "The Kestrel cross-encoders share one architecture at three scales. Kestrel-CE-small has 6 layers and 33 million parameters, Kestrel-CE-base has 12 layers and 110 million parameters, and Kestrel-CE-large has 24 layers and 340 million parameters. Each model receives the query and a candidate passage separated by a marker token, truncated to a maximum of 320 tokens, and outputs a single relevance logit. Passages in QuarryQA average about 180 words, so truncation affected only 2.3 percent of candidate pairs."
+      - "All three models were trained on the 33,000 QuarryQA training questions together with 210,000 synthetic question and passage pairs generated from held-out training articles. For each training question we mined seven hard negatives from the top 50 BraidRank candidates, excluding gold passages, and optimised a listwise softmax loss over one positive and seven negatives. Training ran for three epochs with a learning rate of 2 x 10^-5 for the small and base models and 1 x 10^-5 for the large model."
+      - "StopGap is a cascade that tries to spend large-model computation only where it is needed. In the first stage, Kestrel-CE-small reranks the top 100 BraidRank candidates. If the gap between the highest and second-highest logits exceeds a threshold of 1.7, the small model's ranking is returned unchanged. Otherwise, Kestrel-CE-large reranks the top 30 candidates from the small model's ordering. The threshold was chosen on the QuarryQA development split to keep the 95th-percentile latency below 160 ms."
+  - title: "Experimental Setup"
+    paragraphs:
+      - "We evaluate on the 4,600 questions of the QuarryQA test split, reranking BraidRank candidate lists at depths of 20, 50, 100 and 200. The primary metric is nDCG@10. Latency is the 95th-percentile wall-clock time per query, including first-stage retrieval, measured with one query at a time on a single accelerator card. Candidates for one query are scored in a single batch, and we report the 95th percentile rather than the mean because interactive applications are sensitive to slow outliers."
+      - "To estimate serving cost we convert measured throughput into accelerator-hours per million queries, assuming full utilisation and no caching. We also report the fraction of queries that StopGap resolves in its first stage. Statistical significance between configurations is assessed with a paired randomisation test over 5,000 permutations, and differences smaller than 0.003 nDCG@10 are treated as ties, since they were not significant in any comparison we ran."
+  - title: "Results"
+    paragraphs:
+      - "Table 1 lists selected configurations. Every reranker improves on the BraidRank first stage, which scores 0.512 nDCG@10 on its own. Kestrel-CE-large at depth 100 reaches 0.603, a gain of 9.1 points, but its 95th-percentile latency of 412 ms is ten times that of the first stage. Moving the large model from depth 100 to depth 200 adds only 0.004 nDCG@10 while the latency rises to 797 ms. For Kestrel-CE-small the curve is even flatter: depth 200 improves on depth 50 by just 0.005."
+      - "StopGap resolves 64 percent of queries in its first stage, where the small model is already confident, and sends the remaining 36 percent to the large model. The cascade reaches 0.596 nDCG@10, recovering about 92 percent of the large model's gain over the first stage, at a 95th-percentile latency of 158 ms. In serving cost terms, Kestrel-CE-large at depth 100 needs 118 accelerator-hours per million queries, whereas StopGap needs 41."
+      - "Gains were not uniform across query types. On queries containing digits, which BraidRank already handles well through its lexical component, Kestrel-CE-large at depth 100 improved nDCG@10 by only 3.8 points. The largest gains, 14.2 points, came from queries whose first gold passage BraidRank had placed between ranks 11 and 50, where the reranker could promote it into the top ten. Queries whose gold passage sat below rank 100 could not benefit at depth 100 by construction."
+    tables:
+      - caption: "Table 1: nDCG@10 and 95th-percentile latency for reranking BraidRank candidates on the QuarryQA test split."
+        after_paragraph: 0
+        header: ["Configuration", "Parameters (M)", "Depth", "nDCG@10", "p95 latency (ms)"]
+        rows:
+          - ["BraidRank only", "n/a", "n/a", "0.512", "41"]
+          - ["Kestrel-CE-small", "33", "50", "0.561", "47"]
+          - ["Kestrel-CE-small", "33", "200", "0.566", "151"]
+          - ["Kestrel-CE-base", "110", "50", "0.584", "109"]
+          - ["Kestrel-CE-base", "110", "100", "0.590", "204"]
+          - ["Kestrel-CE-large", "340", "50", "0.594", "221"]
+          - ["Kestrel-CE-large", "340", "100", "0.603", "412"]
+          - ["Kestrel-CE-large", "340", "200", "0.607", "797"]
+          - ["StopGap cascade", "33 + 340", "100", "0.596", "158"]
+  - title: "Discussion"
+    paragraphs:
+      - "The depth curves flatten early because a strong hybrid first stage already places most gold passages near the top. When the first stage is weak, deeper reranking can compensate, but with BraidRank the marginal candidate beyond rank 50 is rarely relevant. Model size matters more than depth: Kestrel-CE-base at depth 50 beats Kestrel-CE-small at depth 200 while running faster. For teams choosing a single configuration under a latency budget near 100 ms, a mid-sized model at moderate depth is the most efficient choice we observed."
+      - "The success of StopGap rests on the observation that the small model's score margin is a usable confidence signal. Among queries resolved in the first stage, the small model's top-ranked passage was relevant 83 percent of the time, compared with 51 percent for queries passed on to the large model. Cascades of this kind are attractive for retrieval-augmented generation, where the reranked passages feed a language model and the end-to-end latency budget is shared with generation."
+      - "We also examined 150 queries on which Kestrel-CE-large at depth 100 demoted a gold passage out of the top ten. In 62 of these cases the gold passage stated the answer only as a number inside a flattened table, and the reranker preferred a neighbouring passage that discussed the same quantity in prose without giving its value. Another 41 cases involved passages that were cut mid-sentence by the original QuarryQA segmentation, suggesting that how documents are divided into passages limits what any reranker can recover."
+  - title: "Limitations"
+    paragraphs:
+      - "All experiments use one benchmark, QuarryQA, whose passages are short and uniform in length. Long or irregular passages would raise the cost of each forward pass and might change the optimal depth. We measured latency for single queries rather than under concurrent load, so throughput-oriented deployments may see different trade-offs. Finally, the StopGap threshold was tuned on the same benchmark and may need recalibration for other collections."
+  - title: "Conclusion"
+    paragraphs:
+      - "Reranking depth is a costly default that deserves measurement. On BraidRank candidates for QuarryQA, depths beyond 100 bought almost nothing, a mid-sized cross-encoder at depth 50 offered a strong balance, and the StopGap cascade kept 0.596 nDCG@10 at a 95th-percentile latency of 158 ms. We release the Kestrel checkpoints and the cascade configuration so that others can reproduce these curves on their own collections."
+references:
+  - "Velloso-Thiel, O., Andrade-Holm, K. and Nwachukwu-Berg, T. (2022). BraidRank: Query-adaptive fusion of sparse term weights and dense embeddings for scientific passage retrieval. Proceedings of the Synthetic Conference on Retrieval Systems 4:88-103."
+  - "Grenadine, P. and Osei-Lindqvist, M. (2020). Joint encoding of queries and passages for relevance estimation. Journal of Invented Retrieval 9(3):150-171."
+  - "Halloway, D., Riba-Sundaram, E. and Tormund, F. (2021). Listwise losses for neural rerankers. Proceedings of the Imaginary Symposium on Search 15:61-79."
+  - "Vintermark, S. (2019). Cascade ranking under latency budgets. Fictional Transactions on Data Systems 3(2):44-67."
+  - "Ashdown-Kaur, J. and Pellegrin, U. (2021). Hard negative mining from hybrid candidate lists. Journal of Pretend Linguistics 12(2):99-117."
+  - "Morrow-Ike, T. (2022). Tail latency as a design constraint for interactive search. Synthetic Systems Review 7:201-215."
+  - "Lindqvist-Amari, H. and Coriander, B. (2020). Confidence signals from score margins in ranking models. Journal of Invented Retrieval 9(4):230-247."

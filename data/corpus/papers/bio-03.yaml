@@ -1,0 +1,74 @@
+key: bio-03
+title: "A Twelve-Site Wastewater Surveillance Network for Antibiotic-Resistance Gene Prevalence in Harrowmere and Surrounding Towns"
+authors: ["Marisol Vantongeren", "Dmitri Aksoy-Hale", "Wen Tarrabell", "Folake Ingersund"]
+affiliation: "Laboratory for Environmental Health Genomics, Calderbrook University"
+year: 2023
+venue: "Journal of Fictional Environmental Surveillance"
+doi: "10.5555/rrsyn.2023.bio03"
+arxiv_id: "2399.02561"
+keywords: ["wastewater surveillance", "antibiotic resistance genes", "qPCR", "nowcasting"]
+abstract: >-
+  Wastewater offers a population-level view of antibiotic-resistance gene (ARG) carriage that does not
+  depend on clinical sampling. We describe SEWERWATCH-12, a fictional surveillance network of twelve
+  sub-sewershed and treatment-plant sites, seven in the city of Harrowmere and five in surrounding
+  towns, sampled twice weekly for 70 weeks. Of 1,680 scheduled 24-hour composite samples, 1,604 were
+  collected and 1,561 passed quality control. Five targets (sul1, tetW, ermB, blaCTX-M and intI1)
+  were quantified by qPCR and normalised to 16S rRNA gene copies. The sub-sewershed downstream of a
+  fictional hospital, site H3, had a median blaCTX-M relative abundance of minus 2.14 log10, more than
+  one log above the median of site medians of minus 3.43. Winter abundance of blaCTX-M exceeded summer
+  abundance by 0.31 log10. A state-space nowcasting model, ResiCast, forecast next-week absolute
+  concentrations with a mean absolute percentage error of 18.4 percent.
+sections:
+  - title: "Introduction"
+    paragraphs:
+      - "Antibiotic-resistance genes circulate between people, animals and the environment, and municipal sewage collects a pooled signal from everyone connected to a sewer. Wastewater surveillance of resistance therefore complements clinical laboratory data, which overrepresent hospitalised patients and depend on who is tested. A network design, with several sites sampled on a common schedule, makes it possible to compare places, detect local hotspots and follow seasonal patterns using a single laboratory workflow."
+      - "This paper reports the design and first 70 weeks of SEWERWATCH-12, a fictional network operated in Harrowmere and five nearby towns. We had three aims: to establish sampling completeness and laboratory reproducibility for a twice-weekly schedule, to describe spatial and seasonal variation in five resistance-associated targets, and to test whether a simple nowcasting model could anticipate next-week concentrations well enough to support routine reporting. We also align our population denominators with an existing city model so that wastewater results can be compared with respiratory surveillance."
+  - title: "Background"
+    paragraphs:
+      - "Relative abundance, the ratio of target gene copies to 16S rRNA gene copies, is the usual summary for resistance genes in sewage because it partly corrects for dilution and biomass. It does not, however, correct for changes in the bacterial community itself. Absolute concentrations in copies per litre are more sensitive to rainfall and flow but are easier to relate to the number of contributing people. We report both, and we use absolute concentrations for forecasting because they are the quantity most directly affected by short-term changes in the contributing population."
+  - title: "Methods"
+    paragraphs:
+      - "SEWERWATCH-12 comprises seven Harrowmere sub-sewershed sites, labelled H1 to H7, and five treatment-plant influent sites in the towns of Bellsthorpe, Quillan Ferry, Morrowgate, Ashenby and Tollcombe. Site H3 lies immediately downstream of St Aldric Infirmary, a fictional 540-bed hospital. Flow-weighted 24-hour composite samples were collected every Monday and Thursday from March 2021 to July 2022. Populations for the Harrowmere sub-sewersheds were estimated by overlaying sewer catchments on the HARBOR-ABM synthetic population, so that the seven Harrowmere catchments together serve the same 412,600 people represented in that model. Town populations came from invented municipal registers."
+      - "DNA was extracted from 50 mL of each sample within 36 hours of collection. Five targets were quantified by probe-based qPCR: sul1, tetW, ermB, blaCTX-M group 1 and the class 1 integron integrase gene intI1, alongside the 16S rRNA gene. Every tenth sample was split and processed in duplicate to estimate laboratory reproducibility, and extraction blanks were included in every batch. Samples failed quality control if the 16S rRNA gene was below 10^8 copies per litre, if inhibition exceeded a 1.5-cycle shift in a spiked control, or if blanks were positive."
+      - "ResiCast is a local-level state-space model fitted separately to each site and target. It treats the log of absolute concentration as a random walk observed with noise, includes a flow covariate and a seasonal Fourier term, and produces a one-week-ahead forecast. We trained ResiCast on the first 40 weeks and evaluated it on the remaining 30 weeks, reporting the mean absolute percentage error (MAPE) of forecast absolute concentrations, so that the metric can be read alongside forecast errors reported for clinical surveillance models of the same city."
+  - title: "Results"
+    paragraphs:
+      - "Of 1,680 scheduled samples, 1,604 were collected, with 76 missed because of autosampler faults, courier delays or flooding. Of the collected samples, 1,561 (97.3 percent) passed quality control. Duplicate splits showed a median coefficient of variation of 14.6 percent across targets, with blaCTX-M the least reproducible at 21.3 percent because of its low concentrations. Table 1 lists the population served, valid samples and median relative abundances for each site."
+      - "Site H3, downstream of St Aldric Infirmary, stood out for blaCTX-M, with a median relative abundance of minus 2.14 log10 compared with a median of site medians of minus 3.43 across the network. Its sul1 abundance was also the highest, at minus 0.87 log10. The two smallest towns, Ashenby and Quillan Ferry, had the lowest abundances of both genes. Across all sites, intI1 relative abundance rose by 0.18 log10 per year over the study, although the confidence interval for this trend, 0.02 to 0.34, was wide."
+      - "Seasonality was clearest for blaCTX-M. Across the seven Harrowmere sites, mean relative abundance in December to February exceeded that in June to August by 0.31 log10. Weekly blaCTX-M abundance in Harrowmere correlated with ILI consultation rates from the Harrowmere Sentinel Clinic Network, with a Spearman coefficient of 0.42 at a lag of one week. ResiCast forecast next-week absolute concentrations with a MAPE of 18.4 percent over the 30 test weeks, ranging from 12.9 percent for sul1 to 27.6 percent for blaCTX-M."
+      - "Population-normalised loads, computed by multiplying absolute concentration by daily flow and dividing by population served, were used to compare Harrowmere with the towns. Median daily sul1 load was 3.2 x 10^11 copies per person in Harrowmere and 2.1 x 10^11 copies per person across the five towns. Loads were less sensitive than concentrations to the rainfall events that interrupted sampling, but they depend on population estimates, which are more uncertain for the towns than for the HARBOR-ABM catchments."
+    tables:
+      - caption: "Table 1: SEWERWATCH-12 sites, valid samples and median relative abundance (log10 gene copies per 16S rRNA gene copy)."
+        after_paragraph: 0
+        header: ["Site", "Population served", "Valid samples", "blaCTX-M", "sul1"]
+        rows:
+          - ["H1 Harrowmere", "61,200", "135", "-3.41", "-1.22"]
+          - ["H2 Harrowmere", "54,800", "132", "-3.29", "-1.15"]
+          - ["H3 Harrowmere (hospital)", "48,300", "138", "-2.14", "-0.87"]
+          - ["H4 Harrowmere", "72,900", "128", "-3.52", "-1.30"]
+          - ["H5 Harrowmere", "66,400", "131", "-3.37", "-1.19"]
+          - ["H6 Harrowmere", "59,700", "133", "-3.18", "-1.08"]
+          - ["H7 Harrowmere", "49,300", "129", "-3.44", "-1.26"]
+          - ["B1 Bellsthorpe", "18,400", "127", "-3.61", "-1.41"]
+          - ["Q1 Quillan Ferry", "9,750", "130", "-3.88", "-1.57"]
+          - ["M1 Morrowgate", "23,100", "126", "-3.33", "-1.17"]
+          - ["A1 Ashenby", "7,820", "124", "-3.95", "-1.63"]
+          - ["T1 Tollcombe", "14,260", "128", "-3.70", "-1.45"]
+  - title: "Discussion"
+    paragraphs:
+      - "The hospital-adjacent site illustrates both the value and the risk of sub-sewershed sampling. It reveals a hotspot that would be diluted at the treatment plant, but it also reflects a small, atypical contributing population, and its numbers should not be read as describing the wider catchment. Network-level summaries such as the median of site medians are less sensitive to a single unusual site and are what we recommend for routine reporting."
+      - "The winter rise in blaCTX-M and its modest correlation with respiratory consultations are consistent with seasonal changes in antibiotic use, but the network cannot establish that link, because prescribing data were not available. Forecast accuracy was lower than reported for the HARBOR-ABM respiratory model, whose out-of-sample weekly MAPE was 14.8 percent, which is unsurprising given the noisier laboratory signal and the absence of a mechanistic transmission model behind ResiCast. Sharing the HARBOR-ABM population base made such comparisons straightforward."
+  - title: "Limitations"
+    paragraphs:
+      - "Several limitations apply. We did not culture organisms or link genes to specific hosts, so carriage cannot be attributed to people rather than to sewer biofilms. Relative abundance depends on the 16S rRNA gene, whose copy number varies between taxa. Five towns were represented by a single influent site each, and rainfall events reduced sampling completeness at Morrowgate in particular. The 70-week window covers only one full winter, so the seasonal estimate rests on limited data. Finally, ResiCast was evaluated on a single 30-week test window, and its accuracy may differ in seasons with unusual rainfall."
+  - title: "Conclusion"
+    paragraphs:
+      - "SEWERWATCH-12 achieved a 97.3 percent quality-control pass rate on a twice-weekly schedule across twelve fictional sites, revealed a hospital-adjacent hotspot for blaCTX-M, and supported one-week-ahead forecasts with 18.4 percent MAPE. Aligning population denominators with an existing city model allows wastewater resistance data to be read alongside respiratory surveillance, which we see as the main practical lesson of the network. A second phase will add prescribing data and a third winter of sampling."
+references:
+  - "Okafor-Lindqvist, T., Deverajan, R., Hallstrand-Abebe, I. and Quennell, P. (2022). School closure timing in an agent-based model of influenza-like illness for the fictional city of Harrowmere. Annals of Invented Epidemic Modelling 14(1):27-45."
+  - "Vantongeren, M. and Prell, U. (2019). Relative versus absolute quantification of resistance genes in sewage. Fictional Water Microbiology 10(2):88-103."
+  - "Aksoy-Hale, D., Morandi, C. and Ibekwe-Strand, L. (2020). Inhibition controls for qPCR in raw influent. Journal of Imaginary Laboratory Methods 7(4):215-229."
+  - "Tarrabell, W. (2021). Local-level state-space models for environmental time series. Notional Forecasting Letters 3(1):1-14."
+  - "Ingersund, F. and Galloway-Mintz, R. (2018). Hospital effluent as a hotspot in urban sewer networks. Invented Environmental Health 9(3):170-186."
+  - "Kerrowan, B., Asante, E. and Delacourt, Y. (2017). Sampling design for multi-site wastewater programmes. Synthetic Public Health Engineering 5(2):49-66."
+  - "Okafor-Lindqvist, T. and Rennick, H. (2017). Design of the Harrowmere Sentinel Clinic Network. Invented Surveillance Quarterly 2(2):61-74."
