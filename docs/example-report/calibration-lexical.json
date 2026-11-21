@@ -1,0 +1,189 @@
+{
+  "judge": "lexical",
+  "n": 40,
+  "accuracy": 0.45,
+  "binary_accuracy": 0.575,
+  "cohen_kappa": 0.2388,
+  "confusion": {
+    "supported": {
+      "supported": 0,
+      "partially_supported": 1,
+      "unsupported": 10,
+      "contradicted": 1
+    },
+    "partially_supported": {
+      "supported": 0,
+      "partially_supported": 3,
+      "unsupported": 5,
+      "contradicted": 0
+    },
+    "unsupported": {
+      "supported": 0,
+      "partially_supported": 0,
+      "unsupported": 12,
+      "contradicted": 0
+    },
+    "contradicted": {
+      "supported": 0,
+      "partially_supported": 1,
+      "unsupported": 4,
+      "contradicted": 3
+    }
+  },
+  "per_label": {
+    "supported": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "support": 12.0
+    },
+    "partially_supported": {
+      "precision": 0.6,
+      "recall": 0.375,
+      "support": 8.0
+    },
+    "unsupported": {
+      "precision": 0.3871,
+      "recall": 1.0,
+      "support": 12.0
+    },
+    "contradicted": {
+      "precision": 0.75,
+      "recall": 0.375,
+      "support": 8.0
+    }
+  },
+  "disagreements": [
+    {
+      "id": "bio-c01",
+      "label": "supported",
+      "judge": "unsupported",
+      "claim": "Over a 30-week test period, ResiCast's one-week-ahead forecasts of absolute gene concentration were off by roughly 18 percent on average."
+    },
+    {
+      "id": "bio-c02",
+      "label": "supported",
+      "judge": "contradicted",
+      "claim": "The two video annotators' step totals agreed very closely, with an intraclass correlation above 0.99."
+    },
+    {
+      "id": "bio-c03",
+      "label": "supported",
+      "judge": "unsupported",
+      "claim": "Closing schools for four weeks once weekly ILI hit 1 percent cut the modelled peak by about a third and pushed it back by more than three weeks."
+    },
+    {
+      "id": "bio-c04",
+      "label": "partially_supported",
+      "judge": "unsupported",
+      "claim": "The wrist device overestimated total sleep time by 19 minutes, with the overestimate largest among night-shift workers."
+    },
+    {
+      "id": "clim-c01",
+      "label": "supported",
+      "judge": "unsupported",
+      "claim": "Low-marsh sediments in the Vellmar Estuary built up faster than local relative sea level rose."
+    },
+    {
+      "id": "clim-c02",
+      "label": "supported",
+      "judge": "unsupported",
+      "claim": "After the roof retrofits, cooling electricity use in the surveyed buildings dropped by roughly a tenth."
+    },
+    {
+      "id": "clim-c03",
+      "label": "supported",
+      "judge": "unsupported",
+      "claim": "Meltwater's share of July river flow shrinks from over two thirds near the glacier to under a tenth at the estuary."
+    },
+    {
+      "id": "clim-c04",
+      "label": "partially_supported",
+      "judge": "unsupported",
+      "claim": "Wild bee counts on Brennick farmland fell by 37 percent, mainly because of insecticide spraying."
+    },
+    {
+      "id": "clim-c05",
+      "label": "partially_supported",
+      "judge": "unsupported",
+      "claim": "The CoolCrown coating cut afternoon heat island intensity from 3.9 to 3.1 degrees C and also lowered winter heating bills."
+    },
+    {
+      "id": "clim-c09",
+      "label": "contradicted",
+      "judge": "unsupported",
+      "claim": "High-marsh carbon burial increased by 22 percent between 1960-1989 and 1990-2019."
+    },
+    {
+      "id": "ir-c01",
+      "label": "supported",
+      "judge": "unsupported",
+      "claim": "Adding Kestrel-CE-base reranking lifted the best LongLedger chunking setup from roughly 0.74 to about 0.80 answer-complete recall at ten."
+    },
+    {
+      "id": "ir-c02",
+      "label": "supported",
+      "judge": "unsupported",
+      "claim": "Questions that mention chemical formulas were given a lower dense weight by BraidRank, around 0.21, than the typical query."
+    },
+    {
+      "id": "ir-c03",
+      "label": "supported",
+      "judge": "partially_supported",
+      "claim": "Each citation in the VeriCite study was labelled by two people, with a senior annotator settling any disagreement."
+    },
+    {
+      "id": "ir-c04",
+      "label": "partially_supported",
+      "judge": "unsupported",
+      "claim": "StopGap forwards 36 percent of queries to the large model, which improves nDCG@10 on those queries by 12 points."
+    },
+    {
+      "id": "ir-c05",
+      "label": "partially_supported",
+      "judge": "unsupported",
+      "claim": "The 41,200 QuarryQA questions were written by 44 annotators who were paid per question."
+    },
+    {
+      "id": "ir-c09",
+      "label": "contradicted",
+      "judge": "unsupported",
+      "claim": "Raising overlap from 25 to 50 percent with 256-token chunks improved answer-complete Recall@10 by more than five points."
+    },
+    {
+      "id": "ir-c10",
+      "label": "contradicted",
+      "judge": "unsupported",
+      "claim": "BraidRank's adaptive fusion weight helped most on queries that contain no digits."
+    },
+    {
+      "id": "mat-c01",
+      "label": "supported",
+      "judge": "unsupported",
+      "claim": "The bromide-substituted electrolyte conducted lithium ions almost twice as well as the chloride-only reference at room temperature."
+    },
+    {
+      "id": "mat-c02",
+      "label": "supported",
+      "judge": "unsupported",
+      "claim": "Glass-glass packaged perovskite cells began to degrade from their edges, whereas cells with the trilayer barrier degraded evenly."
+    },
+    {
+      "id": "mat-c03",
+      "label": "supported",
+      "judge": "unsupported",
+      "claim": "Just under a third of the hot tank's standby heat loss escaped through its foundation."
+    },
+    {
+      "id": "mat-c09",
+      "label": "contradicted",
+      "judge": "partially_supported",
+      "claim": "Under the IRLP-24 protocol, NFM-felt degraded faster than the molybdate-free NF-ref catalyst."
+    },
+    {
+      "id": "mat-c10",
+      "label": "contradicted",
+      "judge": "unsupported",
+      "claim": "The Corvane Ridge pilot achieved its highest monthly round-trip efficiency in January."
+    }
+  ]
+}

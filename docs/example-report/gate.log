@@ -1,0 +1,7 @@
+recall@5             base 0.803 -> 0.803  diff +0.000 [+0.000, +0.000]  ok
+mrr                  base 0.618 -> 0.618  diff +0.000 [+0.000, +0.000]  ok
+context_recall       base 0.922 -> 0.922  diff +0.000 [+0.000, +0.000]  ok
+faithfulness         base 0.918 -> 0.918  diff +0.000 [+0.000, +0.000]  ok
+answer_correctness   base 0.476 -> 0.476  diff +0.000 [+0.000, +0.000]  ok
+abstention_accuracy  base 0.705 -> 0.705  diff +0.000 [+0.000, +0.000]  ok
+evaluation gate passed

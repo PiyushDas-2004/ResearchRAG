@@ -1,0 +1,4 @@
+name: seeded-regression
+generation: {provider: mock, mock: {hallucination_rate: 0.2}}
+retrieval: {top_k: 1, candidate_k: 3, mmr_enabled: false}
+rerank: {provider: none}

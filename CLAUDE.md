@@ -16,7 +16,8 @@ researchrag eval check --baseline main   # offline regression gate
 python scripts/validate_corpus.py data   # validate corpus YAML + gold evidence
 ```
 
-Local Postgres for tests: `docker compose up -d db` (pgvector/pgvector:pg16), then
+Local Postgres for tests: `docker compose up -d db` (pgvector/pgvector:pg16, pgvector 0.8: exercises
+iterative HNSW scans; distro pgvector 0.6 exercises the exact-scan fallback), then
 `export RR_TEST_DATABASE_URL=postgresql+asyncpg://researchrag:researchrag@localhost:5432/researchrag_test`.
 
 ## Architecture (one paragraph)
@@ -26,7 +27,7 @@ Ingestion: upload -> magic-byte validation -> PDF parse in a resource-limited su
 (fixed / sentence / section / parent_child) -> embed (batched, cached, rate-limited) -> one
 transaction writes document, pages, chunk set, chunks, embeddings. Query: condense follow-up ->
 optional rewrite / multi-query -> vector (pgvector HNSW, per-embedding-version partial index) +
-lexical (tsvector GIN, ts_rank_cd) -> RRF -> MMR -> rerank -> injection scan -> small-to-big
+lexical (tsvector GIN, ts_rank_cd) -> RRF -> rerank -> MMR -> injection scan -> small-to-big
 parent swap -> token-budget packing -> evidence gate (abstain) -> LLM structured answer ->
 citation + quote checks -> claim verification -> policy (remove/flag/regenerate) -> output guard
 -> persisted trace + OTel spans + Prometheus metrics.
@@ -46,16 +47,23 @@ citation + quote checks -> claim verification -> policy (remove/flag/regenerate)
 
 - [x] Phase 1 scaffold: tooling, config, CLAUDE.md
 - [x] Phase 2 synthetic corpus + PDF ingestion + chunkers + metadata (+ property tests)
-- [ ] Phase 3 Postgres schema/migrations, embeddings, hybrid retrieval, MMR, rerank, rewrite
-- [ ] Phase 4 generation, structured citations, abstention, streaming, condensation
-- [ ] Phase 5 verification layer, security hardening, poisoned-PDF test
-- [ ] Phase 6 evaluation harness, sweeps + CIs, regression gate, judge calibration
-- [ ] Phase 7 FastAPI service, auth, rate limit, problem+json, SSE, feedback, UI
-- [ ] Phase 8 observability: logs, OTel traces, Prometheus, Jaeger profile
-- [ ] Phase 9 Docker, compose, Terraform, CI workflows, docs, ADRs, README
-- [ ] Phase 10 hardening pass
+- [x] Phase 3 Postgres schema/migrations, embeddings, hybrid retrieval, MMR, rerank, rewrite
+- [x] Phase 4 generation, structured citations, abstention, streaming, condensation
+- [x] Phase 5 verification layer, security hardening, poisoned-PDF test
+- [x] Phase 6 evaluation harness, sweeps + CIs, regression gate, judge calibration
+- [x] Phase 7 FastAPI service, auth, rate limit, problem+json, SSE, feedback, UI
+- [x] Phase 8 observability: logs, OTel traces, Prometheus, Jaeger profile (real trace in docs)
+- [x] Phase 9 Docker, compose, Terraform (zero-cost profile), CI workflows, docs, ADRs, README
+- [x] Phase 10 hardening pass (see final report in the session)
 - [ ] Phase 11 publish (needs user: session can only push to the unvibecode repo)
-- [ ] Phase 12 cloud deploy (needs explicit cost confirmation)
+- [ ] Phase 12 cloud deploy (owner requires zero cost; nothing is created without explicit go-ahead)
+
+## Cost constraint
+
+The owner requires **zero cost**. Defaults are offline (no paid APIs). Terraform defaults to an
+external free-tier Postgres (`database_mode = "external"`) and request-based Cloud Run billing with
+inline ingestion; Cloud SQL and always-on CPU are opt-in and documented as paid. Never run live
+evaluations or apply infrastructure without the owner's explicit approval.
 
 ## Environment notes
 

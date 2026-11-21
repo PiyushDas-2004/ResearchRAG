@@ -1,0 +1,2 @@
+13 configurations; best quality per dollar: chunking.overlap_tokens=0
+reports: docs/example-report/sweep.md, docs/example-report/sweep.html, docs/example-report/sweep.json

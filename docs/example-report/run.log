@@ -1,0 +1,5 @@
+recall@5               0.803  [0.711, 0.880]  n=71
+faithfulness           0.918  [0.867, 0.964]  n=55
+answer_correctness     0.476  [0.393, 0.560]  n=88
+abstention_accuracy    0.705  [0.602, 0.796]  n=88
+reports: docs/example-report/eval-eval-offline.md, docs/example-report/eval-eval-offline.html, docs/example-report/eval-eval-offline.json

@@ -1,0 +1,8 @@
+recall@5             base 0.803 -> 0.422  diff -0.380 [-0.479, -0.282]  REGRESSED
+mrr                  base 0.618 -> 0.493  diff -0.126 [-0.215, -0.026]  REGRESSED
+context_recall       base 0.922 -> 0.465  diff -0.458 [-0.563, -0.352]  REGRESSED
+faithfulness         base 0.974 -> 0.974  diff +0.000 [+0.000, +0.000]  ok
+answer_correctness   base 0.476 -> 0.340  diff -0.136 [-0.217, -0.054]  REGRESSED
+abstention_accuracy  base 0.705 -> 0.489  diff -0.216 [-0.318, -0.125]  REGRESSED
+evaluation gate FAILED
+exit 1

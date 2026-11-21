@@ -1,0 +1,2 @@
+6 configurations; best quality per dollar: retrieval.mode=vector
+reports: /tmp/claude-0/hnsw/sweep.md, /tmp/claude-0/hnsw/sweep.html, /tmp/claude-0/hnsw/sweep.json

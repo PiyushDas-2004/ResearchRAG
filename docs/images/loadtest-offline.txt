@@ -1,0 +1,10 @@
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+GET      /health                                                                           57     0(0.00%) |      9       2      40      4 |    0.95        0.00
+GET      /v1/documents                                                                     58     0(0.00%) |     30       9     135     18 |    0.97        0.00
+POST     /v1/query                                                                        437     0(0.00%) |    122      54     547    100 |    7.29        0.00
+         Aggregated                                                                       552     0(0.00%) |    101       2     547     89 |    9.20        0.00
+Type     Name                                                                                  50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+GET      /health                                                                                 4      6      7     10     29     35     38     40     40     40     40     57
+GET      /v1/documents                                                                          18     26     46     55     66    100    110    140    140    140    140     58
+POST     /v1/query                                                                             100    120    140    160    200    230    260    530    550    550    550    437
+         Aggregated                                                                             89    110    130    140    190    230    250    330    550    550    550    552

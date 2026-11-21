@@ -1,0 +1,18 @@
+traceID 1104bf12b6856162d161983035710c6d 17 spans
+    0.00ms    75.26ms  POST /v1/query         {'http.request.method': 'POST', 'http.response.status_code': 200, 'http.route': '/v1/query'}
+    0.78ms     0.85ms  fastapi.dependencies   {}
+    1.73ms    72.84ms  fastapi.endpoint       {}
+    2.01ms    12.55ms  retrieve.vector        {'rr.count': 40, 'rr.ef_search': 64}
+   14.66ms     3.17ms  retrieve.lexical       {'rr.count': 36}
+   17.93ms     3.48ms  fuse                   {'rr.count': 52, 'rr.lists': 2}
+   21.51ms     9.56ms  rerank                 {'rr.count': 24, 'rr.reranker': 'lexical'}
+   31.17ms     7.51ms  diversify              {'rr.count': 8, 'rr.enabled': True}
+   38.78ms     2.78ms  expand                 {'rr.children': 8, 'rr.passages': 4}
+   41.64ms     1.16ms  guard.input            {'rr.action': 'sanitize', 'rr.flagged': '[]'}
+   42.85ms     0.34ms  pack                   {'rr.budget': 1800, 'rr.count': 4}
+   45.18ms     0.03ms  gate                   {'rr.evidence_score': 1, 'rr.passed': True, 'rr.threshold': 0.34}
+   45.26ms     7.15ms  generate               {'rr.attempts': 1, 'rr.errors': '[]', 'rr.failed': False, 'rr.model': 'mock-extractive-v1', 'rr.repaired': False}
+   52.48ms     0.43ms  cite                   {'rr.citations': 2, 'rr.dangling': '[]', 'rr.fabricated': '[]'}
+   52.95ms    11.31ms  verify                 {'rr.faithfulness': 1, 'rr.judge': 'lexical', 'rr.removed': 0, 'rr.verdicts': '["supported","supported","supported"]'}
+   64.41ms     0.24ms  guard.output           {'rr.enabled': True, 'rr.violations': '[]'}
+   74.67ms     0.09ms  fastapi.serialization  {}
