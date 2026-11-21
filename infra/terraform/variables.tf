@@ -26,6 +26,38 @@ variable "api_keys" {
   sensitive   = true
 }
 
+variable "database_mode" {
+  description = <<-EOT
+    "external" (default, zero cost): use a free-tier managed Postgres with pgvector (e.g. Neon) via
+    var.external_database_url. "cloudsql": create a Cloud SQL instance (NOT free: roughly $10+/month).
+  EOT
+  type        = string
+  default     = "external"
+  validation {
+    condition     = contains(["external", "cloudsql"], var.database_mode)
+    error_message = "database_mode must be \"external\" or \"cloudsql\"."
+  }
+}
+
+variable "external_database_url" {
+  description = "SQLAlchemy URL of an external Postgres with pgvector, e.g. postgresql+asyncpg://user:pass@host/db?ssl=require (database_mode = external)."
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
+variable "cpu_always_allocated" {
+  description = "false (default, zero cost) = request-based billing, uploads are ingested inline. true = instance-based billing with a background worker (costs money while instances are alive)."
+  type        = bool
+  default     = false
+}
+
+variable "billing_account" {
+  description = "Optional billing account ID; when set, a budget with a 1 USD alert threshold is created as a safety net."
+  type        = string
+  default     = ""
+}
+
 variable "db_tier" {
   description = "Cloud SQL machine tier. db-f1-micro is the cheapest shared-core option; use db-custom-1-3840 or larger for real workloads."
   type        = string
@@ -51,9 +83,9 @@ variable "min_instances" {
 }
 
 variable "max_instances" {
-  description = "Maximum Cloud Run instances."
+  description = "Maximum Cloud Run instances (1 keeps usage predictable and inside the free tier)."
   type        = number
-  default     = 2
+  default     = 1
 }
 
 variable "concurrency" {

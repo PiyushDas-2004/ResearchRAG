@@ -10,7 +10,7 @@ output "artifact_registry" {
 
 output "cloudsql_connection_name" {
   description = "Cloud SQL connection name."
-  value       = google_sql_database_instance.pg.connection_name
+  value       = local.use_cloudsql ? google_sql_database_instance.pg[0].connection_name : ""
 }
 
 output "wif_provider" {

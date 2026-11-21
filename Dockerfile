@@ -1,6 +1,9 @@
 # syntax=docker/dockerfile:1.7
 # ---------- build stage: build a wheel and install it into a venv ----------
 FROM python:3.12-slim AS build
+# Provider SDK extras are opt-in so the default offline image stays small (registry storage is
+# part of the zero-cost budget). Example: --build-arg EXTRAS=openai,gemini,tiktoken
+ARG EXTRAS=""
 ENV PIP_NO_CACHE_DIR=1 PIP_DISABLE_PIP_VERSION_CHECK=1
 WORKDIR /src
 RUN python -m venv /opt/venv
@@ -13,7 +16,8 @@ RUN --mount=type=secret,id=pipca,required=false \
     if [ -f /run/secrets/pipca ]; then export PIP_CERT=/run/secrets/pipca; fi \
  && pip install --upgrade pip build \
  && python -m build --wheel --outdir /dist \
- && pip install "/dist/$(ls /dist | grep '\.whl$')[openai,gemini,tiktoken]"
+ && WHEEL="/dist/$(ls /dist | grep '\.whl$')" \
+ && if [ -n "$EXTRAS" ]; then pip install "${WHEEL}[${EXTRAS}]"; else pip install "$WHEEL"; fi
 
 # ---------- runtime stage: slim, non-root ----------
 FROM python:3.12-slim AS runtime

@@ -1,6 +1,10 @@
 # Copy to terraform.tfvars (git-ignored) and fill in. Never commit real values.
-project_id        = "your-gcp-project-id"
-region            = "us-central1"
-image             = "us-central1-docker.pkg.dev/your-gcp-project-id/researchrag/api:0.1.0"
-api_keys          = "replace-with-a-long-random-key"
-github_repository = "PiyushDas-2004/ResearchRAG"
+# Zero-cost profile: external free-tier Postgres + request-based Cloud Run billing.
+project_id            = "your-gcp-project-id"
+region                = "us-central1"
+image                 = "us-central1-docker.pkg.dev/your-gcp-project-id/researchrag/api:0.1.0"
+api_keys              = "replace-with-a-long-random-key"
+database_mode         = "external"
+external_database_url = "postgresql+asyncpg://USER:PASSWORD@ep-example.us-east-2.aws.neon.tech/neondb?ssl=require"
+# billing_account     = "000000-000000-000000"   # optional: creates a 1 USD budget alert
+github_repository     = "PiyushDas-2004/ResearchRAG"

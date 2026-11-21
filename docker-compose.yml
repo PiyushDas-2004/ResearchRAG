@@ -18,7 +18,10 @@ services:
       retries: 20
 
   api:
-    build: .
+    build:
+      context: .
+      args:
+        EXTRAS: ${RR_IMAGE_EXTRAS:-}   # e.g. openai,gemini,tiktoken for live providers
     image: researchrag:local
     depends_on:
       db: {condition: service_healthy}
@@ -32,6 +35,7 @@ services:
       RR_CORS_ORIGINS: http://localhost:8000
       RR_OTEL_EXPORTER_ENDPOINT: ${RR_OTEL_EXPORTER_ENDPOINT:-}
       RR_LOG_LEVEL: INFO
+      RR_RATE_LIMIT_PER_MINUTE: ${RR_RATE_LIMIT_PER_MINUTE:-60}
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
     stop_grace_period: 30s

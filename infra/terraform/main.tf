@@ -1,13 +1,13 @@
 locals {
-  services = [
+  use_cloudsql = var.database_mode == "cloudsql"
+  services = concat([
     "run.googleapis.com",
-    "sqladmin.googleapis.com",
     "secretmanager.googleapis.com",
     "artifactregistry.googleapis.com",
     "iam.googleapis.com",
     "iamcredentials.googleapis.com",
     "sts.googleapis.com",
-  ]
+  ], local.use_cloudsql ? ["sqladmin.googleapis.com"] : [], var.billing_account == "" ? [] : ["billingbudgets.googleapis.com"])
   db_name = "researchrag"
   db_user = "researchrag"
 }
@@ -24,7 +24,24 @@ resource "google_artifact_registry_repository" "repo" {
   repository_id = "researchrag"
   format        = "DOCKER"
   description   = "ResearchRAG container images"
-  depends_on    = [google_project_service.apis]
+
+  # Keep only the newest image so storage stays inside the 0.5 GB free tier.
+  cleanup_policy_dry_run = false
+  cleanup_policies {
+    id     = "keep-latest"
+    action = "KEEP"
+    most_recent_versions {
+      keep_count = 1
+    }
+  }
+  cleanup_policies {
+    id     = "delete-older"
+    action = "DELETE"
+    condition {
+      tag_state = "ANY"
+    }
+  }
+  depends_on = [google_project_service.apis]
 }
 
 # ---------------------------------------------------------------- runtime identity (least privilege)
@@ -34,23 +51,24 @@ resource "google_service_account" "runtime" {
 }
 
 resource "google_project_iam_member" "runtime_roles" {
-  for_each = toset([
-    "roles/cloudsql.client",
-    "roles/logging.logWriter",
-    "roles/monitoring.metricWriter",
-  ])
+  for_each = toset(concat(
+    ["roles/logging.logWriter", "roles/monitoring.metricWriter"],
+    local.use_cloudsql ? ["roles/cloudsql.client"] : [],
+  ))
   project = var.project_id
   role    = each.value
   member  = "serviceAccount:${google_service_account.runtime.email}"
 }
 
-# ---------------------------------------------------------------- Cloud SQL (PostgreSQL 16 + pgvector)
+# ---------------------------------------------------------------- Cloud SQL (optional, NOT free)
 resource "random_password" "db" {
+  count   = local.use_cloudsql ? 1 : 0
   length  = 32
   special = false
 }
 
 resource "google_sql_database_instance" "pg" {
+  count               = local.use_cloudsql ? 1 : 0
   name                = "${var.service_name}-pg"
   database_version    = "POSTGRES_16"
   region              = var.region
@@ -85,14 +103,16 @@ resource "google_sql_database_instance" "pg" {
 }
 
 resource "google_sql_database" "db" {
+  count    = local.use_cloudsql ? 1 : 0
   name     = local.db_name
-  instance = google_sql_database_instance.pg.name
+  instance = google_sql_database_instance.pg[0].name
 }
 
 resource "google_sql_user" "app" {
+  count    = local.use_cloudsql ? 1 : 0
   name     = local.db_user
-  instance = google_sql_database_instance.pg.name
-  password = random_password.db.result
+  instance = google_sql_database_instance.pg[0].name
+  password = random_password.db[0].result
 }
 
 # ---------------------------------------------------------------- secrets
@@ -106,8 +126,8 @@ resource "google_secret_manager_secret" "database_url" {
 
 resource "google_secret_manager_secret_version" "database_url" {
   secret = google_secret_manager_secret.database_url.id
-  # asyncpg connects through the Cloud SQL unix socket mounted at /cloudsql.
-  secret_data = "postgresql+asyncpg://${local.db_user}:${random_password.db.result}@/${local.db_name}?host=/cloudsql/${google_sql_database_instance.pg.connection_name}"
+  # Cloud SQL: asyncpg connects through the unix socket mounted at /cloudsql.
+  secret_data = local.use_cloudsql ? "postgresql+asyncpg://${local.db_user}:${random_password.db[0].result}@/${local.db_name}?host=/cloudsql/${google_sql_database_instance.pg[0].connection_name}" : var.external_database_url
 }
 
 resource "google_secret_manager_secret" "api_keys" {
@@ -164,10 +184,13 @@ resource "google_cloud_run_v2_service" "api" {
       max_instance_count = var.max_instances
     }
 
-    volumes {
-      name = "cloudsql"
-      cloud_sql_instance {
-        instances = [google_sql_database_instance.pg.connection_name]
+    dynamic "volumes" {
+      for_each = local.use_cloudsql ? [1] : []
+      content {
+        name = "cloudsql"
+        cloud_sql_instance {
+          instances = [google_sql_database_instance.pg[0].connection_name]
+        }
       }
     }
 
@@ -181,14 +204,26 @@ resource "google_cloud_run_v2_service" "api" {
           cpu    = "1"
           memory = "2Gi"
         }
-        # The in-process ingestion worker needs CPU between requests; this switches billing to
-        # instance-time while an instance is alive (it still scales to zero when idle).
-        cpu_idle          = false
-        startup_cpu_boost = true
+        # cpu_idle = true is request-based billing (free-tier friendly): CPU only while serving a
+        # request, so uploads are ingested inline. false keeps CPU for the background worker but is
+        # billed for the whole instance lifetime.
+        cpu_idle          = !var.cpu_always_allocated
+        startup_cpu_boost = false
       }
-      volume_mounts {
-        name       = "cloudsql"
-        mount_path = "/cloudsql"
+      dynamic "volume_mounts" {
+        for_each = local.use_cloudsql ? [1] : []
+        content {
+          name       = "cloudsql"
+          mount_path = "/cloudsql"
+        }
+      }
+      env {
+        name  = "RR_INGEST_MODE"
+        value = var.cpu_always_allocated ? "background" : "inline"
+      }
+      env {
+        name  = "RR_RUN_WORKER"
+        value = var.cpu_always_allocated ? "true" : "false"
       }
       env {
         name  = "RR_ENVIRONMENT"
@@ -259,4 +294,26 @@ resource "google_cloud_run_v2_service_iam_member" "public" {
   location = var.region
   role     = "roles/run.invoker"
   member   = "allUsers"
+}
+
+# ---------------------------------------------------------------- optional cost safety net
+resource "google_billing_budget" "guard" {
+  count           = var.billing_account == "" ? 0 : 1
+  billing_account = var.billing_account
+  display_name    = "${var.service_name} zero-cost guard"
+  budget_filter {
+    projects = ["projects/${var.project_id}"]
+  }
+  amount {
+    specified_amount {
+      currency_code = "USD"
+      units         = "1"
+    }
+  }
+  threshold_rules {
+    threshold_percent = 0.01
+  }
+  threshold_rules {
+    threshold_percent = 1.0
+  }
 }
