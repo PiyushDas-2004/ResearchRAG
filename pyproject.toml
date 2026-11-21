@@ -78,9 +78,6 @@ Issues = "https://github.com/PiyushDas-2004/ResearchRAG/issues"
 [tool.hatch.build.targets.wheel]
 packages = ["src/researchrag"]
 
-[tool.hatch.build.targets.wheel.force-include]
-"src/researchrag/storage/migrations" = "researchrag/storage/migrations"
-
 [tool.ruff]
 line-length = 110
 target-version = "py311"
@@ -90,6 +87,7 @@ src = ["src", "tests"]
 select = ["E", "F", "W", "I", "B", "UP", "N", "S", "C4", "SIM", "RUF", "PL", "PT", "ASYNC", "TID", "RET"]
 ignore = [
   "PLR0913", # many-argument constructors are fine for config-driven components
+  "PLR0917",
   "PLR2004", # magic numbers are fine in heuristics with named context
   "PLR0911",
   "PLR0912",

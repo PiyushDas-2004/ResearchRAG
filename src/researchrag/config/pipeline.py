@@ -55,6 +55,9 @@ class EmbeddingConfig(_Strict):
     requests_per_minute: int = Field(600, ge=1)
     max_retries: int = Field(4, ge=0, le=10)
     cache_size: int = Field(2048, ge=0)
+    contextual_header: bool = Field(
+        True, description="Prefix 'title. section:' to chunk text before embedding"
+    )
 
     @property
     def model_id(self) -> str:
