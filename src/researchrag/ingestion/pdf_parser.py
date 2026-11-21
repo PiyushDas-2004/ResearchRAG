@@ -97,7 +97,13 @@ def _read_blocks(page: Any, ocr_enabled: bool) -> tuple[list[RawBlock], bool]:
 
 
 def _extract_tables(page: Any, blocks: list[RawBlock]) -> list[RawBlock]:
-    """Replace blocks inside detected tables with one table block per table (caption attached)."""
+    """Replace blocks inside detected tables with one table block per table (caption attached).
+
+    Table detection is the most expensive parsing step, so it only runs on pages that have
+    both vector drawings (ruling lines) and a ``Table N`` caption.
+    """
+    if not any(_CAPTION_RE.match(b.text) for b in blocks) or not page.get_drawings():
+        return blocks
     try:
         # Line-based detection only: deterministic and free of the ONNX layout model that
         # newer pymupdf releases load by default (too large for the parser's memory cap).
@@ -110,11 +116,12 @@ def _extract_tables(page: Any, blocks: list[RawBlock]) -> list[RawBlock]:
     if not found:
         return blocks
     kept = list(blocks)
+    words = page.get_text("words")  # (x0, y0, x1, y1, word, block, line, word_no)
     for table in found:
         tx0, ty0, tx1, ty1 = table.bbox
         rows: list[str] = []
         for row in table.rows:
-            cells = [" ".join(page.get_textbox(c).split()) if c else "" for c in row.cells]
+            cells = [_cell_text(words, c) if c else "" for c in row.cells]
             if any(cells):
                 rows.append(" | ".join(cells))
         if not rows:
@@ -140,6 +147,14 @@ def _extract_tables(page: Any, blocks: list[RawBlock]) -> list[RawBlock]:
         y0 = min(ty0, caption_block.y0) if caption_block else ty0
         kept.append(RawBlock(tx0, y0, tx1, ty1, lines, 0.0, kind="table", caption=caption))
     return kept
+
+
+def _cell_text(words: list[Any], cell: tuple[float, float, float, float]) -> str:
+    """Join the words whose centre lies inside ``cell`` in reading order."""
+    x0, y0, x1, y1 = cell
+    inside = [w for w in words if x0 <= (w[0] + w[2]) / 2 <= x1 and y0 <= (w[1] + w[3]) / 2 <= y1]
+    inside.sort(key=lambda w: (w[5], w[6], w[7]))
+    return join_lines([" ".join(str(w[4]) for w in inside)])
 
 
 def order_blocks(blocks: list[RawBlock], page_width: float) -> list[RawBlock]:

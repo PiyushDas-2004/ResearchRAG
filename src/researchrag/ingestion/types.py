@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import bisect
 from dataclasses import dataclass, field
-from typing import Literal
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
@@ -119,3 +119,28 @@ class ChunkDraft:
     def retrievable(self) -> bool:
         """Parents are context-only; references are kept for metadata but not retrieved by default."""
         return self.kind != "parent"
+
+
+def structure_to_json(doc: ParsedDocument) -> dict[str, object]:
+    """Serialise pages, blocks and sections so a stored document can be re-chunked later."""
+    return {
+        "pages": [[p.number, p.start, p.end, p.ocr] for p in doc.pages],
+        "blocks": [[b.kind, b.page, b.start, b.end, b.section, b.caption] for b in doc.blocks],
+        "sections": [[s.label, s.title, s.start, s.end] for s in doc.sections],
+        "warnings": list(doc.warnings),
+    }
+
+
+def document_from_structure(
+    text: str, structure: dict[str, Any], metadata: DocumentMetadata, content_hash: str
+) -> ParsedDocument:
+    """Rebuild a :class:`ParsedDocument` from stored text and :func:`structure_to_json` output."""
+    pages = [PageInfo(int(n), int(s), int(e), bool(o)) for n, s, e, o in structure["pages"]]
+    blocks = [
+        Block(kind, text[start:end], int(page), int(start), int(end), section, caption)
+        for kind, page, start, end, section, caption in structure["blocks"]
+    ]
+    sections = [Section(label, title, int(s), int(e)) for label, title, s, e in structure["sections"]]
+    return ParsedDocument(
+        text, pages, blocks, sections, metadata, content_hash, list(structure.get("warnings", []))
+    )
