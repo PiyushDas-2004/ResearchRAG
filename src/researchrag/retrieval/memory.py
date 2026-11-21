@@ -162,6 +162,7 @@ class MemoryStore:
             authors=tuple(meta.authors),
             year=meta.year,
             parent_id=row.parent_id,
+            page_map=d.page_map,
             score=score,
             scores={method: score},
             ranks={method: rank},
@@ -230,5 +231,7 @@ class MemoryStore:
             row = self.chunks.get(pid)
             if row is not None:
                 d = row.draft
-                out[pid] = ParentPassage(pid, row.document_id, d.text, d.page_start, d.page_end, d.section)
+                out[pid] = ParentPassage(
+                    pid, row.document_id, d.text, d.page_start, d.page_end, d.section, d.page_map
+                )
         return out

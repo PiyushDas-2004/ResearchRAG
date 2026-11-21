@@ -135,6 +135,7 @@ class Chunk(Base):
     page_start: Mapped[int] = mapped_column(Integer, nullable=False)
     page_end: Mapped[int] = mapped_column(Integer, nullable=False)
     section: Mapped[str] = mapped_column(String(32), nullable=False)
+    page_map: Mapped[list[Any]] = mapped_column(JSONB, nullable=False, default=list)
     token_count: Mapped[int] = mapped_column(Integer, nullable=False)
     retrievable: Mapped[bool] = mapped_column(Boolean, nullable=False)
     is_reference: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)

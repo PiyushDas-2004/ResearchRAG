@@ -120,8 +120,21 @@ def stem(word: str) -> str:
 
 
 def words(text: str) -> list[str]:
-    """Lower-cased word and number tokens."""
-    return [m.group(0).lower().strip("-'") for m in _WORD_RE.finditer(text)]
+    """Lower-cased word and number tokens.
+
+    Possessives are dropped (``model's`` -> ``model``), hyphenated compounds are split into
+    their parts (``molten-salt`` -> ``molten``, ``salt``) and thousands separators are removed
+    (``2,048`` -> ``2048``) so that surface variants of the same term match.
+    """
+    out: list[str] = []
+    for match in _WORD_RE.finditer(text):
+        token = match.group(0).lower()
+        if token[0].isdigit():
+            out.append(token.replace(",", ""))
+            continue
+        token = re.sub(r"'s?$", "", token).strip("-'")
+        out.extend(part for part in token.split("-") if part)
+    return out
 
 
 def content_terms(text: str) -> list[str]:

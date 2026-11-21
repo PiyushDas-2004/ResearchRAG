@@ -223,6 +223,7 @@ def upgrade() -> None:
         sa.Column("page_start", sa.Integer(), nullable=False),
         sa.Column("page_end", sa.Integer(), nullable=False),
         sa.Column("section", sa.String(length=32), nullable=False),
+        sa.Column("page_map", postgresql.JSONB(astext_type=sa.Text()), nullable=False),
         sa.Column("token_count", sa.Integer(), nullable=False),
         sa.Column("retrievable", sa.Boolean(), nullable=False),
         sa.Column("is_reference", sa.Boolean(), nullable=False),

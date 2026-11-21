@@ -26,7 +26,7 @@ from researchrag.textutils import STOPWORDS
 _TERM_RE = re.compile(r"[a-z0-9]+")
 _SELECT = """
 SELECT c.id::text AS id, c.document_id::text AS document_id, c.text, c.page_start, c.page_end,
-       c.section, c.parent_id::text AS parent_id, d.title, d.authors, d.year
+       c.section, c.parent_id::text AS parent_id, c.page_map, d.title, d.authors, d.year
 """
 
 
@@ -86,6 +86,7 @@ def _candidate(
         authors=tuple(row.authors or ()),
         year=row.year,
         parent_id=row.parent_id,
+        page_map=tuple((int(a), int(b)) for a, b in (row.page_map or [])),
         score=score,
         scores={method: score},
         ranks={method: rank},
@@ -183,8 +184,8 @@ LIMIT :k"""  # the filter fragment contains only bound placeholders
         if not parent_ids:
             return {}
         sql = text(
-            "SELECT id::text AS id, document_id::text AS document_id, text, page_start, page_end, section "
-            "FROM chunks WHERE id = ANY(CAST(:ids AS uuid[]))"
+            "SELECT id::text AS id, document_id::text AS document_id, text, page_start, page_end, section, "
+            "page_map FROM chunks WHERE id = ANY(CAST(:ids AS uuid[]))"
         )
         async with self._factory() as session:
             rows = (await session.execute(sql, {"ids": list(set(parent_ids))})).all()

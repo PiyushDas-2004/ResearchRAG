@@ -30,6 +30,20 @@ from researchrag.verification.lexical import lexical_judge
 _PRONOUN_RE = re.compile(r"\b(it|its|they|their|them|this|that|these|those|he|she|his|her)\b", re.I)
 _NUM_RE = re.compile(r"(?<![\w.])(\d+(?:\.\d+)?)(?![\w.])")
 _STREAM_CHUNK = 24
+# Question words that carry no topical content: their absence from the passages is not a
+# reason to abstain.
+_GENERIC = frozenset(
+    content_terms(
+        "many much long large total average overall value number amount rate show achieve reach perform "
+        "affect quality differ difference compare compared change result results find found report "
+        "describe study paper method measure measured main used give gave percent percentage level "
+        "reported values high higher low lower best worst year years make made take took go went come "
+        "came get got keep kept carry share agree well since rule stop lose lost fast slow long longer "
+        "short shorter first second third last original new old produce contain include includes "
+        "reduce increase decrease improve explain why how what which name named call called kind type "
+        "part number numbers figure table section authors propose proposed introduce introduced"
+    )
+)
 _NO_EVIDENCE = "The passages do not contain enough information to answer the question."
 
 
@@ -128,7 +142,12 @@ class MockLLM:
                     {"answer": reply, "claims": [], "quotes": [], "confidence": 0.9, "abstained": False}
                 )
         best = scored[0][0] if scored else 0.0
-        if best < self.config.min_term_coverage:
+        passage_terms: set[str] = set()
+        for _, text in passages:
+            passage_terms |= set(content_terms(text))
+        unmatched = _unmatched_terms(question, q_terms, passage_terms)
+        entity_like = [t for t in unmatched if t in _entity_terms(question)]
+        if len(unmatched) >= 2 or entity_like or best < self.config.min_term_coverage:
             return json.dumps(
                 {
                     "answer": "",
@@ -136,7 +155,8 @@ class MockLLM:
                     "quotes": [],
                     "confidence": round(best, 3),
                     "abstained": True,
-                    "abstain_reason": _NO_EVIDENCE,
+                    "abstain_reason": _NO_EVIDENCE
+                    + (f" The passages never mention: {', '.join(unmatched)}." if unmatched else ""),
                 }
             )
         chosen: list[tuple[int, str]] = []
@@ -154,7 +174,9 @@ class MockLLM:
         if self.config.hallucination_rate > 0 and rng.random() < self.config.hallucination_rate:
             claims[0]["text"] = _perturb_number(str(claims[0]["text"]), rng)
         if mode == "fabricated_quote":
-            quotes[0]["quote"] = "The authors conclusively proved that " + str(quotes[0]["quote"]).lower()
+            quotes[0]["quote"] = (
+                "The authors conclusively proved that this effect is universal and permanent."
+            )
         if mode == "uncited_claim":
             claims.append(
                 {"text": "This result has been replicated in many independent studies.", "citations": []}
@@ -233,6 +255,24 @@ class MockLLM:
             num_hit = len(gold_nums & numbers(candidate)) / len(gold_nums) if gold_nums else 1.0
             score = round(0.5 * min(1.0, recall * 1.25) + 0.25 * f1 + 0.25 * num_hit, 3)
         return json.dumps({"score": score, "rationale": "mock lexical rubric (term recall, F1, numbers)"})
+
+
+def _entity_terms(question: str) -> set[str]:
+    """Stemmed terms of tokens that look like names or quantities (digits or inner capitals)."""
+    raw = re.findall(r"[A-Za-z0-9][A-Za-z0-9,.\-]*", question)
+    specific = [t for t in raw if any(c.isdigit() for c in t) or any(c.isupper() for c in t[1:])]
+    return set(content_terms(" ".join(specific)))
+
+
+def _unmatched_terms(question: str, q_terms: set[str], passage_terms: set[str]) -> list[str]:
+    """Question terms with no counterpart in any passage (5-letter stem tolerance)."""
+    prefixes = {t[:5] for t in passage_terms if len(t) >= 5}
+    missing = []
+    for term in sorted(q_terms - passage_terms):
+        if term in _GENERIC or len(term) < 4 or (len(term) >= 5 and term[:5] in prefixes):
+            continue
+        missing.append(term)
+    return missing
 
 
 def _asks_number(question: str) -> bool:

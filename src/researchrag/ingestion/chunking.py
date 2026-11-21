@@ -165,6 +165,7 @@ def _drafts(
                 token_count=tokens,
                 kind=kind,
                 parent_index=parent_index,
+                page_map=doc.page_map(start, end),
             )
         )
     return drafts

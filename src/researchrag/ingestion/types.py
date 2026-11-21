@@ -86,6 +86,10 @@ class ParsedDocument:
     content_hash: str
     warnings: list[str] = field(default_factory=list)
 
+    def page_map(self, start: int, end: int) -> tuple[tuple[int, int], ...]:
+        """``((relative_offset, page), ...)`` for every page that begins inside ``[start, end)``."""
+        return tuple((p.start - start, p.number) for p in self.pages if start < p.start < end)
+
     def page_at(self, offset: int) -> int:
         """Return the 1-based page number containing a document offset."""
         starts = [p.start for p in self.pages]
@@ -114,6 +118,7 @@ class ChunkDraft:
     token_count: int
     kind: ChunkKind = "chunk"
     parent_index: int | None = None
+    page_map: tuple[tuple[int, int], ...] = ()
 
     @property
     def retrievable(self) -> bool:

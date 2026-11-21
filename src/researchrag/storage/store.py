@@ -293,6 +293,7 @@ class PgDocumentStore:
                     page_start=draft.page_start,
                     page_end=draft.page_end,
                     section=draft.section,
+                    page_map=[list(pair) for pair in draft.page_map],
                     token_count=draft.token_count,
                     retrievable=draft.retrievable,
                     is_reference=draft.section == "references",

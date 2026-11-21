@@ -57,6 +57,7 @@ class Candidate:
     authors: tuple[str, ...] = ()
     year: int | None = None
     parent_id: str | None = None
+    page_map: tuple[tuple[int, int], ...] = ()
     score: float = 0.0
     scores: dict[str, float] = field(default_factory=dict)
     ranks: dict[str, int] = field(default_factory=dict)
@@ -79,6 +80,20 @@ class ParentPassage:
     page_start: int
     page_end: int
     section: str
+    page_map: tuple[tuple[int, int], ...] = ()
+
+    def page_of(self, relative_offset: int) -> int:
+        """Page number of a character offset inside this passage."""
+        return page_of(self.page_start, self.page_map, relative_offset)
+
+
+def page_of(page_start: int, page_map: tuple[tuple[int, int], ...], relative_offset: int) -> int:
+    """Resolve the page of an offset within a chunk from its page map."""
+    page = page_start
+    for offset, number in page_map:
+        if relative_offset >= offset:
+            page = number
+    return page
 
 
 class SearchBackend(Protocol):
