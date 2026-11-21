@@ -207,9 +207,13 @@ async def test_hnsw_and_gin_indexes_exist_and_are_used(indexed: IndexedCorpus, f
     from researchrag.storage.search import vector_literal
 
     params |= {"q": vector_literal(vec), "ch": indexed.config.chunking.config_hash(), "k": 10}
+    # With a few hundred vectors an exact scan + sort can be legitimately cheaper, and the planner's
+    # choice then varies with statistics. Discouraging sequential scans proves the query shape
+    # matches the per-version partial HNSW expression index (what matters at real scale).
     async with factory() as session, session.begin():
         await session.execute(text("ANALYZE chunk_embeddings"))
         await session.execute(text("ANALYZE chunks"))
+        await session.execute(text("SET LOCAL enable_seqscan = off"))
         plan = "\n".join((await session.execute(text("EXPLAIN " + sql), params)).scalars())
     assert f"ix_emb_hnsw_v{indexed.version.id}" in plan, plan
     # At this corpus size the planner may legitimately prefer the config_hash B-tree for the

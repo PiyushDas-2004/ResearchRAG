@@ -35,7 +35,7 @@ async def retry_async(
         except RetryableProviderError as exc:
             if attempt >= max_retries:
                 raise
-            delay = min(max_delay, base_delay * (2**attempt)) * (0.5 + random.random() / 2)  # noqa: S311
+            delay = min(max_delay, base_delay * (2**attempt)) * (0.5 + random.random() / 2)  # retry jitter  # noqa: S311  # nosec B311
             if exc.retry_after is not None:
                 delay = min(max_delay, exc.retry_after)
             if on_retry is not None:

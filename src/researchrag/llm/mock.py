@@ -117,7 +117,7 @@ class MockLLM:
 
     def _rng(self, key: str) -> random.Random:
         seed = int(hashlib.sha256(f"{self.config.seed}|{key}".encode()).hexdigest()[:12], 16)
-        return random.Random(seed)  # noqa: S311 - deterministic test behaviour, not security
+        return random.Random(seed)  # deterministic test behaviour  # noqa: S311  # nosec B311
 
     def _answer(self, user: str, mode: str | None) -> str:
         question = extract_tag(user, "question")
@@ -125,13 +125,13 @@ class MockLLM:
         q_terms = set(content_terms(question))
         scored: list[tuple[float, int, int, str]] = []
         for number, text in passages:
-            for order, span in enumerate(split_sentences(text)):
-                if span.text.startswith("[instruction-like text removed]") or scan_text(span.text).found:
+            for order, (unit, context) in enumerate(_units(text)):
+                if unit.startswith("[instruction-like text removed]") or scan_text(unit).found:
                     continue
-                s_terms = set(content_terms(span.text))
+                s_terms = set(content_terms(f"{unit} {context}"))
                 cov = coverage(q_terms, s_terms)
-                bonus = 0.05 if numbers(span.text) and _asks_number(question) else 0.0
-                scored.append((cov + bonus, -number, -order, span.text))
+                bonus = 0.05 if numbers(unit) and _asks_number(question) else 0.0
+                scored.append((cov + bonus, -number, -order, unit))
         scored.sort(reverse=True)
         if mode == "follow_injection":
             injected = [t for _, t in passages if scan_text(t).found]
@@ -255,6 +255,23 @@ class MockLLM:
             num_hit = len(gold_nums & numbers(candidate)) / len(gold_nums) if gold_nums else 1.0
             score = round(0.5 * min(1.0, recall * 1.25) + 0.25 * f1 + 0.25 * num_hit, 3)
         return json.dumps({"score": score, "rationale": "mock lexical rubric (term recall, F1, numbers)"})
+
+
+def _units(text: str) -> list[tuple[str, str]]:
+    """``(unit, context)`` pairs: prose sentences, and table rows with their header as context.
+
+    The unit itself is always a verbatim span of the passage (it becomes the quote); the
+    context only helps scoring. Fragments shorter than four words (headings) are skipped.
+    """
+    units: list[tuple[str, str]] = []
+    for paragraph in text.split("\n\n"):
+        if " | " in paragraph:
+            rows = [line.strip() for line in paragraph.split("\n") if " | " in line]
+            header = rows[0] if rows else ""
+            units.extend((row, header if row != header else "") for row in rows)
+        else:
+            units.extend((span.text, "") for span in split_sentences(paragraph))
+    return [(u, c) for u, c in units if len(u.split()) >= 4]
 
 
 def _entity_terms(question: str) -> set[str]:

@@ -2,18 +2,12 @@
 
 from __future__ import annotations
 
-import math
 from collections.abc import Sequence
+
+import numpy as np
 
 from researchrag.retrieval.types import Candidate
 from researchrag.textutils import jaccard, term_set
-
-
-def _cosine(a: Sequence[float], b: Sequence[float]) -> float:
-    dot = sum(x * y for x, y in zip(a, b, strict=False))
-    na = math.sqrt(sum(x * x for x in a))
-    nb = math.sqrt(sum(y * y for y in b))
-    return dot / (na * nb) if na and nb else 0.0
 
 
 def mmr(candidates: Sequence[Candidate], *, k: int, lambda_: float) -> list[Candidate]:
@@ -29,12 +23,26 @@ def mmr(candidates: Sequence[Candidate], *, k: int, lambda_: float) -> list[Cand
     scores = [c.score for c in pool]
     lo, hi = min(scores), max(scores)
     rel = {c.chunk_id: (c.score - lo) / (hi - lo) if hi > lo else 1.0 for c in pool}
-    terms = {c.chunk_id: term_set(c.text) for c in pool}
+    terms: dict[str, set[str]] = {}
+
+    def terms_of(c: Candidate) -> set[str]:
+        if c.chunk_id not in terms:
+            terms[c.chunk_id] = term_set(c.text)
+        return terms[c.chunk_id]
+
+    embedded = [c for c in pool if c.embedding is not None]
+    index = {c.chunk_id: i for i, c in enumerate(embedded)}
+    matrix: np.ndarray | None = None
+    if embedded:
+        emb = np.asarray([c.embedding for c in embedded], dtype=float)
+        norms = np.linalg.norm(emb, axis=1, keepdims=True)
+        unit = emb / np.where(norms == 0, 1.0, norms)
+        matrix = unit @ unit.T
 
     def sim(a: Candidate, b: Candidate) -> float:
-        if a.embedding is not None and b.embedding is not None:
-            return _cosine(a.embedding, b.embedding)
-        return jaccard(terms[a.chunk_id], terms[b.chunk_id])
+        if matrix is not None and a.chunk_id in index and b.chunk_id in index:
+            return float(matrix[index[a.chunk_id], index[b.chunk_id]])
+        return jaccard(terms_of(a), terms_of(b))
 
     selected: list[Candidate] = []
     while pool and len(selected) < k:

@@ -84,7 +84,7 @@ def run_markdown(run: RunResult) -> str:
             [
                 [
                     t,
-                    _fmt(v.get("n")),
+                    str(int(v.get("n", 0))),
                     _fmt(v.get("answer_correctness")),
                     _fmt(v.get("abstention_accuracy")),
                     _fmt(v.get("recall@5")),
@@ -127,7 +127,7 @@ def run_html(run: RunResult) -> str:
         [
             [
                 t,
-                _fmt(v.get("n")),
+                str(int(v.get("n", 0))),
                 _fmt(v.get("answer_correctness")),
                 _fmt(v.get("abstention_accuracy")),
                 _fmt(v.get("recall@5")),

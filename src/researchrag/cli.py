@@ -101,7 +101,8 @@ async def _database(settings: Settings) -> AsyncIterator[_Db]:
 # --------------------------------------------------------------------------- serve
 @app.command()
 def serve(
-    host: Annotated[str, typer.Option(help="Bind address")] = "0.0.0.0",  # noqa: S104 - container default
+    # Containers must bind all interfaces.
+    host: Annotated[str, typer.Option(help="Bind address")] = "0.0.0.0",  # noqa: S104  # nosec B104
     port: Annotated[int, typer.Option(envvar="PORT", help="Port (Cloud Run sets $PORT)")] = 8000,
     reload: Annotated[bool, typer.Option(help="Auto-reload (development)")] = False,
     workers: Annotated[int, typer.Option(help="Worker processes")] = 1,
@@ -274,7 +275,9 @@ def db_stats() -> None:
                     "feedback",
                     "ingestion_jobs",
                 ):
-                    counts[table] = (await session.execute(text(f"SELECT count(*) FROM {table}"))).scalar()  # noqa: S608
+                    # Table names come from the fixed tuple above.
+                    query = text(f"SELECT count(*) FROM {table}")  # noqa: S608  # nosec B608
+                    counts[table] = (await session.execute(query)).scalar()
                 versions = [
                     dict(r._mapping)
                     for r in (

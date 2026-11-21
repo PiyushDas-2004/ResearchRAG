@@ -13,7 +13,7 @@ import io
 from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
-from xml.sax.saxutils import escape
+from xml.sax.saxutils import escape  # escapes markup we generate; never parses XML  # nosec B406
 
 import yaml
 from pydantic import BaseModel, Field

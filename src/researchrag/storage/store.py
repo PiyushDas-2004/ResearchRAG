@@ -160,7 +160,7 @@ class PgDocumentStore:
                     EmbeddingVersion.model_id == model_id, EmbeddingVersion.dimension == dimension
                 )
             )
-            assert version_id is not None  # noqa: S101 - guaranteed by the upsert above
+            assert version_id is not None  # guaranteed by the upsert above  # noqa: S101  # nosec B101
             vid, dim = int(version_id), int(dimension)
             await session.execute(
                 text(
