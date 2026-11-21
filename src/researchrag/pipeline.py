@@ -180,9 +180,22 @@ class QueryPipeline:
                 "pages": [p.page_start, p.page_end],
                 "score": round(p.score, 5),
                 "suspicious": p.suspicious,
+                "text": p.text,
             }
             for p in packed
         ]
+        details["candidates"] = [
+            {
+                "chunk_id": c.chunk_id,
+                "document_id": c.document_id,
+                "page": c.page_start,
+                "score": round(c.score, 6),
+                "scores": {k: round(v, 6) for k, v in c.scores.items()},
+                "text": c.text,
+            }
+            for c in retrieval.candidates
+        ]
+        details["queries"] = retrieval.queries
         score = evidence_score(standalone, packed)
         searched = SearchedOut(
             queries=retrieval.queries,

@@ -1,0 +1,14 @@
+# Ablation sweep (one factor at a time from the base config).
+# Run: researchrag eval sweep configs/sweep.yaml
+base: eval-offline.yaml
+mode: ofat
+quality_metric: answer_correctness
+factors:
+  retrieval.mode: [hybrid, vector, lexical]
+  chunking.chunk_tokens: [96, 160, 256]
+  chunking.overlap_tokens: [0, 32]
+  retrieval.top_k: [4, 8, 12]
+  rerank.provider: [none, lexical]
+  rewrite.enabled: [false, true]
+  retrieval.ef_search: [16, 64, 200]
+  retrieval.mmr_enabled: [true, false]

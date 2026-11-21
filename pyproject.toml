@@ -101,6 +101,7 @@ ignore = [
 "scripts/**" = ["S", "T201", "PLC0415"]
 "loadtest/**" = ["S311"]
 "src/researchrag/storage/migrations/**" = ["N999"]
+"src/researchrag/evaluation/report.py" = ["E501"]  # inline HTML templates
 
 [tool.ruff.lint.flake8-tidy-imports.banned-api]
 "openai".msg = "Provider SDKs may only be imported inside provider adapter modules."

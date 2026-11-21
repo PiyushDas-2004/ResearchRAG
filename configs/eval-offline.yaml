@@ -1,0 +1,17 @@
+# Offline evaluation config used by the CI regression gate.
+# Identical to default.yaml except that the mock LLM injects a numeric hallucination into
+# 20% of answers, so that the verifier's catch rate is measurable without API keys.
+name: eval-offline
+chunking: {strategy: parent_child, chunk_tokens: 160, overlap_tokens: 32, parent_tokens: 480, tokenizer: simple}
+embedding: {provider: fake, model: fake-hash-v1, dimension: 384}
+retrieval: {mode: hybrid, candidate_k: 40, top_k: 8, rrf_k: 60, mmr_enabled: true, mmr_lambda: 0.7, ef_search: 64}
+rewrite: {enabled: false, multi_query: 0, condense_followups: true}
+rerank: {provider: lexical, top_n: 24}
+generation:
+  provider: mock
+  model: mock-extractive-v1
+  max_context_tokens: 1800
+  min_evidence_score: 0.34
+  mock: {seed: 7, hallucination_rate: 0.2}
+verification: {enabled: true, judge: lexical, policy: remove, regenerate_on_failure: true}
+security: {injection_action: sanitize, output_guard: true}
