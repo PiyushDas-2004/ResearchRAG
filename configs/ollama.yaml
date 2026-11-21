@@ -1,0 +1,16 @@
+# Local OpenAI-compatible server (e.g. Ollama: `ollama serve`, `ollama pull llama3.1`) plus
+# local sentence-transformers embeddings and cross-encoder reranking (pip install '.[local,openai]').
+# No API cost. OPENAI_API_KEY may be any non-empty string for Ollama.
+name: ollama-local
+chunking: {strategy: parent_child, chunk_tokens: 160, overlap_tokens: 32, parent_tokens: 480, tokenizer: simple}
+embedding: {provider: local, model: sentence-transformers/all-MiniLM-L6-v2, dimension: 384}
+retrieval: {mode: hybrid, candidate_k: 40, top_k: 8, rrf_k: 60, mmr_enabled: true, mmr_lambda: 0.7, ef_search: 64}
+rerank: {provider: cross_encoder, model: cross-encoder/ms-marco-MiniLM-L-6-v2, top_n: 24}
+generation:
+  provider: openai_compatible
+  model: llama3.1
+  base_url: http://localhost:11434/v1
+  temperature: 0.0
+  max_output_tokens: 1200
+  max_context_tokens: 2500
+verification: {enabled: true, judge: llm, policy: remove, regenerate_on_failure: true}

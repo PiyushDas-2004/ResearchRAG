@@ -1,0 +1,18 @@
+# Live Gemini configuration (needs GEMINI_API_KEY). Model ids were checked against
+# ai.google.dev on 2026-11-20 (the -latest alias tracks the newest Flash model); verify before use
+# and add prices to configs/pricing.yaml.
+name: gemini
+chunking: {strategy: parent_child, chunk_tokens: 160, overlap_tokens: 32, parent_tokens: 480, tokenizer: simple}
+embedding: {provider: gemini, model: gemini-embedding-001, dimension: 768, batch_size: 64, requests_per_minute: 300}
+retrieval: {mode: hybrid, candidate_k: 40, top_k: 8, rrf_k: 60, mmr_enabled: true, mmr_lambda: 0.7, ef_search: 64}
+rewrite: {enabled: false, multi_query: 2, condense_followups: true}
+rerank: {provider: lexical, top_n: 24}
+generation:
+  provider: gemini
+  model: gemini-flash-latest
+  temperature: 0.0
+  max_output_tokens: 2000
+  max_context_tokens: 3000
+  min_evidence_score: 0.34
+verification: {enabled: true, judge: llm, policy: remove, regenerate_on_failure: true}
+security: {injection_action: sanitize, output_guard: true}

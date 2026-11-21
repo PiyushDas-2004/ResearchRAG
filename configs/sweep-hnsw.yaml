@@ -1,0 +1,8 @@
+# HNSW recall/latency trade-off: only meaningful on the Postgres backend (the memory backend
+# is exact). Run: researchrag eval sweep configs/sweep-hnsw.yaml --backend postgres
+base: eval-offline.yaml
+mode: ofat
+quality_metric: recall@5
+factors:
+  retrieval.ef_search: [4, 8, 16, 64, 200]
+  retrieval.mode: [hybrid, vector]
