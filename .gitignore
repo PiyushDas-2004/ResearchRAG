@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.hypothesis/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Secrets and local state
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+
+# Generated data (rebuilt deterministically by `researchrag corpus build`)
+data/corpus/pdfs/
+data/uploads/
+*.dump
+*.sql.gz
+reports/
+!docs/example-report/
+
+# Terraform
+infra/terraform/.terraform/
+infra/terraform/*.tfstate
+infra/terraform/*.tfstate.*
+infra/terraform/*.tfvars
+!infra/terraform/terraform.tfvars.example
+infra/terraform/.terraform.lock.hcl.bak
+
+# Third-party PDFs fetched by scripts/download_open_access.py
+data/open_access/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/

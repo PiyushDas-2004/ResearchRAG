@@ -1,0 +1,19 @@
+# USD per one million tokens, keyed by "<provider>/<model>".
+# VERIFY BEFORE RELYING ON THIS: prices change and differ by region, tier and contract.
+# Sources checked on the as_of date: OpenAI model pages / pricing page, Google AI pricing page.
+as_of: "2026-11-20"
+note: "Verify every price with the provider before relying on cost numbers. Unlisted models are reported as unpriced."
+currency: USD
+models:
+  # Offline components are free.
+  fake/fake-hash-v1: {input_per_mtok: 0.0}
+  mock/mock-extractive-v1: {input_per_mtok: 0.0, output_per_mtok: 0.0}
+  # OpenAI (third-party aggregators and OpenAI docs as of the date above).
+  openai/text-embedding-3-small: {input_per_mtok: 0.02}
+  openai/text-embedding-3-large: {input_per_mtok: 0.13}
+  openai/gpt-5-mini: {input_per_mtok: 0.25, output_per_mtok: 2.00}
+  # Gemini: fill in from https://ai.google.dev/gemini-api/docs/pricing before use.
+  # gemini/gemini-embedding-001: {input_per_mtok: 0.0}
+  # gemini/gemini-flash-latest: {input_per_mtok: 0.0, output_per_mtok: 0.0}
+  # Local models run on your hardware; their marginal API cost is zero.
+  local/sentence-transformers/all-MiniLM-L6-v2: {input_per_mtok: 0.0}

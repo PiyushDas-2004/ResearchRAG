@@ -33,7 +33,17 @@ def validate_paper(path: Path) -> tuple[dict[str, Any], list[str]]:
     key = paper.get("key", "")
     if not KEY_RE.match(key) or path.stem != key:
         errors.append(f"{path.name}: key {key!r} must match file name and <prefix>-NN")
-    for field in ("title", "authors", "affiliation", "year", "venue", "doi", "abstract", "sections", "references"):
+    for field in (
+        "title",
+        "authors",
+        "affiliation",
+        "year",
+        "venue",
+        "doi",
+        "abstract",
+        "sections",
+        "references",
+    ):
         if not paper.get(field):
             errors.append(f"{key}: missing field {field}")
     if not str(paper.get("doi", "")).startswith("10.5555/rrsyn."):

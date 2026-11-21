@@ -1,0 +1,1 @@
+"""ResearchRAG embeddings package."""
