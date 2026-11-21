@@ -41,6 +41,11 @@ class Settings(BaseSettings):
     ocr_enabled: bool = False
 
     run_worker: bool = True
+    # "inline" processes an upload's ingestion job inside the upload request (needed on Cloud Run
+    # with request-based billing, where CPU is throttled between requests); "background" uses the
+    # worker loop and returns 202 immediately.
+    ingest_mode: Literal["background", "inline"] = "background"
+    inline_ingest_timeout_s: float = 240.0
     worker_poll_interval_s: float = 1.0
     job_max_retries: int = 3
     job_stale_after_s: float = 300.0

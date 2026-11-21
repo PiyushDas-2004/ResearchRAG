@@ -63,7 +63,10 @@ async def upload_document(
         api_key_id=None if principal.anonymous else principal.key_id,
         max_attempts=container.settings.job_max_retries,
     )
-    if not created:
+    if container.settings.ingest_mode == "inline" and job["status"] in {"queued", "running"}:
+        job = await container.process_inline(str(job["id"]))
+        response.status_code = status.HTTP_200_OK
+    elif not created:
         response.status_code = status.HTTP_200_OK
     return UploadAccepted(job=JobOut(**job), created=created, job_url=f"/v1/jobs/{job['id']}")
 

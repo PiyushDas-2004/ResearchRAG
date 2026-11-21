@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 from dataclasses import dataclass
 
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker
@@ -46,6 +47,18 @@ class AppContainer:
     limiter: RateLimiter
     upload_policy: UploadPolicy
     worker: JobWorker | None = None
+
+    async def process_inline(self, job_id: str) -> dict[str, object]:
+        """Run queued jobs until ``job_id`` finishes (``ingest_mode="inline"``); return its view."""
+        worker = JobWorker(self.jobs, self.stack.ingestion)
+        deadline = asyncio.get_running_loop().time() + self.settings.inline_ingest_timeout_s
+        while asyncio.get_running_loop().time() < deadline:
+            job = await self.jobs.get(job_id)
+            if job["status"] in {"succeeded", "failed"}:
+                return job
+            if not await worker.run_once():
+                await asyncio.sleep(0.2)  # another instance is running it
+        return await self.jobs.get(job_id)
 
     async def close(self) -> None:
         """Stop the worker and close the pool (graceful shutdown)."""

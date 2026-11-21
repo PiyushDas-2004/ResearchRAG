@@ -147,3 +147,27 @@ async def test_reembed_job_kind(worker_container: AppContainer) -> None:
     worker = JobWorker(worker_container.jobs, worker_container.stack.ingestion)
     assert await worker.run_once()
     assert (await worker_container.jobs.get(str(job["id"])))["status"] == "succeeded"
+
+
+async def test_inline_ingest_mode(migrated: str) -> None:
+    import httpx
+
+    from researchrag.api.app import create_app
+
+    settings = Settings(
+        database_url=migrated, run_worker=False, ingest_mode="inline", parse_isolation="inline",
+        pipeline_config="configs/default.yaml", rate_limit_per_minute=0,
+    )  # fmt: skip
+    c = await build_container(settings)
+    try:
+        app = create_app(settings, container=c)
+        app.state.container = c
+        async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://t") as client:
+            resp = await client.post(
+                "/v1/documents", files={"file": ("bio-02.pdf", paper_pdf("bio-02"), "application/pdf")}
+            )
+        assert resp.status_code == 200, resp.text
+        assert resp.json()["job"]["status"] == "succeeded"
+        assert resp.json()["job"]["document_id"]
+    finally:
+        await c.close()
