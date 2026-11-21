@@ -1,0 +1,6 @@
+# Copy to terraform.tfvars (git-ignored) and fill in. Never commit real values.
+project_id        = "your-gcp-project-id"
+region            = "us-central1"
+image             = "us-central1-docker.pkg.dev/your-gcp-project-id/researchrag/api:0.1.0"
+api_keys          = "replace-with-a-long-random-key"
+github_repository = "PiyushDas-2004/ResearchRAG"

@@ -1,0 +1,38 @@
+name: Live evaluation (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      config:
+        description: Pipeline config to evaluate
+        default: configs/openai.yaml
+      limit:
+        description: Number of questions (empty = all)
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  live-eval:
+    runs-on: ubuntu-latest
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: pip install -e ".[all]"
+      - name: Check that a provider key is configured
+        run: |
+          if [ -z "$OPENAI_API_KEY" ] && [ -z "$GEMINI_API_KEY" ]; then
+            echo "No OPENAI_API_KEY or GEMINI_API_KEY repository secret; nothing to evaluate."; exit 1
+          fi
+      - name: Run live evaluation (costs money: see configs/pricing.yaml)
+        run: |
+          ARGS="--config ${{ inputs.config }} --out reports/live"
+          if [ -n "${{ inputs.limit }}" ]; then ARGS="$ARGS --limit ${{ inputs.limit }}"; fi
+          researchrag eval run $ARGS
+      - uses: actions/upload-artifact@v4
+        with: {name: live-eval-report, path: reports/live/}

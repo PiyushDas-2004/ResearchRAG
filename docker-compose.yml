@@ -1,0 +1,49 @@
+# Quickstart: docker compose up --build
+# Offline by default (fake embedder + mock LLM): no API keys needed.
+# Tracing: RR_OTEL_EXPORTER_ENDPOINT=http://jaeger:4318/v1/traces docker compose --profile tracing up --build
+#          then open the Jaeger UI at http://localhost:16686
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: researchrag
+      POSTGRES_PASSWORD: researchrag  # local development only
+      POSTGRES_DB: researchrag
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U researchrag -d researchrag"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: .
+    image: researchrag:local
+    depends_on:
+      db: {condition: service_healthy}
+    ports: ["8000:8000"]
+    environment:
+      RR_DATABASE_URL: postgresql+asyncpg://researchrag:researchrag@db:5432/researchrag
+      RR_ENVIRONMENT: dev
+      RR_API_KEYS: ${RR_API_KEYS:-dev-local-key}
+      RR_RUN_MIGRATIONS_ON_STARTUP: "true"
+      RR_PIPELINE_CONFIG: ${RR_PIPELINE_CONFIG:-/app/configs/default.yaml}
+      RR_CORS_ORIGINS: http://localhost:8000
+      RR_OTEL_EXPORTER_ENDPOINT: ${RR_OTEL_EXPORTER_ENDPOINT:-}
+      RR_LOG_LEVEL: INFO
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    stop_grace_period: 30s
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.62.0
+    profiles: [tracing]
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+    ports:
+      - "16686:16686"  # UI
+      - "4318:4318"    # OTLP/HTTP
+
+volumes:
+  pgdata:
