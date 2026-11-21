@@ -11,6 +11,8 @@ from researchrag.evaluation.synthetic import PaperSpec, load_papers, render_pape
 from researchrag.ingestion.pdf_parser import parse_pdf
 from researchrag.ingestion.types import ParsedDocument
 
+pytest_plugins = ["tests.db_fixtures"]
+
 ROOT = Path(__file__).resolve().parents[1]
 PAPERS_DIR = ROOT / "data" / "corpus" / "papers"
 EVAL_DIR = ROOT / "data" / "eval"

@@ -95,6 +95,7 @@ class PgTraceRepository:
                     api_key_id=api_key_id,
                 )
             )
+            await session.flush()  # the trace row must exist before its answer (FK)
             answer = Answer(
                 trace_id=trace_id,
                 answer_text=result.answer,

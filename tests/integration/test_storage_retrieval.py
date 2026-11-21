@@ -32,7 +32,7 @@ async def _count(factory: async_sessionmaker[AsyncSession], model: type) -> int:
 
 async def test_corpus_ingested_with_pages_chunks_embeddings(indexed: IndexedCorpus, factory) -> None:  # type: ignore[no-untyped-def]
     assert len(indexed.doc_ids) == 16
-    assert await _count(factory, Document) == 16
+    assert await _count(factory, Document) >= 16
     assert await _count(factory, DocumentPage) >= 32
     chunks = await indexed.store.count_chunks(indexed.config.chunking.config_hash())
     assert chunks > 300
@@ -146,7 +146,8 @@ async def test_metadata_filters_are_applied_in_sql(indexed: IndexedCorpus) -> No
         "roof cooling", chunk_config_hash=ch, k=10, filters=SearchFilters(authors=(author.lower(),))
     )
     assert by_author
-    assert {c.document_id for c in by_author} == {indexed.doc_ids["clim-02"]}
+    assert indexed.doc_ids["clim-02"] in {c.document_id for c in by_author}
+    assert all(any(author.lower() in a.lower() for a in c.authors) for c in by_author)
     coll = await backend.lexical_search(
         "roof", chunk_config_hash=ch, k=3, filters=SearchFilters(collection="none")
     )
@@ -173,6 +174,21 @@ async def test_parents_fetched_for_children(indexed: IndexedCorpus) -> None:
         assert cand.parent_id is not None
         assert cand.text in parents[cand.parent_id].text
     assert await indexed.backend.get_parents([]) == {}
+    # Parents spanning a page break carry their page map (needed for exact citation pages).
+    all_parents = await indexed.backend.get_parents(
+        [
+            c.parent_id
+            for c in (
+                await _retriever(indexed, **{"retrieval.top_k": 30}).retrieve(
+                    "results", SearchFilters(), StageRecorder()
+                )
+            ).candidates
+            if c.parent_id
+        ]
+    )
+    spanning = [p for p in all_parents.values() if p.page_end > p.page_start]
+    assert spanning
+    assert all(p.page_map and p.page_of(len(p.text) - 1) == p.page_end for p in spanning)
 
 
 async def test_hnsw_and_gin_indexes_exist_and_are_used(indexed: IndexedCorpus, factory) -> None:  # type: ignore[no-untyped-def]

@@ -190,6 +190,14 @@ LIMIT :k"""  # the filter fragment contains only bound placeholders
         async with self._factory() as session:
             rows = (await session.execute(sql, {"ids": list(set(parent_ids))})).all()
         return {
-            r.id: ParentPassage(r.id, r.document_id, r.text, r.page_start, r.page_end, r.section)
+            r.id: ParentPassage(
+                r.id,
+                r.document_id,
+                r.text,
+                r.page_start,
+                r.page_end,
+                r.section,
+                tuple((int(a), int(b)) for a, b in (r.page_map or [])),
+            )
             for r in rows
         }

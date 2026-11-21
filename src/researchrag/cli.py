@@ -532,3 +532,7 @@ def feedback_export(
 def main() -> None:  # pragma: no cover - console entry point
     """Entry point."""
     app(sys.argv[1:])
+
+
+if __name__ == "__main__":  # pragma: no cover
+    main()

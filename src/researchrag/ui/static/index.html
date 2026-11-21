@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ResearchRAG</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><span class="logo">R</span> ResearchRAG <span class="tag">citation-grounded QA</span></div>
+    <label class="key">API key <input id="api-key" type="password" autocomplete="off" placeholder="X-API-Key"></label>
+  </header>
+  <main class="layout">
+    <aside class="panel" aria-label="Papers">
+      <h2>Papers</h2>
+      <form id="upload-form" class="upload">
+        <input id="file" type="file" accept="application/pdf" required>
+        <button type="submit">Upload PDF</button>
+      </form>
+      <p id="upload-status" class="muted" role="status"></p>
+      <ul id="documents" class="documents"></ul>
+      <button id="refresh" class="link" type="button">Refresh list</button>
+    </aside>
+    <section class="panel main" aria-label="Ask">
+      <form id="ask-form" class="ask">
+        <textarea id="question" rows="2" placeholder="Ask a question about the indexed papers…" required></textarea>
+        <div class="ask-row">
+          <label class="muted"><input id="followup" type="checkbox"> Follow-up (keep conversation)</label>
+          <button id="ask" type="submit">Ask</button>
+        </div>
+      </form>
+      <article id="answer" class="answer" aria-live="polite" hidden>
+        <div id="stage" class="muted"></div>
+        <div id="answer-text" class="answer-text"></div>
+        <div id="abstain" class="abstain" hidden></div>
+        <div id="warnings" class="warnings" hidden></div>
+        <h3 id="claims-title" hidden>Claims and verification</h3>
+        <ul id="claims" class="claims"></ul>
+        <div class="meta"><span id="meta"></span>
+          <span class="feedback" id="feedback" hidden>
+            Helpful? <button type="button" data-rating="up" aria-label="Thumbs up">👍</button>
+            <button type="button" data-rating="down" aria-label="Thumbs down">👎</button>
+          </span>
+        </div>
+      </article>
+    </section>
+    <aside class="panel" aria-label="Source passage">
+      <h2>Source</h2>
+      <div id="source" class="source muted">Click a citation such as [1] to see the passage, paper and page.</div>
+    </aside>
+  </main>
+</body>
+</html>

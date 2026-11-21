@@ -73,7 +73,7 @@ def configure_logging(level: str = "INFO", *, json_logs: bool = True, redact: bo
         wrapper_class=structlog.make_filtering_bound_logger(
             numeric if isinstance(numeric, int) else logging.INFO
         ),
-        logger_factory=structlog.PrintLoggerFactory(sys.stdout),
+        logger_factory=structlog.PrintLoggerFactory(),  # resolves sys.stdout per logger
         cache_logger_on_first_use=False,
     )
     logging.basicConfig(
