@@ -57,7 +57,7 @@ jobs:
       - run: pip install -e ".[dev]"
       - name: Tests with coverage gate (85%)
         run: pytest --cov=researchrag --cov-report=term-missing --cov-report=xml
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v7
         if: matrix.python == '3.12'
         with: {name: coverage, path: coverage.xml}
 
@@ -74,7 +74,7 @@ jobs:
       - name: Offline evaluation report
         if: always()
         run: researchrag eval run --out reports
-      - uses: actions/upload-artifact@v5
+      - uses: actions/upload-artifact@v7
         if: always()
         with: {name: eval-report, path: reports/}
 
