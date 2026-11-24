@@ -55,7 +55,7 @@ citation + quote checks -> claim verification -> policy (remove/flag/regenerate)
 - [x] Phase 8 observability: logs, OTel traces, Prometheus, Jaeger profile (real trace in docs)
 - [x] Phase 9 Docker, compose, Terraform (zero-cost profile), CI workflows, docs, ADRs, README
 - [x] Phase 10 hardening pass (see final report in the session)
-- [ ] Phase 11 publish (needs user: session can only push to the unvibecode repo)
+- [x] Phase 11 publish: pushed to https://github.com/PiyushDas-2004/ResearchRAG (main); CI and v0.1.0 release still to confirm
 - [ ] Phase 12 cloud deploy (owner requires zero cost; nothing is created without explicit go-ahead)
 
 ## Cost constraint
@@ -67,5 +67,6 @@ evaluations or apply infrastructure without the owner's explicit approval.
 
 ## Environment notes
 
-This project currently lives in the `ResearchRAG/` subfolder of the `unvibecode` repo (branch
-`ccr-a05333e2-ynyq69`). Extract with `git subtree split --prefix=ResearchRAG -b researchrag-main`.
+Canonical repository: https://github.com/PiyushDas-2004/ResearchRAG (branch `main`). The project
+was first developed in the `ResearchRAG/` subfolder of the `unvibecode` repo and exported with
+`git subtree split`, which preserved its commit history.
