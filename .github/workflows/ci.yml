@@ -16,7 +16,7 @@ jobs:
   lint-type:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
         with: {python-version: "3.12", cache: pip}
       - run: pip install -e ".[dev]"
@@ -49,7 +49,7 @@ jobs:
     env:
       RR_TEST_DATABASE_URL: postgresql+asyncpg://researchrag:researchrag@localhost:5432/researchrag_test
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
         with: {python-version: "${{ matrix.python }}", cache: pip}
       - name: Install tesseract (OCR fallback test)
@@ -65,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: lint-type
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
         with: {python-version: "3.12", cache: pip}
       - run: pip install -e .
@@ -82,7 +82,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: lint-type
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: Build image
         run: docker build -t researchrag:ci .
       - name: Smoke test the image (offline)
@@ -109,7 +109,7 @@ jobs:
       run:
         working-directory: infra/terraform
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: hashicorp/setup-terraform@v3
         with: {terraform_version: 1.9.8}
       - run: terraform fmt -check -recursive
