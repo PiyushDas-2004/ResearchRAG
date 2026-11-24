@@ -46,3 +46,6 @@ data/open_access/
 .DS_Store
 .idea/
 .vscode/
+
+# GitHub Pages build output (scripts/build_pages.py)
+_site/

@@ -98,7 +98,7 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["S101", "S105", "S106", "S311", "PLR2004", "PLC0415", "S608", "PT018", "PT011", "B017", "PT012"]
-"scripts/**" = ["S", "T201", "PLC0415"]
+"scripts/**" = ["S", "T201", "PLC0415", "E501", "ASYNC240"]  # one-shot tooling
 "loadtest/**" = ["S311"]
 "src/researchrag/storage/migrations/**" = ["N999"]
 "src/researchrag/evaluation/report.py" = ["E501"]  # inline HTML templates

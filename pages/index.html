@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ResearchRAG</title>
+  <meta name="description" content="Citation-grounded question answering over academic papers with claim-level verification: a static showcase of real pipeline outputs.">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><span class="logo">R</span> ResearchRAG <span class="tag">citation-grounded QA with claim verification</span></div>
+    <nav class="tabs" role="tablist">
+      <button role="tab" data-tab="ask" aria-selected="true">Questions</button>
+      <button role="tab" data-tab="scenarios">Verification scenarios</button>
+      <button role="tab" data-tab="eval">Evaluation</button>
+      <button role="tab" data-tab="about">About</button>
+    </nav>
+    <a class="gh" href="https://github.com/PiyushDas-2004/ResearchRAG">GitHub</a>
+  </header>
+
+  <p class="banner" id="banner">
+    Static showcase on GitHub Pages: every answer below was produced by the real ResearchRAG pipeline at build time
+    with the <b>offline components</b> (hashing embedder, mock extractive LLM, lexical verifier) over 16 fictional
+    papers. It is not a live LLM. Run the full API locally with <code>docker compose up</code>.
+  </p>
+
+  <main>
+    <section id="tab-ask" class="layout" role="tabpanel">
+      <aside class="panel list-panel">
+        <input id="search" type="search" placeholder="Filter 88 questions…" aria-label="Filter questions">
+        <div class="chips" id="chips"></div>
+        <ul id="qlist" class="qlist"></ul>
+      </aside>
+      <article class="panel" id="answer-panel"><p class="muted">Pick a question.</p></article>
+      <aside class="panel source" id="source" aria-live="polite"><h2>Source</h2><p class="muted">Click a citation such as [1] to see the passage, the paper and the page.</p></aside>
+    </section>
+
+    <section id="tab-scenarios" class="layout two" role="tabpanel" hidden>
+      <aside class="panel list-panel"><ul id="slist" class="qlist"></ul></aside>
+      <article class="panel" id="scenario-panel"></article>
+    </section>
+
+    <section id="tab-eval" class="single" role="tabpanel" hidden>
+      <div class="panel" id="eval-panel"></div>
+    </section>
+
+    <section id="tab-about" class="single" role="tabpanel" hidden>
+      <div class="panel prose">
+        <h2>What this is</h2>
+        <p>ResearchRAG answers questions about academic papers so that every claim is <b>traceable</b> (paper, page and
+          verbatim passage), <b>verified</b> (unsupported claims and fabricated quotes are removed or flagged),
+          <b>abstaining</b> ("not enough evidence" instead of a guess) and <b>measured</b> (retrieval, faithfulness,
+          correctness and abstention with confidence intervals, gated in CI).</p>
+        <p>The production stack is FastAPI + PostgreSQL/pgvector (HNSW + full-text, Reciprocal Rank Fusion, reranking,
+          MMR), structured generation with JSON repair, claim-level verification, prompt-injection defences,
+          OpenTelemetry traces and Prometheus metrics. GitHub Pages cannot run that server, so this page shows outputs
+          precomputed by the same pipeline code in an in-memory index.</p>
+        <h2>Honest caveats</h2>
+        <ul>
+          <li>The corpus is synthetic and small; real-world performance will be lower.</li>
+          <li>The mock LLM copies sentences, so faithfulness is high by construction; it measures the pipeline, not model quality.</li>
+          <li>The offline lexical verifier agrees only weakly with hand labels (Cohen's kappa 0.24); use the LLM or NLI judge with real models.</li>
+        </ul>
+        <h2>Run it yourself (free, no API keys)</h2>
+        <pre>git clone https://github.com/PiyushDas-2004/ResearchRAG.git && cd ResearchRAG
+docker compose up -d --build
+docker compose exec api sh -c "researchrag corpus build && researchrag ingest data/corpus/pdfs"
+# open http://localhost:8000  (API key: dev-local-key)</pre>
+        <p><a href="https://github.com/PiyushDas-2004/ResearchRAG#readme">README</a> ·
+          <a href="https://github.com/PiyushDas-2004/ResearchRAG/blob/main/docs/ARCHITECTURE.md">Architecture</a> ·
+          <a href="https://github.com/PiyushDas-2004/ResearchRAG/blob/main/docs/EVALUATION.md">Evaluation</a> ·
+          <a href="https://github.com/PiyushDas-2004/ResearchRAG/blob/main/docs/SECURITY.md">Security</a></p>
+        <p class="muted" id="build-info"></p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
