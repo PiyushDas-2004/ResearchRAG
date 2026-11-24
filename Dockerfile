@@ -17,7 +17,8 @@ RUN --mount=type=secret,id=pipca,required=false \
  && pip install --upgrade pip build \
  && python -m build --wheel --outdir /dist \
  && WHEEL="/dist/$(ls /dist | grep '\.whl$')" \
- && if [ -n "$EXTRAS" ]; then pip install "${WHEEL}[${EXTRAS}]"; else pip install "$WHEEL"; fi
+ && if [ -n "$EXTRAS" ]; then pip install "${WHEEL}[${EXTRAS}]"; else pip install "$WHEEL"; fi \
+ && pip install --upgrade "setuptools>=78.1.1"  # CVE-2025-47273 (flagged by Trivy in CI)
 
 # ---------- runtime stage: slim, non-root ----------
 FROM python:3.12-slim AS runtime
